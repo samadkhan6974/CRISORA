@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CRISORA - Disaster Preparedness & Response Education</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+        
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+        
+        .hero-gradient {
+            background: linear-gradient(135deg, #1e40af 0%, #3b82f6 50%, #06b6d4 100%);
+        }
+        
+        .card-hover {
+            transition: all 0.3s ease;
+        }
+        
+        .card-hover:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+        }
+        
+        .pulse-animation {
+            animation: pulse 2s infinite;
+        }
+        
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.7; }
+        }
+        
+        .emergency-alert {
+            background: linear-gradient(90deg, #ef4444, #dc2626);
+            animation: alertPulse 3s infinite;
+        }
+        
+        @keyframes alertPulse {
+            0%, 100% { background: linear-gradient(90deg, #ef4444, #dc2626); }
+            50% { background: linear-gradient(90deg, #dc2626, #b91c1c); }
+        }
+    </style>
+</head>
+<body class="bg-gray-50">
+    <!-- Navigation -->
+    <nav class="bg-white shadow-lg sticky top-0 z-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-16">
+                <div class="flex items-center space-x-3">
+                    <div class="text-3xl">🌍</div>
+                    <div>
+                        <h1 class="text-2xl font-bold text-blue-600">CRISORA</h1>
+                        <p class="text-xs text-gray-500">Crisis Resilience & Response</p>
+                    </div>
+                </div>
+                <div class="hidden md:flex space-x-8">
+                    <a href="#home" class="nav-link text-gray-700 hover:text-blue-600 font-medium">Home</a>
+                    <a href="#learn" class="nav-link text-gray-700 hover:text-blue-600 font-medium">Learn</a>
+                    <a href="#prepare" class="nav-link text-gray-700 hover:text-blue-600 font-medium">Prepare</a>
+                    <a href="#alerts" class="nav-link text-gray-700 hover:text-blue-600 font-medium">Alerts</a>
+                    <a href="#community" class="nav-link text-gray-700 hover:text-blue-600 font-medium">Community</a>
+                </div>
+                <button class="emergency-alert text-white px-4 py-2 rounded-lg font-semibold pulse-animation">
+                    🚨 Emergency Mode
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="home" class="hero-gradient text-white py-20">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <h1 class="text-5xl md:text-6xl font-bold mb-6">
+                Stay Prepared. Stay Safe. 
+                <span class="text-yellow-300">Stay Resilient.</span>
+            </h1>
+            <p class="text-xl md:text-2xl mb-8 max-w-3xl mx-auto opacity-90">
+                Empowering communities with knowledge, tools, and resources for disaster preparedness and emergency response.
+            </p>
+            <div class="flex flex-col sm:flex-row gap-4 justify-center">
+                <button onclick="startLearning()" class="bg-yellow-400 text-blue-900 px-8 py-4 rounded-lg text-lg font-semibold hover:bg-yellow-300 transition-colors">
+                    🎓 Start Learning
+                </button>
+                <button onclick="checkReadiness()" class="bg-white bg-opacity-20 backdrop-blur-sm border-2 border-white text-white px-8 py-4 rounded-lg text-lg font-semibold hover:bg-opacity-30 transition-colors">
+                    ✅ Check My Readiness
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Current Alerts -->
+    <section class="bg-red-50 border-l-4 border-red-400 py-4">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center">
+                <div class="text-2xl mr-3">⚠️</div>
+                <div>
+                    <h3 class="text-red-800 font-semibold">Current Weather Alert</h3>
+                    <p class="text-red-700">Severe thunderstorm warning in effect for your area until 8:00 PM. Stay indoors and avoid travel.</p>
+                </div>
+                <button class="ml-auto bg-red-600 text-white px-4 py-2 rounded-lg hover:bg-red-700">
+                    View Details
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Main Features -->
+    <section id="learn" class="py-20">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h2 class="text-4xl font-bold text-gray-900 mb-4">Learn & Prepare</h2>
+                <p class="text-xl text-gray-600 max-w-2xl mx-auto">
+                    Interactive modules designed to educate and prepare you for various emergency scenarios
+                </p>
+            </div>
+
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Natural Disasters -->
+                <div class="bg-white rounded-xl shadow-lg p-6 card-hover cursor-pointer" onclick="openModule('natural')">
+                    <div class="text-4xl mb-4">🌪️</div>
+                    <h3 class="text-xl font-semibold mb-3 text-gray-900">Natural Disasters</h3>
+                    <p class="text-gray-600 mb-4">Learn about earthquakes, hurricanes, floods, wildfires, and how to prepare for each.</p>
+                    <div class="flex items-center justify-between">
+                        <span class="text-sm text-blue-600 font-medium">8 Modules Available</span>
+                        <div class="bg-green-100 text-green-800 px-2 py-1 rounded-full text-xs font-medium">Beginner</div>
+                    </div>
+                </div>
+
+                <!-- Emergency Kits -->
+                <div class="bg-white rounded-xl shadow-lg p-6 card-hover cursor-pointer" onclick="openModule('kits')">
+                    <div class="text-4xl mb-4">🎒</div>
+                    <h3 class="text-xl font-semibold mb-3 text-gray-900">Emergency Kits</h3>
+                    <p class="text-gray-600 mb-4">Build comprehensive emergency kits for home, work, and vehicle with our interactive checklist.</p>
+                    <div class="flex items-center justify-between">
+                        <span class="text-sm text-blue-600 font-medium">Interactive Checklist</span>
+                        <div class="bg-blue-100 text-blue-800 px-2 py-1 rounded-full text-xs font-medium">Essential</div>
+                    </div>
+                </div>
+
+                <!-- First Aid -->
+                <div class="bg-white rounded-xl shadow-lg p-6 card-hover cursor-pointer" onclick="openModule('firstaid')">
+                    <div class="text-4xl mb-4">🏥</div>
+                    <h3 class="text-xl font-semibold mb-3 text-gray-900">First Aid Training</h3>
+                    <p class="text-gray-600 mb-4">Essential first aid skills with step-by-step guides and video demonstrations.</p>
+                    <div class="flex items-center justify-between">
+                        <span class="text-sm text-blue-600 font-medium">Video Tutorials</span>
+                        <div class="bg-orange-100 text-orange-800 px-2 py-1 rounded-full text-xs font-medium">Critical</div>
+                    </div>
+                </div>
+
+                <!-- Communication -->
+                <div class="bg-white rounded-xl shadow-lg p-6 card-hover cursor-pointer" onclick="openModule('communication')">
+                    <div class="text-4xl mb-4">📡</div>
+                    <h3 class="text-xl font-semibold mb-3 text-gray-900">Emergency Communication</h3>
+                    <p class="text-gray-600 mb-4">Stay connected during emergencies with backup communication methods and protocols.</p>
+                    <div class="flex items-center justify-between">
+                        <span class="text-sm text-blue-600 font-medium">5 Strategies</span>
+                        <div class="bg-purple-100 text-purple-800 px-2 py-1 rounded-full text-xs font-medium">Advanced</div>
+                    </div>
+                </div>
+
+                <!-- Family Planning -->
+                <div class="bg-white rounded-xl shadow-lg p-6 card-hover cursor-pointer" onclick="openModule('family')">
+                    <div class="text-4xl mb-4">👨‍👩‍👧‍👦</div>
+                    <h3 class="text-xl font-semibold mb-3 text-gray-900">Family Emergency Plans</h3>
+                    <p class="text-gray-600 mb-4">Create comprehensive family emergency plans with meeting points and contact information.</p>
+                    <div class="flex items-center justify-between">
+                        <span class="text-sm text-blue-600 font-medium">Plan Builder</span>
+                        <div class="bg-green-100 text-green-800 px-2 py-1 rounded-full text-xs font-medium">Essential</div>
+                    </div>
+                </div>
+
+                <!-- Community Response -->
+                <div class="bg-white rounded-xl shadow-lg p-6 card-hover cursor-pointer" onclick="openModule('community')">
+                    <div class="text-4xl mb-4">🤝</div>
+                    <h3 class="text-xl font-semibold mb-3 text-gray-900">Community Response</h3>
+                    <p class="text-gray-600 mb-4">Learn how to organize and participate in community disaster response efforts.</p>
+                    <div class="flex items-center justify-between">
+                        <span class="text-sm text-blue-600 font-medium">Leadership Skills</span>
+                        <div class="bg-red-100 text-red-800 px-2 py-1 rounded-full text-xs font-medium">Advanced</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
