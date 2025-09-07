@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="en">
+<head> 
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Make a Donation</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+        body { font-family: 'Inter', sans-serif; }
+        .donation-card { transition: all 0.3s ease; }
+        .donation-card:hover { transform: translateY(-2px); box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1); }
+        .amount-btn { transition: all 0.2s ease; }
+        .amount-btn:hover { transform: scale(1.05); }
+        .amount-btn.selected { background: linear-gradient(135deg, #3b82f6, #1d4ed8); color: white; }
+    </style>
+</head>
+<body class="bg-gradient-to-br from-blue-50 to-indigo-100 min-h-screen">
+    <div class="container mx-auto px-4 py-12">
+        <!-- Header -->
+        <div class="text-center mb-12">
+            <h1 class="text-4xl md:text-5xl font-bold text-gray-800 mb-4">Make a Difference Today</h1>
+            <p class="text-xl text-gray-600 max-w-2xl mx-auto">Your generous donation helps us continue our mission and create positive change in our community.</p>
+        </div>
+
+        <!-- Main Donation Card -->
+        <div class="max-w-2xl mx-auto">
+            <div class="donation-card bg-white rounded-2xl shadow-xl p-8 md:p-10">
+                <!-- Donation Type Selection -->
+                <div class="mb-8">
+                    <h3 class="text-2xl font-semibold text-gray-800 mb-6">Choose Your Impact</h3>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        <button onclick="selectDonationType('one-time')" id="one-time-btn" class="donation-type-btn selected p-4 rounded-xl border-2 border-blue-500 bg-blue-50 text-blue-700 font-medium transition-all">
+                            💝 One-Time Donation
+                        </button>
+                        <button onclick="selectDonationType('monthly')" id="monthly-btn" class="donation-type-btn p-4 rounded-xl border-2 border-gray-200 bg-gray-50 text-gray-700 font-medium transition-all hover:border-blue-300">
+                            🔄 Monthly Giving
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Amount Selection -->
+                <div class="mb-8">
+                    <h3 class="text-xl font-semibold text-gray-800 mb-4">Select Amount</h3>
+                    <div class="grid grid-cols-2 md:grid-cols-4 gap-3 mb-4">
+                        <button onclick="selectAmount(25)" class="amount-btn bg-gray-100 hover:bg-blue-100 text-gray-700 font-medium py-3 px-4 rounded-lg">$25</button>
+                        <button onclick="selectAmount(50)" class="amount-btn bg-gray-100 hover:bg-blue-100 text-gray-700 font-medium py-3 px-4 rounded-lg">$50</button>
+                        <button onclick="selectAmount(100)" class="amount-btn selected bg-blue-600 text-white font-medium py-3 px-4 rounded-lg">$100</button>
+                        <button onclick="selectAmount(250)" class="amount-btn bg-gray-100 hover:bg-blue-100 text-gray-700 font-medium py-3 px-4 rounded-lg">$250</button>
+                    </div>
+                    <div class="relative">
+                        <span class="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-500 text-lg">$</span>
+                        <input type="number" id="custom-amount" placeholder="Enter custom amount" class="w-full pl-8 pr-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent text-lg" min="1">
+                    </div>
+                </div>
+
+                <!-- Donor Information -->
+                <div class="mb-8">
+                    <h3 class="text-xl font-semibold text-gray-800 mb-4">Your Information</h3>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
+                        <input type="text" placeholder="First Name" class="px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent">
+                        <input type="text" placeholder="Last Name" class="px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent">
+                    </div>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        <input type="email" placeholder="Email Address" class="px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent">
+                        <input type="tel" placeholder="Phone Number (Optional)" class="px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent">
+                    </div>
+                </div>
+
+                <!-- Dedication Section -->
+                <div class="mb-8">
+                    <div class="flex items-center mb-4">
+                        <input type="checkbox" id="dedication" class="mr-3 h-4 w-4 text-blue-600 focus:ring-blue-500 border-gray-300 rounded">
+                        <label for="dedication" class="text-gray-700 font-medium">Make this donation in honor or memory of someone</label>
+                    </div>
+                    <div id="dedication-fields" class="hidden space-y-3">
+                        <select class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent">
+                            <option>In Honor Of</option>
+                            <option>In Memory Of</option>
+                        </select>
+                        <input type="text" placeholder="Person's Name" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent">
+                    </div>
+                </div>
+
+                <!-- Privacy Options -->
+                <div class="mb-8 space-y-3">
+                    <div class="flex items-center">
+                        <input type="checkbox" id="anonymous" class="mr-3 h-4 w-4 text-blue-600 focus:ring-blue-500 border-gray-300 rounded">
+                        <label for="anonymous" class="text-gray-700">Make this donation anonymous</label>
+                    </div>
+                    <div class="flex items-center">
+                        <input type="checkbox" id="newsletter" checked class="mr-3 h-4 w-4 text-blue-600 focus:ring-blue-500 border-gray-300 rounded">
+                        <label for="newsletter" class="text-gray-700">Subscribe to our newsletter for updates</label>
+                    </div>
+                </div>
+
+                <!-- Donation Summary -->
+                <div class="bg-blue-50 rounded-xl p-6 mb-8">
+                    <h4 class="font-semibold text-gray-800 mb-3">Donation Summary</h4>
+                    <div class="flex justify-between items-center text-lg">
+                        <span class="text-gray-600">Amount:</span>
+                        <span class="font-bold text-blue-600" id="summary-amount">$100.00</span>
+                    </div>
+                    <div class="flex justify-between items-center text-sm text-gray-500 mt-1">
+                        <span>Type:</span>
+                        <span id="summary-type">One-time donation</span>
+                    </div>
+                </div>
+
+                <!-- Demo Notice -->
+                <div class="bg-yellow-50 border border-yellow-200 rounded-lg p-4 mb-6">
+                    <div class="flex items-center">
+                        <span class="text-yellow-600 mr-2">⚠️</span>
+                        <p class="text-yellow-800 text-sm"><strong>Demo Notice:</strong> This is a sample donation form. No actual payment processing is implemented. You'll need to integrate with a payment processor like Stripe, PayPal, or similar service.</p>
+                    </div>
+                </div>
+
+                <!-- Donate Button -->
+                <button onclick="processDonation()" class="w-full bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-700 hover:to-indigo-700 text-white font-bold py-4 px-8 rounded-xl text-lg transition-all duration-200 transform hover:scale-105 shadow-lg">
+                    🎁 Complete Donation
+                </button>
+
+                <!-- Security Notice -->
+                <p class="text-center text-sm text-gray-500 mt-4">
+                    🔒 Your donation is secure and encrypted. We never store your payment information.
+                </p>
+            </div>
+        </div>
+
+        <!-- Impact Section -->
+        <div class="max-w-4xl mx-auto mt-16">
+            <h2 class="text-3xl font-bold text-center text-gray-800 mb-8">Your Impact</h2>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <div class="bg-white rounded-xl p-6 shadow-lg text-center">
+                    <div class="text-4xl mb-4">🏠</div>
+                    <h3 class="font-semibold text-gray-800 mb-2">$25 Provides</h3>
+                    <p class="text-gray-600">A warm meal for a family in need</p>
+                </div>
+                <div class="bg-white rounded-xl p-6 shadow-lg text-center">
+                    <div class="text-4xl mb-4">📚</div>
+                    <h3 class="font-semibold text-gray-800 mb-2">$50 Provides</h3>
+                    <p class="text-gray-600">School supplies for a child for one month</p>
+                </div>
+                <div class="bg-white rounded-xl p-6 shadow-lg text-center">
+                    <div class="text-4xl mb-4">❤️</div>
+                    <h3 class="font-semibold text-gray-800 mb-2">$100 Provides</h3>
+                    <p class="text-gray-600">Healthcare support for a family</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let selectedAmount = 100;
+        let donationType = 'one-time';
+
+        function selectDonationType(type) {
+            donationType = type;
+            
+            // Update button styles
+            document.querySelectorAll('.donation-type-btn').forEach(btn => {
+                btn.classList.remove('selected', 'border-blue-500', 'bg-blue-50', 'text-blue-700');
+                btn.classList.add('border-gray-200', 'bg-gray-50', 'text-gray-700');
+            });
+            
+            const selectedBtn = document.getElementById(type + '-btn');
+            selectedBtn.classList.add('selected', 'border-blue-500', 'bg-blue-50', 'text-blue-700');
+            selectedBtn.classList.remove('border-gray-200', 'bg-gray-50', 'text-gray-700');
+            
+            updateSummary();
+        }
+
+        function selectAmount(amount) {
+            selectedAmount = amount;
+            
+            // Clear custom input
+            document.getElementById('custom-amount').value = '';
+            
+            // Update button styles
+            document.querySelectorAll('.amount-btn').forEach(btn => {
+                btn.classList.remove('selected', 'bg-blue-600', 'text-white');
+                btn.classList.add('bg-gray-100', 'text-gray-700');
+            });
+            
+            // Find and select the clicked button
+            event.target.classList.add('selected', 'bg-blue-600', 'text-white');
+            event.target.classList.remove('bg-gray-100', 'text-gray-700');
+            
+            updateSummary();
+        }
+
+        // Handle custom amount input
+        document.getElementById('custom-amount').addEventListener('input', function(e) {
+            const customAmount = parseFloat(e.target.value);
+            if (customAmount && customAmount > 0) {
+                selectedAmount = customAmount;
+                
+                // Deselect preset buttons
+                document.querySelectorAll('.amount-btn').forEach(btn => {
+                    btn.classList.remove('selected', 'bg-blue-600', 'text-white');
+                    btn.classList.add('bg-gray-100', 'text-gray-700');
+                });
+                
+                updateSummary();
+            }
+        });
+
+        // Handle dedication checkbox
+        document.getElementById('dedication').addEventListener('change', function(e) {
+            const dedicationFields = document.getElementById('dedication-fields');
+            if (e.target.checked) {
+                dedicationFields.classList.remove('hidden');
+            } else {
+                dedicationFields.classList.add('hidden');
+            }
+        });
+
+        function updateSummary() {
+            document.getElementById('summary-amount').textContent = '$' + selectedAmount.toFixed(2);
+            document.getElementById('summary-type').textContent = donationType === 'one-time' ? 'One-time donation' : 'Monthly recurring donation';
+        }
+
+        function processDonation() {
+            // Collect form data
+            const firstName = document.querySelector('input[placeholder="First Name"]').value;
+            const lastName = document.querySelector('input[placeholder="Last Name"]').value;
+            const email = document.querySelector('input[placeholder="Email Address"]').value;
+            
+            // Basic validation
+            if (!firstName || !lastName || !email) {
+                alert('Please fill in all required fields (First Name, Last Name, and Email).');
+                return;
+            }
+            
+            if (!selectedAmount || selectedAmount <= 0) {
+                alert('Please select or enter a valid donation amount.');
+                return;
+            }
+            
+            // Show success message (in a real implementation, this would process the payment)
+            alert(`Thank you ${firstName}! Your ${donationType} donation of $${selectedAmount.toFixed(2)} has been processed successfully. You will receive a confirmation email shortly.`);
+            
+            // Reset form (optional)
+            // location.reload();
+        }
+
+        // Initialize
+        updateSummary();
+    </script>
+<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'97b4890a244e918a',t:'MTc1NzIzMDU4OC4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+</html>
