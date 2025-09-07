@@ -13,8 +13,7 @@
         }
         
         .hero-gradient {
-            background:url("image23.jpg")no-repeat center center/cover; 
-        }
+            background: url("image23.jpg")no-repeat center center/cover;        }
         
         .card-hover {
             transition: all 0.3s ease;
@@ -38,6 +37,22 @@
             background: linear-gradient(90deg, #ef4444, #dc2626);
             animation: alertPulse 3s infinite;
         }
+
+        .donation {
+      background-color: #72B01D;
+      color:white;
+      border: none;
+      padding: 12px 24px;
+      border-radius: 8px;
+      font-size: 18px;
+      font-weight: bold;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+
+    .donation:hover {
+      background-color: #5c8f16; /* slightly darker shade */
+    }
         
         @keyframes alertPulse {
             0%, 100% { background: linear-gradient(90deg, #ef4444, #dc2626); }
@@ -46,17 +61,49 @@
     </style>
 </head>
 <body class="bg-gray-50">
+
+
     <!-- Navigation -->
-    <nav class="bg-white shadow-lg sticky top-0 z-50">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="flex justify-between items-center h-16">
-                <div class="flex items-center space-x-3">
-                    <div class="text-3xl">🌍</div>
-                    <div>
-                        <h1 class="text-2xl font-bold text-blue-600">CRISORA</h1>
-                        <p class="text-xs text-gray-500">Crisis Resilience & Response</p>
-                    </div>
-                </div>
+<nav class="bg-white shadow-lg fixed w-full top-0 z-50">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="flex justify-between items-center h-16">
+      
+      <!-- Logo with link to Home -->
+      <a href="#home" class="flex items-center">
+        <!-- Shield Logo -->
+        <div class="relative mr-2 shield-glow">
+          <svg width="40" height="40" viewBox="0 0 80 80" class="pulse-animation">
+            <!-- Shield Background -->
+            <path d="M40 8 L65 18 L65 35 C65 52 40 70 40 70 C40 70 15 52 15 35 L15 18 Z" 
+                  fill="url(#shieldGradient)" stroke="#1e40af" stroke-width="2"/>
+            
+            <!-- Safety Cross -->
+            <rect x="36" y="25" width="8" height="20" fill="white" rx="2"/>
+            <rect x="30" y="31" width="20" height="8" fill="white" rx="2"/>
+            
+            <!-- Emergency Alert Dots -->
+            <circle cx="28" cy="48" r="3" fill="#ef4444"/>
+            <circle cx="40" cy="52" r="3" fill="#f59e0b"/>
+            <circle cx="52" cy="48" r="3" fill="#10b981"/>
+            
+            <!-- Graduation Cap -->
+            <path d="M25 22 L40 18 L55 22 L55 26 L40 22 L25 26 Z" fill="#1e40af" opacity="0.8"/>
+            <rect x="53" y="22" width="4" height="8" fill="#1e40af" opacity="0.8"/>
+            <circle cx="55" cy="24" r="2" fill="#1e40af" opacity="0.8"/>
+            
+            <defs>
+              <linearGradient id="shieldGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                <stop offset="0%" style="stop-color:#3b82f6;stop-opacity:0.9"/>
+                <stop offset="50%" style="stop-color:#60a5fa;stop-opacity:0.8"/>
+                <stop offset="100%" style="stop-color:#93c5fd;stop-opacity:0.7"/>
+              </linearGradient>
+            </defs>
+          </svg>
+        </div>
+        <!-- Logo Text -->
+        <span class="text-xl font-bold text-gradient tracking-tight">CRISORA</span>
+      </a>
+   
                 <div class="hidden md:flex space-x-8">
                     <a href="#home" class="nav-link text-gray-700 hover:text-blue-600 font-medium">Home</a>
                     <a href="#learn" class="nav-link text-gray-700 hover:text-blue-600 font-medium">Learn</a>
@@ -64,9 +111,11 @@
                     <a href="#alerts" class="nav-link text-gray-700 hover:text-blue-600 font-medium">Alerts</a>
                     <a href="#community" class="nav-link text-gray-700 hover:text-blue-600 font-medium">Community</a>
                 </div>
+                <button class="donation text-white px-4 py-2 rounded-lg font-semibold pulse-animation">Donate</button>
                 <button class="emergency-alert text-white px-4 py-2 rounded-lg font-semibold pulse-animation">
                     🚨 Emergency Mode
                 </button>
+                
             </div>
         </div>
     </nav>
@@ -86,7 +135,7 @@
                     🎓 Start Learning
                 </button>
                 <button onclick="checkReadiness()" class="bg-white bg-opacity-20 backdrop-blur-sm border-2 border-white text-white px-8 py-4 rounded-lg text-lg font-semibold hover:bg-opacity-30 transition-colors">
-                    ✅ Check My Readiness
+                     Check My Readiness
                 </button>
             </div>
         </div>
@@ -188,7 +237,7 @@
         </div>
     </section>
 
-<!-- Readiness Assessment -->
+    <!-- Readiness Assessment -->
     <section id="prepare" class="bg-blue-50 py-20">
         <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="text-center mb-12">
@@ -382,7 +431,7 @@
             </div>
             
             <div class="border-t border-gray-800 mt-8 pt-8 text-center text-gray-400">
-                <p>&copy; 2024 CRISORA. All rights reserved. | Emergency Hotline: 911</p>
+                <p>&copy; 2025 CRISORA. All rights reserved. | Emergency Hotline: 911</p>
             </div>
         </div>
     </footer>
@@ -402,7 +451,8 @@
         </div>
     </div>
 
-     // Navigation smooth scrolling
+    <script>
+        // Navigation smooth scrolling
         document.querySelectorAll('.nav-link').forEach(link => {
             link.addEventListener('click', function(e) {
                 e.preventDefault();
@@ -704,4 +754,3 @@
     </script>
 <script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'979ec167713d8ae5',t:'MTc1NzAwMjIxMC4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
 </html>
-
