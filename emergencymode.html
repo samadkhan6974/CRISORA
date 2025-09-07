@@ -1,0 +1,453 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Emergency Mode - Immediate Assistance</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap');
+        body { font-family: 'Inter', sans-serif; }
+        
+        .emergency-pulse {
+            animation: emergencyPulse 1.5s ease-in-out infinite;
+        }
+        
+        @keyframes emergencyPulse {
+            0%, 100% { 
+                transform: scale(1);
+                box-shadow: 0 0 0 0 rgba(239, 68, 68, 0.7);
+            }
+            50% { 
+                transform: scale(1.05);
+                box-shadow: 0 0 0 20px rgba(239, 68, 68, 0);
+            }
+        }
+        
+        .urgent-blink {
+            animation: urgentBlink 1s ease-in-out infinite;
+        }
+        
+        @keyframes urgentBlink {
+            0%, 50% { opacity: 1; }
+            51%, 100% { opacity: 0.7; }
+        }
+        
+        .slide-in {
+            animation: slideIn 0.5s ease-out;
+        }
+        
+        @keyframes slideIn {
+            from { transform: translateY(-20px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+        
+        .emergency-button {
+            transition: all 0.2s ease;
+        }
+        
+        .emergency-button:active {
+            transform: scale(0.95);
+        }
+        
+        .status-indicator {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            display: inline-block;
+            margin-right: 8px;
+        }
+        
+        .status-active { background-color: #10b981; }
+        .status-warning { background-color: #f59e0b; }
+        .status-critical { background-color: #ef4444; }
+    </style>
+</head>
+<body class="bg-red-900 min-h-screen text-white">
+    <!-- Emergency Header -->
+    <div class="bg-red-800 border-b-4 border-red-600 p-4">
+        <div class="container mx-auto">
+            <div class="flex items-center justify-between">
+                <div class="flex items-center">
+                    <div class="urgent-blink text-3xl mr-3">🚨</div>
+                    <div>
+                        <h1 class="text-2xl md:text-3xl font-bold">EMERGENCY MODE</h1>
+                        <p class="text-red-200 text-sm">Immediate assistance available</p>
+                    </div>
+                </div>
+                <div class="text-right">
+                    <div class="text-sm text-red-200">Current Time</div>
+                    <div class="text-xl font-bold" id="current-time">--:--:--</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="container mx-auto px-4 py-6">
+        <!-- Critical Alert Banner -->
+        <div id="alert-banner" class="bg-yellow-500 text-black p-4 rounded-lg mb-6 slide-in hidden">
+            <div class="flex items-center">
+                <span class="text-2xl mr-3">⚠️</span>
+                <div>
+                    <div class="font-bold">ACTIVE EMERGENCY ALERT</div>
+                    <div id="alert-message">Severe weather warning in your area. Seek shelter immediately.</div>
+                </div>
+                <button onclick="dismissAlert()" class="ml-auto bg-black text-white px-3 py-1 rounded text-sm">Dismiss</button>
+            </div>
+        </div>
+
+        <!-- Emergency Action Buttons -->
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-8">
+            <!-- Call 911 -->
+            <button onclick="callEmergency('911')" class="emergency-button emergency-pulse bg-red-600 hover:bg-red-700 p-6 rounded-xl text-center shadow-2xl">
+                <div class="text-4xl mb-2">📞</div>
+                <div class="text-2xl font-bold mb-1">CALL 911</div>
+                <div class="text-red-200 text-sm">Police, Fire, Medical</div>
+            </button>
+
+            <!-- Medical Emergency -->
+            <button onclick="callEmergency('medical')" class="emergency-button bg-red-700 hover:bg-red-800 p-6 rounded-xl text-center shadow-xl">
+                <div class="text-4xl mb-2">🏥</div>
+                <div class="text-xl font-bold mb-1">MEDICAL</div>
+                <div class="text-red-200 text-sm">Health Emergency</div>
+            </button>
+
+            <!-- Share Location -->
+            <button onclick="shareLocation()" class="emergency-button bg-red-700 hover:bg-red-800 p-6 rounded-xl text-center shadow-xl">
+                <div class="text-4xl mb-2">📍</div>
+                <div class="text-xl font-bold mb-1">LOCATION</div>
+                <div class="text-red-200 text-sm">Share My Position</div>
+            </button>
+        </div>
+
+        <!-- Quick Actions Row -->
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-3 mb-8">
+            <button onclick="quickAction('poison')" class="emergency-button bg-orange-600 hover:bg-orange-700 p-4 rounded-lg text-center">
+                <div class="text-2xl mb-1">☠️</div>
+                <div class="font-semibold text-sm">Poison Control</div>
+            </button>
+            
+            <button onclick="quickAction('fire')" class="emergency-button bg-red-600 hover:bg-red-700 p-4 rounded-lg text-center">
+                <div class="text-2xl mb-1">🔥</div>
+                <div class="font-semibold text-sm">Fire Dept</div>
+            </button>
+            
+            <button onclick="quickAction('police')" class="emergency-button bg-blue-600 hover:bg-blue-700 p-4 rounded-lg text-center">
+                <div class="text-2xl mb-1">👮</div>
+                <div class="font-semibold text-sm">Police</div>
+            </button>
+            
+            <button onclick="quickAction('mental')" class="emergency-button bg-purple-600 hover:bg-purple-700 p-4 rounded-lg text-center">
+                <div class="text-2xl mb-1">🧠</div>
+                <div class="font-semibold text-sm">Crisis Line</div>
+            </button>
+        </div>
+
+        <!-- Emergency Information Cards -->
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
+            <!-- Emergency Contacts -->
+            <div class="bg-red-800 rounded-xl p-6 shadow-xl">
+                <h2 class="text-xl font-bold mb-4 flex items-center">
+                    <span class="text-2xl mr-2">📋</span>
+                    Emergency Contacts
+                </h2>
+                <div class="space-y-3">
+                    <div class="flex justify-between items-center bg-red-700 p-3 rounded-lg">
+                        <div>
+                            <div class="font-semibold">Emergency Services</div>
+                            <div class="text-red-200 text-sm">Police, Fire, Medical</div>
+                        </div>
+                        <button onclick="callNumber('911')" class="bg-red-600 hover:bg-red-500 px-4 py-2 rounded font-bold">911</button>
+                    </div>
+                    
+                    <div class="flex justify-between items-center bg-red-700 p-3 rounded-lg">
+                        <div>
+                            <div class="font-semibold">Poison Control</div>
+                            <div class="text-red-200 text-sm">24/7 Poison Help</div>
+                        </div>
+                        <button onclick="callNumber('1-800-222-1222')" class="bg-orange-600 hover:bg-orange-500 px-3 py-2 rounded text-sm font-bold">CALL</button>
+                    </div>
+                    
+                    <div class="flex justify-between items-center bg-red-700 p-3 rounded-lg">
+                        <div>
+                            <div class="font-semibold">Crisis Hotline</div>
+                            <div class="text-red-200 text-sm">Mental Health Support</div>
+                        </div>
+                        <button onclick="callNumber('988')" class="bg-purple-600 hover:bg-purple-500 px-4 py-2 rounded font-bold">988</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Current Status -->
+            <div class="bg-red-800 rounded-xl p-6 shadow-xl">
+                <h2 class="text-xl font-bold mb-4 flex items-center">
+                    <span class="text-2xl mr-2">📊</span>
+                    System Status
+                </h2>
+                <div class="space-y-3">
+                    <div class="flex items-center justify-between">
+                        <div class="flex items-center">
+                            <span class="status-indicator status-active"></span>
+                            <span>Emergency Services</span>
+                        </div>
+                        <span class="text-green-400 font-semibold">ONLINE</span>
+                    </div>
+                    
+                    <div class="flex items-center justify-between">
+                        <div class="flex items-center">
+                            <span class="status-indicator status-active"></span>
+                            <span>Location Services</span>
+                        </div>
+                        <span class="text-green-400 font-semibold">ACTIVE</span>
+                    </div>
+                    
+                    <div class="flex items-center justify-between">
+                        <div class="flex items-center">
+                            <span class="status-indicator status-warning"></span>
+                            <span>Weather Alerts</span>
+                        </div>
+                        <span class="text-yellow-400 font-semibold">MONITORING</span>
+                    </div>
+                    
+                    <div class="flex items-center justify-between">
+                        <div class="flex items-center">
+                            <span class="status-indicator status-active"></span>
+                            <span>Communication</span>
+                        </div>
+                        <span class="text-green-400 font-semibold">CONNECTED</span>
+                    </div>
+                </div>
+                
+                <div class="mt-4 pt-4 border-t border-red-700">
+                    <div class="text-sm text-red-200">Last Updated: <span id="last-updated">Just now</span></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Safety Checklist -->
+        <div class="bg-red-800 rounded-xl p-6 shadow-xl mb-8">
+            <h2 class="text-xl font-bold mb-4 flex items-center">
+                <span class="text-2xl mr-2">✅</span>
+                Emergency Safety Checklist
+            </h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <div class="space-y-2">
+                    <label class="flex items-center cursor-pointer">
+                        <input type="checkbox" class="mr-3 w-4 h-4" onchange="updateChecklist()">
+                        <span>I am in a safe location</span>
+                    </label>
+                    <label class="flex items-center cursor-pointer">
+                        <input type="checkbox" class="mr-3 w-4 h-4" onchange="updateChecklist()">
+                        <span>Emergency contacts have been notified</span>
+                    </label>
+                    <label class="flex items-center cursor-pointer">
+                        <input type="checkbox" class="mr-3 w-4 h-4" onchange="updateChecklist()">
+                        <span>I have access to communication</span>
+                    </label>
+                </div>
+                <div class="space-y-2">
+                    <label class="flex items-center cursor-pointer">
+                        <input type="checkbox" class="mr-3 w-4 h-4" onchange="updateChecklist()">
+                        <span>Medical needs are addressed</span>
+                    </label>
+                    <label class="flex items-center cursor-pointer">
+                        <input type="checkbox" class="mr-3 w-4 h-4" onchange="updateChecklist()">
+                        <span>I have emergency supplies</span>
+                    </label>
+                    <label class="flex items-center cursor-pointer">
+                        <input type="checkbox" class="mr-3 w-4 h-4" onchange="updateChecklist()">
+                        <span>Location has been shared</span>
+                    </label>
+                </div>
+            </div>
+            <div class="mt-4 text-center">
+                <div class="text-sm text-red-200">Checklist Progress: <span id="checklist-progress">0/6</span> completed</div>
+            </div>
+        </div>
+
+        <!-- Emergency Information -->
+        <div class="bg-red-800 rounded-xl p-6 shadow-xl mb-8">
+            <h2 class="text-xl font-bold mb-4 flex items-center">
+                <span class="text-2xl mr-2">ℹ️</span>
+                Important Information
+            </h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div>
+                    <h3 class="font-semibold mb-2 text-red-200">Your Current Location:</h3>
+                    <div class="bg-red-700 p-3 rounded-lg">
+                        <div id="current-location" class="text-sm">📍 Detecting location...</div>
+                    </div>
+                </div>
+                <div>
+                    <h3 class="font-semibold mb-2 text-red-200">Emergency ID:</h3>
+                    <div class="bg-red-700 p-3 rounded-lg">
+                        <div class="text-sm font-mono" id="emergency-id">EMG-2024-001234</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Exit Emergency Mode -->
+        <div class="text-center">
+            <button onclick="exitEmergencyMode()" class="bg-gray-700 hover:bg-gray-600 text-white font-bold py-3 px-8 rounded-lg transition-colors">
+                Exit Emergency Mode
+            </button>
+            <p class="text-red-200 text-sm mt-2">Only exit when the emergency situation has been resolved</p>
+        </div>
+    </div>
+
+    <script>
+        // Update current time
+        function updateTime() {
+            const now = new Date();
+            const timeString = now.toLocaleTimeString('en-US', { 
+                hour12: false,
+                hour: '2-digit',
+                minute: '2-digit',
+                second: '2-digit'
+            });
+            document.getElementById('current-time').textContent = timeString;
+        }
+
+        // Call emergency services
+        function callEmergency(type) {
+            const numbers = {
+                '911': '911',
+                'medical': '911',
+                'fire': '911',
+                'police': '911'
+            };
+            
+            const messages = {
+                '911': 'Calling 911 - Emergency Services',
+                'medical': 'Calling 911 - Medical Emergency',
+                'fire': 'Calling 911 - Fire Department',
+                'police': 'Calling 911 - Police'
+            };
+            
+            if (confirm(`${messages[type]}\n\nThis will attempt to call ${numbers[type]}. Continue?`)) {
+                // In a real app, this would initiate a phone call
+                alert(`Calling ${numbers[type]}...\n\nIn a real emergency app, this would dial ${numbers[type]} immediately.`);
+                logEmergencyAction(`Called ${type} services`);
+            }
+        }
+
+        // Quick action buttons
+        function quickAction(type) {
+            const actions = {
+                'poison': { number: '1-800-222-1222', name: 'Poison Control' },
+                'fire': { number: '911', name: 'Fire Department' },
+                'police': { number: '911', name: 'Police' },
+                'mental': { number: '988', name: 'Crisis Hotline' }
+            };
+            
+            const action = actions[type];
+            if (confirm(`Call ${action.name}?\n\nThis will dial ${action.number}`)) {
+                alert(`Calling ${action.name} at ${action.number}...\n\nIn a real emergency app, this would dial immediately.`);
+                logEmergencyAction(`Called ${action.name}`);
+            }
+        }
+
+        // Call specific number
+        function callNumber(number) {
+            if (confirm(`Call ${number}?\n\nThis will attempt to dial ${number}`)) {
+                alert(`Calling ${number}...\n\nIn a real emergency app, this would dial immediately.`);
+                logEmergencyAction(`Called ${number}`);
+            }
+        }
+
+        // Share location
+        function shareLocation() {
+            if (navigator.geolocation) {
+                navigator.geolocation.getCurrentPosition(
+                    function(position) {
+                        const lat = position.coords.latitude.toFixed(6);
+                        const lon = position.coords.longitude.toFixed(6);
+                        const locationText = `📍 Lat: ${lat}, Lon: ${lon}`;
+                        
+                        document.getElementById('current-location').textContent = locationText;
+                        
+                        alert(`Location shared!\n\nCoordinates: ${lat}, ${lon}\n\nIn a real emergency app, this would be sent to emergency services and your emergency contacts.`);
+                        logEmergencyAction('Shared location');
+                    },
+                    function(error) {
+                        alert('Unable to get location. Please ensure location services are enabled.');
+                        document.getElementById('current-location').textContent = '📍 Location unavailable';
+                    }
+                );
+            } else {
+                alert('Geolocation is not supported by this browser.');
+            }
+        }
+
+        // Update checklist progress
+        function updateChecklist() {
+            const checkboxes = document.querySelectorAll('input[type="checkbox"]');
+            const checked = document.querySelectorAll('input[type="checkbox"]:checked').length;
+            document.getElementById('checklist-progress').textContent = `${checked}/${checkboxes.length}`;
+            
+            if (checked === checkboxes.length) {
+                alert('✅ Safety checklist completed! You\'ve taken all recommended emergency steps.');
+            }
+        }
+
+        // Log emergency actions
+        function logEmergencyAction(action) {
+            const timestamp = new Date().toLocaleTimeString();
+            console.log(`[${timestamp}] Emergency Action: ${action}`);
+            // In a real app, this would log to emergency services or a monitoring system
+        }
+
+        // Show emergency alert
+        function showEmergencyAlert() {
+            document.getElementById('alert-banner').classList.remove('hidden');
+        }
+
+        // Dismiss alert
+        function dismissAlert() {
+            document.getElementById('alert-banner').classList.add('hidden');
+        }
+
+        // Exit emergency mode
+        function exitEmergencyMode() {
+            if (confirm('Are you sure you want to exit Emergency Mode?\n\nOnly exit if the emergency situation has been completely resolved.')) {
+                alert('Exiting Emergency Mode...\n\nIn a real app, this would return you to normal mode and log the emergency session.');
+                // In a real app, this would redirect to normal mode
+            }
+        }
+
+        // Generate emergency ID
+        function generateEmergencyId() {
+            const date = new Date();
+            const year = date.getFullYear();
+            const random = Math.floor(Math.random() * 999999).toString().padStart(6, '0');
+            return `EMG-${year}-${random}`;
+        }
+
+        // Initialize emergency mode
+        function initializeEmergencyMode() {
+            // Update time every second
+            updateTime();
+            setInterval(updateTime, 1000);
+            
+            // Generate emergency ID
+            document.getElementById('emergency-id').textContent = generateEmergencyId();
+            
+            // Update last updated time
+            document.getElementById('last-updated').textContent = new Date().toLocaleTimeString();
+            
+            // Try to get location immediately
+            shareLocation();
+            
+            // Show alert after 3 seconds (demo)
+            setTimeout(showEmergencyAlert, 3000);
+            
+            // Log emergency mode activation
+            logEmergencyAction('Emergency Mode Activated');
+        }
+
+        // Initialize when page loads
+        document.addEventListener('DOMContentLoaded', initializeEmergencyMode);
+    </script>
+<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'97b4c64434be5524',t:'MTc1NzIzMzA5Ni4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+</html>
