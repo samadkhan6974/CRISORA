@@ -69,7 +69,7 @@
     <div class="flex justify-between items-center h-16">
       
       <!-- Logo with link to Home -->
-      <a href="#home" class="flex items-center">
+      <a href="/map.html" class="flex items-center">
         <!-- Shield Logo -->
         <div class="relative mr-2 shield-glow">
           <svg width="40" height="40" viewBox="0 0 80 80" class="pulse-animation">
@@ -110,9 +110,11 @@
                     <a href="#prepare" class="nav-link text-gray-700 hover:text-blue-600 font-medium">Prepare</a>
                     <a href="#alerts" class="nav-link text-gray-700 hover:text-blue-600 font-medium">Alerts</a>
                     <a href="#community" class="nav-link text-gray-700 hover:text-blue-600 font-medium">Community</a>
+                    <a href="/donatepage" class="nav-link text-gray-700 hover:text-blue-600 font-medium"></a>
+                    <a href="/confirmation" class="nav-link text-gray-700 hover:text-blue-600 font-medium"></a>
                 </div>
-                <button class="donation text-white px-4 py-2 rounded-lg font-semibold pulse-animation">Donate</button>
-                <button class="emergency-alert text-white px-4 py-2 rounded-lg font-semibold pulse-animation">
+                <button onclick="window.location.href='donatepage2.html'" class="donation text-white px-4 py-2 rounded-lg font-semibold pulse-animation">Donate</button>
+                <button href="/emergencymode.html"class="emergency-alert text-white px-4 py-2 rounded-lg font-semibold pulse-animation">
                     🚨 Emergency Mode
                 </button>
                 
@@ -153,6 +155,7 @@
                 <button class="ml-auto bg-red-600 text-white px-4 py-2 rounded-lg hover:bg-red-700">
                     View Details
                 </button>
+                
             </div>
         </div>
     </section>
@@ -167,21 +170,23 @@
                 </p>
             </div>
 
-            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+            <div class="grid md:grid-cols-3 lg:grid-cols-4 gap-8">
                 <!-- Natural Disasters -->
                 <div class="bg-white rounded-xl shadow-lg p-6 card-hover cursor-pointer" onclick="openModule('natural')">
-                    <div class="text-4xl mb-4">🌪️</div>
+                    <div class="text-4xl mb-4"></div>
                     <h3 class="text-xl font-semibold mb-3 text-gray-900">Natural Disasters</h3>
                     <p class="text-gray-600 mb-4">Learn about earthquakes, hurricanes, floods, wildfires, and how to prepare for each.</p>
                     <div class="flex items-center justify-between">
                         <span class="text-sm text-blue-600 font-medium">8 Modules Available</span>
                         <div class="bg-green-100 text-green-800 px-2 py-1 rounded-full text-xs font-medium">Beginner</div>
+                        
                     </div>
                 </div>
+                
 
                 <!-- Emergency Kits -->
                 <div class="bg-white rounded-xl shadow-lg p-6 card-hover cursor-pointer" onclick="openModule('kits')">
-                    <div class="text-4xl mb-4">🎒</div>
+                    <div class="text-4xl mb-4"></div>
                     <h3 class="text-xl font-semibold mb-3 text-gray-900">Emergency Kits</h3>
                     <p class="text-gray-600 mb-4">Build comprehensive emergency kits for home, work, and vehicle with our interactive checklist.</p>
                     <div class="flex items-center justify-between">
@@ -192,7 +197,7 @@
 
                 <!-- First Aid -->
                 <div class="bg-white rounded-xl shadow-lg p-6 card-hover cursor-pointer" onclick="openModule('firstaid')">
-                    <div class="text-4xl mb-4">🏥</div>
+                    <div class="text-4xl mb-4"></div>
                     <h3 class="text-xl font-semibold mb-3 text-gray-900">First Aid Training</h3>
                     <p class="text-gray-600 mb-4">Essential first aid skills with step-by-step guides and video demonstrations.</p>
                     <div class="flex items-center justify-between">
@@ -203,7 +208,7 @@
 
                 <!-- Communication -->
                 <div class="bg-white rounded-xl shadow-lg p-6 card-hover cursor-pointer" onclick="openModule('communication')">
-                    <div class="text-4xl mb-4">📡</div>
+                    <div class="text-4xl mb-4"></div>
                     <h3 class="text-xl font-semibold mb-3 text-gray-900">Emergency Communication</h3>
                     <p class="text-gray-600 mb-4">Stay connected during emergencies with backup communication methods and protocols.</p>
                     <div class="flex items-center justify-between">
@@ -212,27 +217,9 @@
                     </div>
                 </div>
 
-                <!-- Family Planning -->
-                <div class="bg-white rounded-xl shadow-lg p-6 card-hover cursor-pointer" onclick="openModule('family')">
-                    <div class="text-4xl mb-4">👨‍👩‍👧‍👦</div>
-                    <h3 class="text-xl font-semibold mb-3 text-gray-900">Family Emergency Plans</h3>
-                    <p class="text-gray-600 mb-4">Create comprehensive family emergency plans with meeting points and contact information.</p>
-                    <div class="flex items-center justify-between">
-                        <span class="text-sm text-blue-600 font-medium">Plan Builder</span>
-                        <div class="bg-green-100 text-green-800 px-2 py-1 rounded-full text-xs font-medium">Essential</div>
-                    </div>
-                </div>
+               
 
-                <!-- Community Response -->
-                <div class="bg-white rounded-xl shadow-lg p-6 card-hover cursor-pointer" onclick="openModule('community')">
-                    <div class="text-4xl mb-4">🤝</div>
-                    <h3 class="text-xl font-semibold mb-3 text-gray-900">Community Response</h3>
-                    <p class="text-gray-600 mb-4">Learn how to organize and participate in community disaster response efforts.</p>
-                    <div class="flex items-center justify-between">
-                        <span class="text-sm text-blue-600 font-medium">Leadership Skills</span>
-                        <div class="bg-red-100 text-red-800 px-2 py-1 rounded-full text-xs font-medium">Advanced</div>
-                    </div>
-                </div>
+                
             </div>
         </div>
     </section>
@@ -327,6 +314,8 @@
                 </p>
             </div>
 
+    
+
             <div class="grid md:grid-cols-3 gap-8">
                 <div class="bg-white rounded-xl shadow-lg p-6">
                     <h3 class="text-xl font-semibold mb-4 text-gray-900">📍 Local Groups</h3>
@@ -388,11 +377,48 @@
             <div class="grid md:grid-cols-4 gap-8">
                 <div>
                     <div class="flex items-center space-x-3 mb-4">
-                        <div class="text-3xl">🌍</div>
-                        <div>
-                            <h3 class="text-xl font-bold">CRISORA</h3>
-                            <p class="text-sm text-gray-400">Crisis Resilience & Response</p>
-                        </div>
+                        <div class="text-3xl"><body class="bg-gradient-to-br from-slate-50 to-blue-50 min-h-screen flex items-center justify-center p-8">
+    <div class="logo-container">
+        <!-- Main Logo -->
+        <div class="flex items-center justify-center">
+            <!-- Shield Icon -->
+            <div class="relative mr-4 shield-glow">
+                <svg width="50" height="60" viewBox="0 0 80 80" class="pulse-animation cursor-pointer">
+                    <!-- Shield Background -->
+                    <path d="M40 8 L65 18 L65 35 C65 52 40 70 40 70 C40 70 15 52 15 35 L15 18 Z" 
+                          fill="url(#shieldGradient)" stroke="#1e40af" stroke-width="2"/>
+                    
+                    <!-- Safety Cross -->
+                    <rect x="36" y="25" width="8" height="20" fill="white" rx="2"/>
+                    <rect x="30" y="31" width="20" height="8" fill="white" rx="2"/>
+                    
+                    <!-- Emergency Alert Dots -->
+                    <circle cx="28" cy="48" r="3" fill="#ef4444"/>
+                    <circle cx="40" cy="52" r="3" fill="#f59e0b"/>
+                    <circle cx="52" cy="48" r="3" fill="#10b981"/>
+                    
+                    <!-- Graduation Cap Element -->
+                    <path d="M25 22 L40 18 L55 22 L55 26 L40 22 L25 26 Z" fill="#1e40af" opacity="0.8"/>
+                    <rect x="53" y="22" width="4" height="8" fill="#1e40af" opacity="0.8"/>
+                    <circle cx="55" cy="24" r="2" fill="#1e40af" opacity="0.8"/>
+                    
+                    <defs>
+                        <linearGradient id="shieldGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                            <stop offset="0%" style="stop-color:#3b82f6;stop-opacity:0.9"/>
+                            <stop offset="50%" style="stop-color:#60a5fa;stop-opacity:0.8"/>
+                            <stop offset="100%" style="stop-color:#93c5fd;stop-opacity:0.7"/>
+                        </linearGradient>
+                    </defs>
+                </svg>
+            </div>
+            
+            <!-- Logo Text -->
+            <div>
+                <h6 class="text-4xl font-bold text-gradient tracking-tight">CRISORA</h6>
+            </div>
+        </div>
+    </div></div>
+                        
                     </div>
                     <p class="text-gray-400">
                         Empowering communities through education, preparation, and coordinated response to disasters and emergencies.
@@ -422,8 +448,8 @@
                 <div>
                     <h4 class="font-semibold mb-4">Contact</h4>
                     <ul class="space-y-2 text-gray-400">
-                        <li>📧 info@crisora.org</li>
-                        <li>📞 1-800-PREPARE</li>
+                        <li>📧 infocrisora@gmail.com</li>
+                        <li>📞 7520691705</li>
                         <li>🌐 www.crisora.org</li>
                         <li>📍 Emergency Operations Center</li>
                     </ul>
@@ -431,7 +457,7 @@
             </div>
             
             <div class="border-t border-gray-800 mt-8 pt-8 text-center text-gray-400">
-                <p>&copy; 2025 CRISORA. All rights reserved. | Emergency Hotline: 911</p>
+                <p>&copy; 2025 CRISORA. All rights reserved. | Emergency Hotline: 112</p>
             </div>
         </div>
     </footer>
