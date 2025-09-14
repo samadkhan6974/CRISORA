@@ -1,0 +1,820 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>School Disaster Preparedness Dashboard</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
+        body { font-family: 'Inter', sans-serif; }
+        
+        .dashboard-card {
+            transition: all 0.3s ease;
+        }
+        
+        .dashboard-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
+        }
+        
+        .metric-card {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        }
+        
+        .metric-card.success {
+            background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+        }
+        
+        .metric-card.warning {
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+        }
+        
+        .metric-card.danger {
+            background: linear-gradient(135deg, #ff9a9e 0%, #fecfef 100%);
+        }
+        
+        .progress-bar {
+            transition: width 0.8s ease-in-out;
+        }
+        
+        .status-indicator {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            display: inline-block;
+            margin-right: 8px;
+        }
+        
+        .status-excellent { background-color: #10b981; }
+        .status-good { background-color: #3b82f6; }
+        .status-fair { background-color: #f59e0b; }
+        .status-poor { background-color: #ef4444; }
+        
+        .drill-status {
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 600;
+        }
+        
+        .drill-completed { background-color: #d1fae5; color: #065f46; }
+        .drill-scheduled { background-color: #dbeafe; color: #1e40af; }
+        .drill-overdue { background-color: #fee2e2; color: #991b1b; }
+        
+        .fade-in {
+            animation: fadeIn 0.6s ease-out;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .tab-active {
+            background-color: #3b82f6;
+            color: white;
+        }
+        
+        .notification-badge {
+            position: absolute;
+            top: -8px;
+            right: -8px;
+            background-color: #ef4444;
+            color: white;
+            border-radius: 50%;
+            width: 20px;
+            height: 20px;
+            font-size: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+    </style>
+</head>
+<body class="bg-gray-50 min-h-screen">
+    <!-- Header -->
+    <header class="bg-white shadow-sm border-b border-gray-200">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center py-4">
+                <div class="flex items-center">
+                    <div class="text-2xl mr-3">🏫</div>
+                    <div>
+                        <h1 class="text-2xl font-bold text-gray-900">Disaster Preparedness Dashboard</h1>
+                        <p class="text-sm text-gray-600">Lincoln High School - Administrator Portal</p>
+                    </div>
+                </div>
+                <div class="flex items-center space-x-4">
+                    <div class="relative">
+                        <button class="p-2 text-gray-400 hover:text-gray-600 relative">
+                            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 17h5l-5 5-5-5h5v-5a7.5 7.5 0 00-15 0v5h5l-5 5-5-5h5V7a9.5 9.5 0 0119 0v10z"></path>
+                            </svg>
+                            <span class="notification-badge">3</span>
+                        </button>
+                    </div>
+                    <div class="flex items-center">
+                        <img class="h-8 w-8 rounded-full" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ccircle cx='50' cy='50' r='50' fill='%234f46e5'/%3E%3Ctext x='50' y='55' text-anchor='middle' fill='white' font-size='40' font-family='Arial'%3EA%3C/text%3E%3C/svg%3E" alt="Admin">
+                        <span class="ml-2 text-sm font-medium text-gray-700">Admin User</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+        <!-- Key Metrics Cards -->
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
+            <div class="metric-card success text-white rounded-xl p-6 dashboard-card fade-in">
+                <div class="flex items-center justify-between">
+                    <div>
+                        <p class="text-blue-100 text-sm font-medium">Overall Preparedness</p>
+                        <p class="text-3xl font-bold">87%</p>
+                        <p class="text-blue-100 text-xs mt-1">↗ +5% from last month</p>
+                    </div>
+                    <div class="text-4xl opacity-80">🛡️</div>
+                </div>
+            </div>
+
+            <div class="metric-card text-white rounded-xl p-6 dashboard-card fade-in">
+                <div class="flex items-center justify-between">
+                    <div>
+                        <p class="text-purple-100 text-sm font-medium">Active Drills</p>
+                        <p class="text-3xl font-bold">12</p>
+                        <p class="text-purple-100 text-xs mt-1">3 scheduled this week</p>
+                    </div>
+                    <div class="text-4xl opacity-80">🚨</div>
+                </div>
+            </div>
+
+            <div class="metric-card warning text-white rounded-xl p-6 dashboard-card fade-in">
+                <div class="flex items-center justify-between">
+                    <div>
+                        <p class="text-pink-100 text-sm font-medium">Student Participation</p>
+                        <p class="text-3xl font-bold">94%</p>
+                        <p class="text-pink-100 text-xs mt-1">1,245 of 1,324 students</p>
+                    </div>
+                    <div class="text-4xl opacity-80">👥</div>
+                </div>
+            </div>
+
+            <div class="metric-card danger text-white rounded-xl p-6 dashboard-card fade-in">
+                <div class="flex items-center justify-between">
+                    <div>
+                        <p class="text-red-100 text-sm font-medium">Pending Actions</p>
+                        <p class="text-3xl font-bold">7</p>
+                        <p class="text-red-100 text-xs mt-1">Require immediate attention</p>
+                    </div>
+                    <div class="text-4xl opacity-80">⚠️</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Tab Navigation -->
+        <div class="bg-white rounded-lg shadow-sm mb-6">
+            <div class="border-b border-gray-200">
+                <nav class="flex space-x-8 px-6">
+                    <button onclick="switchTab('overview')" id="tab-overview" class="tab-active py-4 px-1 border-b-2 border-transparent font-medium text-sm transition-colors">
+                        📊 Overview
+                    </button>
+                    <button onclick="switchTab('drills')" id="tab-drills" class="py-4 px-1 border-b-2 border-transparent font-medium text-sm text-gray-500 hover:text-gray-700 transition-colors">
+                        🚨 Drill Management
+                    </button>
+                    <button onclick="switchTab('scores')" id="tab-scores" class="py-4 px-1 border-b-2 border-transparent font-medium text-sm text-gray-500 hover:text-gray-700 transition-colors">
+                        📈 Preparedness Scores
+                    </button>
+                    <button onclick="switchTab('reports')" id="tab-reports" class="py-4 px-1 border-b-2 border-transparent font-medium text-sm text-gray-500 hover:text-gray-700 transition-colors">
+                        📋 Reports
+                    </button>
+                </nav>
+            </div>
+        </div>
+
+        <!-- Overview Tab -->
+        <div id="content-overview" class="tab-content">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-8">
+                <!-- Preparedness Score Chart -->
+                <div class="bg-white rounded-xl shadow-sm p-6 dashboard-card">
+                    <h3 class="text-lg font-semibold text-gray-900 mb-4">Preparedness Score Trends</h3>
+                    <canvas id="preparednessChart" width="400" height="200"></canvas>
+                </div>
+
+                <!-- Drill Participation Chart -->
+                <div class="bg-white rounded-xl shadow-sm p-6 dashboard-card">
+                    <h3 class="text-lg font-semibold text-gray-900 mb-4">Drill Participation by Grade</h3>
+                    <canvas id="participationChart" width="400" height="200"></canvas>
+                </div>
+            </div>
+
+            <!-- Department Status -->
+            <div class="bg-white rounded-xl shadow-sm p-6 dashboard-card mb-8">
+                <h3 class="text-lg font-semibold text-gray-900 mb-6">Department Preparedness Status</h3>
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                    <div class="border border-gray-200 rounded-lg p-4">
+                        <div class="flex items-center justify-between mb-3">
+                            <h4 class="font-medium text-gray-900">Administration</h4>
+                            <span class="status-indicator status-excellent"></span>
+                        </div>
+                        <div class="w-full bg-gray-200 rounded-full h-2 mb-2">
+                            <div class="progress-bar bg-green-500 h-2 rounded-full" style="width: 95%"></div>
+                        </div>
+                        <p class="text-sm text-gray-600">95% - Excellent</p>
+                    </div>
+
+                    <div class="border border-gray-200 rounded-lg p-4">
+                        <div class="flex items-center justify-between mb-3">
+                            <h4 class="font-medium text-gray-900">Teaching Staff</h4>
+                            <span class="status-indicator status-good"></span>
+                        </div>
+                        <div class="w-full bg-gray-200 rounded-full h-2 mb-2">
+                            <div class="progress-bar bg-blue-500 h-2 rounded-full" style="width: 88%"></div>
+                        </div>
+                        <p class="text-sm text-gray-600">88% - Good</p>
+                    </div>
+
+                    <div class="border border-gray-200 rounded-lg p-4">
+                        <div class="flex items-center justify-between mb-3">
+                            <h4 class="font-medium text-gray-900">Support Staff</h4>
+                            <span class="status-indicator status-fair"></span>
+                        </div>
+                        <div class="w-full bg-gray-200 rounded-full h-2 mb-2">
+                            <div class="progress-bar bg-yellow-500 h-2 rounded-full" style="width: 76%"></div>
+                        </div>
+                        <p class="text-sm text-gray-600">76% - Fair</p>
+                    </div>
+
+                    <div class="border border-gray-200 rounded-lg p-4">
+                        <div class="flex items-center justify-between mb-3">
+                            <h4 class="font-medium text-gray-900">Maintenance</h4>
+                            <span class="status-indicator status-excellent"></span>
+                        </div>
+                        <div class="w-full bg-gray-200 rounded-full h-2 mb-2">
+                            <div class="progress-bar bg-green-500 h-2 rounded-full" style="width: 92%"></div>
+                        </div>
+                        <p class="text-sm text-gray-600">92% - Excellent</p>
+                    </div>
+
+                    <div class="border border-gray-200 rounded-lg p-4">
+                        <div class="flex items-center justify-between mb-3">
+                            <h4 class="font-medium text-gray-900">Security</h4>
+                            <span class="status-indicator status-good"></span>
+                        </div>
+                        <div class="w-full bg-gray-200 rounded-full h-2 mb-2">
+                            <div class="progress-bar bg-blue-500 h-2 rounded-full" style="width: 85%"></div>
+                        </div>
+                        <p class="text-sm text-gray-600">85% - Good</p>
+                    </div>
+
+                    <div class="border border-gray-200 rounded-lg p-4">
+                        <div class="flex items-center justify-between mb-3">
+                            <h4 class="font-medium text-gray-900">Food Services</h4>
+                            <span class="status-indicator status-poor"></span>
+                        </div>
+                        <div class="w-full bg-gray-200 rounded-full h-2 mb-2">
+                            <div class="progress-bar bg-red-500 h-2 rounded-full" style="width: 68%"></div>
+                        </div>
+                        <p class="text-sm text-gray-600">68% - Needs Improvement</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Recent Activities -->
+            <div class="bg-white rounded-xl shadow-sm p-6 dashboard-card">
+                <h3 class="text-lg font-semibold text-gray-900 mb-6">Recent Activities</h3>
+                <div class="space-y-4">
+                    <div class="flex items-center p-3 bg-green-50 rounded-lg">
+                        <div class="text-2xl mr-3">✅</div>
+                        <div class="flex-1">
+                            <p class="font-medium text-gray-900">Fire Drill Completed</p>
+                            <p class="text-sm text-gray-600">Building A - 98% participation rate</p>
+                        </div>
+                        <span class="text-sm text-gray-500">2 hours ago</span>
+                    </div>
+
+                    <div class="flex items-center p-3 bg-blue-50 rounded-lg">
+                        <div class="text-2xl mr-3">📚</div>
+                        <div class="flex-1">
+                            <p class="font-medium text-gray-900">Training Module Updated</p>
+                            <p class="text-sm text-gray-600">Earthquake response procedures revised</p>
+                        </div>
+                        <span class="text-sm text-gray-500">1 day ago</span>
+                    </div>
+
+                    <div class="flex items-center p-3 bg-yellow-50 rounded-lg">
+                        <div class="text-2xl mr-3">⚠️</div>
+                        <div class="flex-1">
+                            <p class="font-medium text-gray-900">Equipment Inspection Due</p>
+                            <p class="text-sm text-gray-600">Fire extinguishers in Building C</p>
+                        </div>
+                        <span class="text-sm text-gray-500">3 days ago</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Drill Management Tab -->
+        <div id="content-drills" class="tab-content hidden">
+            <div class="grid grid-cols-1 lg:grid-cols-3 gap-6 mb-8">
+                <!-- Schedule New Drill -->
+                <div class="bg-white rounded-xl shadow-sm p-6 dashboard-card">
+                    <h3 class="text-lg font-semibold text-gray-900 mb-4">Schedule New Drill</h3>
+                    <form class="space-y-4">
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-1">Drill Type</label>
+                            <select class="w-full border border-gray-300 rounded-lg px-3 py-2 focus:ring-2 focus:ring-blue-500 focus:border-transparent">
+                                <option>Fire Drill</option>
+                                <option>Earthquake Drill</option>
+                                <option>Lockdown Drill</option>
+                                <option>Severe Weather Drill</option>
+                                <option>Evacuation Drill</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-1">Building/Area</label>
+                            <select class="w-full border border-gray-300 rounded-lg px-3 py-2 focus:ring-2 focus:ring-blue-500 focus:border-transparent">
+                                <option>All Buildings</option>
+                                <option>Building A</option>
+                                <option>Building B</option>
+                                <option>Building C</option>
+                                <option>Gymnasium</option>
+                                <option>Cafeteria</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-1">Date & Time</label>
+                            <input type="datetime-local" class="w-full border border-gray-300 rounded-lg px-3 py-2 focus:ring-2 focus:ring-blue-500 focus:border-transparent">
+                        </div>
+                        <button type="button" onclick="scheduleDrill()" class="w-full bg-blue-600 hover:bg-blue-700 text-white font-medium py-2 px-4 rounded-lg transition-colors">
+                            Schedule Drill
+                        </button>
+                    </form>
+                </div>
+
+                <!-- Upcoming Drills -->
+                <div class="lg:col-span-2 bg-white rounded-xl shadow-sm p-6 dashboard-card">
+                    <h3 class="text-lg font-semibold text-gray-900 mb-4">Upcoming Drills</h3>
+                    <div class="space-y-3">
+                        <div class="flex items-center justify-between p-3 border border-gray-200 rounded-lg">
+                            <div class="flex items-center">
+                                <div class="text-2xl mr-3">🔥</div>
+                                <div>
+                                    <p class="font-medium text-gray-900">Fire Drill - Building A</p>
+                                    <p class="text-sm text-gray-600">Tomorrow, 10:30 AM</p>
+                                </div>
+                            </div>
+                            <div class="flex items-center space-x-2">
+                                <span class="drill-status drill-scheduled">Scheduled</span>
+                                <button class="text-blue-600 hover:text-blue-800">Edit</button>
+                            </div>
+                        </div>
+
+                        <div class="flex items-center justify-between p-3 border border-gray-200 rounded-lg">
+                            <div class="flex items-center">
+                                <div class="text-2xl mr-3">🌪️</div>
+                                <div>
+                                    <p class="font-medium text-gray-900">Severe Weather Drill</p>
+                                    <p class="text-sm text-gray-600">Dec 20, 2024, 2:15 PM</p>
+                                </div>
+                            </div>
+                            <div class="flex items-center space-x-2">
+                                <span class="drill-status drill-scheduled">Scheduled</span>
+                                <button class="text-blue-600 hover:text-blue-800">Edit</button>
+                            </div>
+                        </div>
+
+                        <div class="flex items-center justify-between p-3 border border-red-200 rounded-lg bg-red-50">
+                            <div class="flex items-center">
+                                <div class="text-2xl mr-3">🔒</div>
+                                <div>
+                                    <p class="font-medium text-gray-900">Lockdown Drill - Overdue</p>
+                                    <p class="text-sm text-gray-600">Was due: Dec 10, 2024</p>
+                                </div>
+                            </div>
+                            <div class="flex items-center space-x-2">
+                                <span class="drill-status drill-overdue">Overdue</span>
+                                <button class="text-red-600 hover:text-red-800">Reschedule</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Drill History -->
+            <div class="bg-white rounded-xl shadow-sm p-6 dashboard-card">
+                <div class="flex justify-between items-center mb-6">
+                    <h3 class="text-lg font-semibold text-gray-900">Recent Drill History</h3>
+                    <button class="text-blue-600 hover:text-blue-800 font-medium">View All</button>
+                </div>
+                <div class="overflow-x-auto">
+                    <table class="w-full">
+                        <thead>
+                            <tr class="border-b border-gray-200">
+                                <th class="text-left py-3 px-4 font-medium text-gray-700">Date</th>
+                                <th class="text-left py-3 px-4 font-medium text-gray-700">Type</th>
+                                <th class="text-left py-3 px-4 font-medium text-gray-700">Location</th>
+                                <th class="text-left py-3 px-4 font-medium text-gray-700">Participation</th>
+                                <th class="text-left py-3 px-4 font-medium text-gray-700">Duration</th>
+                                <th class="text-left py-3 px-4 font-medium text-gray-700">Status</th>
+                                <th class="text-left py-3 px-4 font-medium text-gray-700">Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr class="border-b border-gray-100">
+                                <td class="py-3 px-4">Dec 15, 2024</td>
+                                <td class="py-3 px-4">🔥 Fire Drill</td>
+                                <td class="py-3 px-4">Building A</td>
+                                <td class="py-3 px-4">98% (245/250)</td>
+                                <td class="py-3 px-4">3m 45s</td>
+                                <td class="py-3 px-4"><span class="drill-status drill-completed">Completed</span></td>
+                                <td class="py-3 px-4">
+                                    <button class="text-blue-600 hover:text-blue-800 text-sm">View Report</button>
+                                </td>
+                            </tr>
+                            <tr class="border-b border-gray-100">
+                                <td class="py-3 px-4">Dec 12, 2024</td>
+                                <td class="py-3 px-4">🌍 Earthquake</td>
+                                <td class="py-3 px-4">All Buildings</td>
+                                <td class="py-3 px-4">94% (1245/1324)</td>
+                                <td class="py-3 px-4">5m 12s</td>
+                                <td class="py-3 px-4"><span class="drill-status drill-completed">Completed</span></td>
+                                <td class="py-3 px-4">
+                                    <button class="text-blue-600 hover:text-blue-800 text-sm">View Report</button>
+                                </td>
+                            </tr>
+                            <tr class="border-b border-gray-100">
+                                <td class="py-3 px-4">Dec 8, 2024</td>
+                                <td class="py-3 px-4">🔒 Lockdown</td>
+                                <td class="py-3 px-4">Building B</td>
+                                <td class="py-3 px-4">96% (384/400)</td>
+                                <td class="py-3 px-4">8m 30s</td>
+                                <td class="py-3 px-4"><span class="drill-status drill-completed">Completed</span></td>
+                                <td class="py-3 px-4">
+                                    <button class="text-blue-600 hover:text-blue-800 text-sm">View Report</button>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <!-- Preparedness Scores Tab -->
+        <div id="content-scores" class="tab-content hidden">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-8">
+                <!-- Score Breakdown -->
+                <div class="bg-white rounded-xl shadow-sm p-6 dashboard-card">
+                    <h3 class="text-lg font-semibold text-gray-900 mb-4">Preparedness Score Breakdown</h3>
+                    <canvas id="scoreBreakdownChart" width="400" height="300"></canvas>
+                </div>
+
+                <!-- Grade-wise Scores -->
+                <div class="bg-white rounded-xl shadow-sm p-6 dashboard-card">
+                    <h3 class="text-lg font-semibold text-gray-900 mb-4">Scores by Grade Level</h3>
+                    <div class="space-y-4">
+                        <div class="flex items-center justify-between">
+                            <span class="font-medium">Grade 9</span>
+                            <div class="flex items-center space-x-3">
+                                <div class="w-32 bg-gray-200 rounded-full h-2">
+                                    <div class="bg-green-500 h-2 rounded-full" style="width: 92%"></div>
+                                </div>
+                                <span class="font-bold text-green-600">92%</span>
+                            </div>
+                        </div>
+                        <div class="flex items-center justify-between">
+                            <span class="font-medium">Grade 10</span>
+                            <div class="flex items-center space-x-3">
+                                <div class="w-32 bg-gray-200 rounded-full h-2">
+                                    <div class="bg-blue-500 h-2 rounded-full" style="width: 89%"></div>
+                                </div>
+                                <span class="font-bold text-blue-600">89%</span>
+                            </div>
+                        </div>
+                        <div class="flex items-center justify-between">
+                            <span class="font-medium">Grade 11</span>
+                            <div class="flex items-center space-x-3">
+                                <div class="w-32 bg-gray-200 rounded-full h-2">
+                                    <div class="bg-blue-500 h-2 rounded-full" style="width: 85%"></div>
+                                </div>
+                                <span class="font-bold text-blue-600">85%</span>
+                            </div>
+                        </div>
+                        <div class="flex items-center justify-between">
+                            <span class="font-medium">Grade 12</span>
+                            <div class="flex items-center space-x-3">
+                                <div class="w-32 bg-gray-200 rounded-full h-2">
+                                    <div class="bg-yellow-500 h-2 rounded-full" style="width: 78%"></div>
+                                </div>
+                                <span class="font-bold text-yellow-600">78%</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Detailed Metrics -->
+            <div class="bg-white rounded-xl shadow-sm p-6 dashboard-card">
+                <h3 class="text-lg font-semibold text-gray-900 mb-6">Detailed Preparedness Metrics</h3>
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                    <div class="text-center p-4 border border-gray-200 rounded-lg">
+                        <div class="text-3xl mb-2">📚</div>
+                        <h4 class="font-semibold text-gray-900 mb-1">Training Completion</h4>
+                        <p class="text-2xl font-bold text-blue-600">91%</p>
+                        <p class="text-sm text-gray-600">1,204 of 1,324 completed</p>
+                    </div>
+
+                    <div class="text-center p-4 border border-gray-200 rounded-lg">
+                        <div class="text-3xl mb-2">🎯</div>
+                        <h4 class="font-semibold text-gray-900 mb-1">Drill Performance</h4>
+                        <p class="text-2xl font-bold text-green-600">88%</p>
+                        <p class="text-sm text-gray-600">Average response time: 4m 12s</p>
+                    </div>
+
+                    <div class="text-center p-4 border border-gray-200 rounded-lg">
+                        <div class="text-3xl mb-2">🛠️</div>
+                        <h4 class="font-semibold text-gray-900 mb-1">Equipment Readiness</h4>
+                        <p class="text-2xl font-bold text-yellow-600">82%</p>
+                        <p class="text-sm text-gray-600">3 items need attention</p>
+                    </div>
+
+                    <div class="text-center p-4 border border-gray-200 rounded-lg">
+                        <div class="text-3xl mb-2">📋</div>
+                        <h4 class="font-semibold text-gray-900 mb-1">Plan Updates</h4>
+                        <p class="text-2xl font-bold text-green-600">95%</p>
+                        <p class="text-sm text-gray-600">Last updated: Nov 2024</p>
+                    </div>
+
+                    <div class="text-center p-4 border border-gray-200 rounded-lg">
+                        <div class="text-3xl mb-2">👥</div>
+                        <h4 class="font-semibold text-gray-900 mb-1">Staff Certification</h4>
+                        <p class="text-2xl font-bold text-blue-600">87%</p>
+                        <p class="text-sm text-gray-600">145 of 167 certified</p>
+                    </div>
+
+                    <div class="text-center p-4 border border-gray-200 rounded-lg">
+                        <div class="text-3xl mb-2">📞</div>
+                        <h4 class="font-semibold text-gray-900 mb-1">Communication Systems</h4>
+                        <p class="text-2xl font-bold text-green-600">98%</p>
+                        <p class="text-sm text-gray-600">All systems operational</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Reports Tab -->
+        <div id="content-reports" class="tab-content hidden">
+            <div class="grid grid-cols-1 lg:grid-cols-3 gap-6 mb-8">
+                <!-- Generate Report -->
+                <div class="bg-white rounded-xl shadow-sm p-6 dashboard-card">
+                    <h3 class="text-lg font-semibold text-gray-900 mb-4">Generate Report</h3>
+                    <form class="space-y-4">
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-1">Report Type</label>
+                            <select class="w-full border border-gray-300 rounded-lg px-3 py-2 focus:ring-2 focus:ring-blue-500 focus:border-transparent">
+                                <option>Comprehensive Assessment</option>
+                                <option>Drill Performance Summary</option>
+                                <option>Training Progress Report</option>
+                                <option>Equipment Status Report</option>
+                                <option>Compliance Report</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-1">Time Period</label>
+                            <select class="w-full border border-gray-300 rounded-lg px-3 py-2 focus:ring-2 focus:ring-blue-500 focus:border-transparent">
+                                <option>Last 30 Days</option>
+                                <option>Last Quarter</option>
+                                <option>Last 6 Months</option>
+                                <option>Academic Year</option>
+                                <option>Custom Range</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-1">Format</label>
+                            <select class="w-full border border-gray-300 rounded-lg px-3 py-2 focus:ring-2 focus:ring-blue-500 focus:border-transparent">
+                                <option>PDF Report</option>
+                                <option>Excel Spreadsheet</option>
+                                <option>PowerPoint Presentation</option>
+                            </select>
+                        </div>
+                        <button type="button" onclick="generateReport()" class="w-full bg-green-600 hover:bg-green-700 text-white font-medium py-2 px-4 rounded-lg transition-colors">
+                            Generate Report
+                        </button>
+                    </form>
+                </div>
+
+                <!-- Recent Reports -->
+                <div class="lg:col-span-2 bg-white rounded-xl shadow-sm p-6 dashboard-card">
+                    <h3 class="text-lg font-semibold text-gray-900 mb-4">Recent Reports</h3>
+                    <div class="space-y-3">
+                        <div class="flex items-center justify-between p-3 border border-gray-200 rounded-lg">
+                            <div class="flex items-center">
+                                <div class="text-2xl mr-3">📊</div>
+                                <div>
+                                    <p class="font-medium text-gray-900">Q4 Comprehensive Assessment</p>
+                                    <p class="text-sm text-gray-600">Generated on Dec 15, 2024</p>
+                                </div>
+                            </div>
+                            <div class="flex items-center space-x-2">
+                                <button class="text-blue-600 hover:text-blue-800 text-sm">Download</button>
+                                <button class="text-gray-600 hover:text-gray-800 text-sm">Share</button>
+                            </div>
+                        </div>
+
+                        <div class="flex items-center justify-between p-3 border border-gray-200 rounded-lg">
+                            <div class="flex items-center">
+                                <div class="text-2xl mr-3">🚨</div>
+                                <div>
+                                    <p class="font-medium text-gray-900">Drill Performance Summary</p>
+                                    <p class="text-sm text-gray-600">Generated on Dec 10, 2024</p>
+                                </div>
+                            </div>
+                            <div class="flex items-center space-x-2">
+                                <button class="text-blue-600 hover:text-blue-800 text-sm">Download</button>
+                                <button class="text-gray-600 hover:text-gray-800 text-sm">Share</button>
+                            </div>
+                        </div>
+
+                        <div class="flex items-center justify-between p-3 border border-gray-200 rounded-lg">
+                            <div class="flex items-center">
+                                <div class="text-2xl mr-3">📚</div>
+                                <div>
+                                    <p class="font-medium text-gray-900">Training Progress Report</p>
+                                    <p class="text-sm text-gray-600">Generated on Dec 5, 2024</p>
+                                </div>
+                            </div>
+                            <div class="flex items-center space-x-2">
+                                <button class="text-blue-600 hover:text-blue-800 text-sm">Download</button>
+                                <button class="text-gray-600 hover:text-gray-800 text-sm">Share</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Compliance Dashboard -->
+            <div class="bg-white rounded-xl shadow-sm p-6 dashboard-card">
+                <h3 class="text-lg font-semibold text-gray-900 mb-6">Compliance Dashboard</h3>
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+                    <div class="text-center p-4 bg-green-50 border border-green-200 rounded-lg">
+                        <div class="text-2xl mb-2">✅</div>
+                        <h4 class="font-semibold text-green-800">Fire Safety</h4>
+                        <p class="text-green-600 font-bold">Compliant</p>
+                        <p class="text-xs text-green-600">Last audit: Nov 2024</p>
+                    </div>
+
+                    <div class="text-center p-4 bg-green-50 border border-green-200 rounded-lg">
+                        <div class="text-2xl mb-2">✅</div>
+                        <h4 class="font-semibold text-green-800">Emergency Plans</h4>
+                        <p class="text-green-600 font-bold">Up to Date</p>
+                        <p class="text-xs text-green-600">Updated: Nov 2024</p>
+                    </div>
+
+                    <div class="text-center p-4 bg-yellow-50 border border-yellow-200 rounded-lg">
+                        <div class="text-2xl mb-2">⚠️</div>
+                        <h4 class="font-semibold text-yellow-800">Staff Training</h4>
+                        <p class="text-yellow-600 font-bold">87% Complete</p>
+                        <p class="text-xs text-yellow-600">22 pending certifications</p>
+                    </div>
+
+                    <div class="text-center p-4 bg-red-50 border border-red-200 rounded-lg">
+                        <div class="text-2xl mb-2">❌</div>
+                        <h4 class="font-semibold text-red-800">Equipment Check</h4>
+                        <p class="text-red-600 font-bold">Overdue</p>
+                        <p class="text-xs text-red-600">Due: Dec 1, 2024</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Tab switching functionality
+        function switchTab(tabName) {
+            // Hide all tab contents
+            document.querySelectorAll('.tab-content').forEach(content => {
+                content.classList.add('hidden');
+            });
+            
+            // Remove active class from all tabs
+            document.querySelectorAll('[id^="tab-"]').forEach(tab => {
+                tab.classList.remove('tab-active');
+                tab.classList.add('text-gray-500', 'hover:text-gray-700');
+            });
+            
+            // Show selected tab content
+            document.getElementById(`content-${tabName}`).classList.remove('hidden');
+            
+            // Add active class to selected tab
+            const activeTab = document.getElementById(`tab-${tabName}`);
+            activeTab.classList.add('tab-active');
+            activeTab.classList.remove('text-gray-500', 'hover:text-gray-700');
+        }
+
+        // Chart initialization
+        function initializeCharts() {
+            // Preparedness Score Trends Chart
+            const preparednessCtx = document.getElementById('preparednessChart').getContext('2d');
+            new Chart(preparednessCtx, {
+                type: 'line',
+                data: {
+                    labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
+                    datasets: [{
+                        label: 'Overall Preparedness Score',
+                        data: [75, 78, 82, 85, 83, 87, 89, 88, 86, 87, 89, 87],
+                        borderColor: '#3b82f6',
+                        backgroundColor: 'rgba(59, 130, 246, 0.1)',
+                        tension: 0.4,
+                        fill: true
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    plugins: {
+                        legend: {
+                            display: false
+                        }
+                    },
+                    scales: {
+                        y: {
+                            beginAtZero: false,
+                            min: 70,
+                            max: 100
+                        }
+                    }
+                }
+            });
+
+            // Drill Participation Chart
+            const participationCtx = document.getElementById('participationChart').getContext('2d');
+            new Chart(participationCtx, {
+                type: 'bar',
+                data: {
+                    labels: ['Grade 9', 'Grade 10', 'Grade 11', 'Grade 12'],
+                    datasets: [{
+                        label: 'Participation Rate (%)',
+                        data: [96, 94, 92, 89],
+                        backgroundColor: ['#10b981', '#3b82f6', '#f59e0b', '#ef4444']
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    plugins: {
+                        legend: {
+                            display: false
+                        }
+                    },
+                    scales: {
+                        y: {
+                            beginAtZero: false,
+                            min: 80,
+                            max: 100
+                        }
+                    }
+                }
+            });
+
+            // Score Breakdown Chart (Doughnut)
+            const scoreBreakdownCtx = document.getElementById('scoreBreakdownChart').getContext('2d');
+            new Chart(scoreBreakdownCtx, {
+                type: 'doughnut',
+                data: {
+                    labels: ['Training', 'Drills', 'Equipment', 'Plans', 'Communication'],
+                    datasets: [{
+                        data: [91, 88, 82, 95, 98],
+                        backgroundColor: [
+                            '#3b82f6',
+                            '#10b981',
+                            '#f59e0b',
+                            '#8b5cf6',
+                            '#06b6d4'
+                        ]
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    plugins: {
+                        legend: {
+                            position: 'bottom'
+                        }
+                    }
+                }
+            });
+        }
+
+        // Schedule drill function
+        function scheduleDrill() {
+            alert('Drill scheduled successfully! All relevant staff will be notified.');
+        }
+
+        // Generate report function
+        function generateReport() {
+            alert('Report generation started. You will receive an email when the report is ready for download.');
+        }
+
+        // Initialize charts when page loads
+        document.addEventListener('DOMContentLoaded', function() {
+            initializeCharts();
+        });
+    </script>
+<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'97e7c479d5945510',t:'MTc1Nzc2Nzc5Ny4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+</html>
