@@ -13,7 +13,7 @@
         }
         
         .hero-gradient {
-            background: url("image2.jpg.jpg")no-repeat center center/cover;        }
+            background: url("image23.jpg")no-repeat center center/cover;        }
         
         .card-hover {
             transition: all 0.3s ease;
@@ -35,6 +35,13 @@
         
         .emergency-alert {
             background: linear-gradient(90deg, #ef4444, #dc2626);
+            border:none;
+            padding:12px 24px;
+            border-radius:8px;
+            font-size: 18px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
             animation: alertPulse 3s infinite;
         }
 
@@ -53,7 +60,22 @@
     .donation:hover {
       background-color: #5c8f16; /* slightly darker shade */
     }
-        
+
+        .dashboard {
+      background-color: #00A7E1;
+      color:white;
+      border: none;
+      padding: 12px 24px;
+      border-radius: 8px;
+      font-size: 18px;
+      font-weight: bold;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+
+    .dashboard:hover {
+      background-color: #6EFAFB; /* slightly darker shade */  
+    }     
         @keyframes alertPulse {
             0%, 100% { background: linear-gradient(90deg, #ef4444, #dc2626); }
             50% { background: linear-gradient(90deg, #dc2626, #b91c1c); }
@@ -114,9 +136,10 @@
                     <a href="/confirmation" class="nav-link text-gray-700 hover:text-blue-600 font-medium"></a>
                 </div>
                 <button onclick="window.location.href='donatepage2.html'" class="donation text-white px-4 py-2 rounded-lg font-semibold pulse-animation">Donate</button>
-                <button href="/emergencymode.html"class="emergency-alert text-white px-4 py-2 rounded-lg font-semibold pulse-animation">
-                    🚨 Emergency Mode
+                <button onclick="window.location.href='emergencymode.html'"class="emergency-alert text-white px-4 py-2 rounded-lg font-semibold pulse-animation">
+                    Emergency
                 </button>
+                <button onclick="window.location.href='Dashboard.html'" class="dashboard text-white px-4 py-2 rounded-lg font-semibold pulse-animation">Dashboard</button>
                 
             </div>
         </div>
@@ -277,14 +300,14 @@
                     <div class="text-4xl mb-3">🚨</div>
                     <h3 class="text-xl font-semibold mb-2">Emergency Services</h3>
                     <p class="text-red-100 mb-4">Police, Fire, Medical</p>
-                    <div class="text-2xl font-bold">911</div>
+                    <div class="text-2xl font-bold">112</div>
                 </div>
 
                 <div class="bg-orange-600 text-white rounded-xl p-6 text-center card-hover cursor-pointer" onclick="callEmergency('poison')">
                     <div class="text-4xl mb-3">☠️</div>
                     <h3 class="text-xl font-semibold mb-2">Poison Control</h3>
                     <p class="text-orange-100 mb-4">24/7 Poison Help</p>
-                    <div class="text-lg font-bold">1-800-222-1222</div>
+                    <div class="text-lg font-bold">1800-425-1213</div>
                 </div>
 
                 <div class="bg-blue-600 text-white rounded-xl p-6 text-center card-hover cursor-pointer" onclick="openWeatherAlerts()">
@@ -298,7 +321,7 @@
                     <div class="text-4xl mb-3">➕</div>
                     <h3 class="text-xl font-semibold mb-2">Red Cross</h3>
                     <p class="text-green-100 mb-4">Disaster Relief</p>
-                    <div class="text-lg font-bold">1-800-733-2767</div>
+                    <div class="text-lg font-bold">011-23711551</div>
                 </div>
             </div>
         </div>
@@ -323,14 +346,14 @@
                         <div class="flex items-center justify-between p-3 bg-gray-50 rounded-lg">
                             <div>
                                 <div class="font-medium">Downtown Preparedness Group</div>
-                                <div class="text-sm text-gray-500">127 members</div>
+                                <div class="text-sm text-gray-500">0 members</div>
                             </div>
                             <button class="text-blue-600 hover:text-blue-800 font-medium">Join</button>
                         </div>
                         <div class="flex items-center justify-between p-3 bg-gray-50 rounded-lg">
                             <div>
                                 <div class="font-medium">Neighborhood Watch Alliance</div>
-                                <div class="text-sm text-gray-500">89 members</div>
+                                <div class="text-sm text-gray-500">0 members</div>
                             </div>
                             <button class="text-blue-600 hover:text-blue-800 font-medium">Join</button>
                         </div>
@@ -780,4 +803,3 @@
     </script>
 <script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'979ec167713d8ae5',t:'MTc1NzAwMjIxMC4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
 </html>
-
