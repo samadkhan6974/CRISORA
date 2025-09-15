@@ -70,11 +70,11 @@
             <div class="card-hover bg-white rounded-2xl shadow-xl p-8 md:p-10 fade-in">
                 <!-- Confirmation Number -->
                 <div class="text-center mb-8">
-                    <h2 class="text-2xl font-semibold text-gray-800 mb-2">Confirmation Number</h2>
+                    <h2 class="text-2xl font-semibold text-gray-800 mb-2">Transaction ID</h2>
                     <div class="bg-gray-100 rounded-lg p-4 inline-block">
-                        <span class="text-2xl font-mono font-bold text-blue-600" id="confirmation-number">DN-2024-001234</span>
+                        <span class="text-2xl font-mono font-bold text-blue-600" id="confirmation-number">""</span>
                     </div>
-                    <p class="text-sm text-gray-500 mt-2">Please save this number for your records</p>
+                    <p class="text-sm text-gray-500 mt-2"></p>
                 </div>
 
                 <!-- Donation Details -->
@@ -84,32 +84,32 @@
                     <div class="space-y-4">
                         <div class="flex justify-between items-center py-2">
                             <span class="text-gray-600">Donor Name:</span>
-                            <span class="font-medium text-gray-800" id="donor-name">John Smith</span>
+                            <span class="font-medium text-gray-800" id="donor-name"></span>
                         </div>
                         
                         <div class="flex justify-between items-center py-2">
                             <span class="text-gray-600">Email:</span>
-                            <span class="font-medium text-gray-800" id="donor-email">john.smith@email.com</span>
+                            <span class="font-medium text-gray-800" id="donor-email"></span>
                         </div>
                         
                         <div class="flex justify-between items-center py-2">
                             <span class="text-gray-600">Donation Amount:</span>
-                            <span class="font-bold text-green-600 text-xl" id="donation-amount">$100.00</span>
+                            <span class="font-bold text-green-600 text-xl" id="donation-amount"></span>
                         </div>
                         
                         <div class="flex justify-between items-center py-2">
                             <span class="text-gray-600">Donation Type:</span>
-                            <span class="font-medium text-gray-800" id="donation-type">One-time donation</span>
+                            <span class="font-medium text-gray-800" id="donation-type"></span>
                         </div>
                         
                         <div class="flex justify-between items-center py-2">
                             <span class="text-gray-600">Date:</span>
-                            <span class="font-medium text-gray-800" id="donation-date">December 15, 2024</span>
+                            <span class="font-medium text-gray-800" id="donation-date"></span>
                         </div>
                         
                         <div class="flex justify-between items-center py-2">
                             <span class="text-gray-600">Payment Method:</span>
-                            <span class="font-medium text-gray-800">Credit Card ending in 4242</span>
+                            <span class="font-medium text-gray-800"></span>
                         </div>
                     </div>
                 </div>
@@ -201,7 +201,7 @@
         <div class="max-w-2xl mx-auto mb-8">
             <div class="bg-gradient-to-r from-green-500 to-emerald-600 rounded-2xl shadow-lg p-8 text-white text-center card-hover fade-in">
                 <h2 class="text-2xl font-bold mb-4">Your Impact</h2>
-                <p class="text-lg mb-4">With your $100 donation, you've provided:</p>
+                <p class="text-lg mb-4">With your ₹100 donation, you've provided:</p>
                 <div class="bg-white bg-opacity-20 rounded-lg p-4">
                     <p class="text-xl font-semibold">Healthcare support for a family in need</p>
                 </div>
@@ -304,7 +304,7 @@
             const urls = {
                 facebook: 'https://facebook.com/yourorganization',
                 twitter: 'https://twitter.com/yourorganization',
-                instagram: 'https://instagram.com/yourorganization'
+                instagram: 'https://instagram.com'
             };
             
             if (urls[platform]) {
