@@ -55,7 +55,6 @@
                 </div>
 
                 <!-- Donor Information -->
-                 <form action=""></form>
                 <div class="mb-8">
                     <h3 class="text-xl font-semibold text-gray-800 mb-4">Your Information</h3>
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
@@ -63,7 +62,7 @@
                         <input type="text" placeholder="Last Name" class="px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent" required>
                     </div>
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                        <input type="email" placeholder="Email Address" class="px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent" required>
+                        <input type="email" placeholder="Email Address" class="px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent">
                         <input type="tel" placeholder="Phone Number (Optional)" class="px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent">
                     </div>
                 </div>
@@ -113,14 +112,10 @@
                     </div>
                 </div>
 
-                <button onclick="window.location.href='confirmation.html'" 
-        class="w-full bg-gradient-to-r from-blue-600 to-indigo-600 
-               hover:from-blue-700 hover:to-indigo-700 text-white 
-               font-bold py-4 px-8 rounded-xl text-lg transition-all 
-               duration-200 transform hover:scale-105 shadow-lg">
-    Complete Donation
-</button>
-
+                <!-- Donate Button -->
+                <button onclick="processDonation()" class="w-full bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-700 hover:to-indigo-700 text-white font-bold py-4 px-8 rounded-xl text-lg transition-all duration-200 transform hover:scale-105 shadow-lg">
+                     Complete Donation
+                </button>
 
                 <!-- Security Notice -->
                 <p class="text-center text-sm text-gray-500 mt-4">
