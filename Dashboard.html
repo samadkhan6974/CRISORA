@@ -91,6 +91,24 @@
             align-items: center;
             justify-content: center;
         }
+
+
+            .dashboard {
+      background-color: #00A7E1;
+      color:white;
+      border: none;
+      padding: 12px 24px;
+      border-radius: 8px;
+      font-size: 18px;
+      font-weight: bold;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+
+    .dashboard:hover {
+      background-color: #6EFAFB; /* slightly darker shade */  
+    }
+    
     </style>
 </head>
 <body class="bg-gray-50 min-h-screen">
@@ -102,17 +120,20 @@
                     <div class="text-2xl mr-3">🏫</div>
                     <div>
                         <h1 class="text-2xl font-bold text-gray-900">Disaster Preparedness Dashboard</h1>
-                        <p class="text-sm text-gray-600">Lincoln High School - Administrator Portal</p>
+                        <p class="text-sm text-gray-600">Bennett University - Administrator Portal</p>
                     </div>
                 </div>
                 <div class="flex items-center space-x-4">
                     <div class="relative">
+                        <button onclick="window.location.href='login.html'" class="dashboard text-white px-4 py-2 rounded-lg font-semibold pulse-animation">Login</button>
                         <button class="p-2 text-gray-400 hover:text-gray-600 relative">
                             <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 17h5l-5 5-5-5h5v-5a7.5 7.5 0 00-15 0v5h5l-5 5-5-5h5V7a9.5 9.5 0 0119 0v10z"></path>
                             </svg>
                             <span class="notification-badge">3</span>
                         </button>
+
+                        
                     </div>
                     <div class="flex items-center">
                         <img class="h-8 w-8 rounded-full" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ccircle cx='50' cy='50' r='50' fill='%234f46e5'/%3E%3Ctext x='50' y='55' text-anchor='middle' fill='white' font-size='40' font-family='Arial'%3EA%3C/text%3E%3C/svg%3E" alt="Admin">
@@ -130,7 +151,7 @@
                 <div class="flex items-center justify-between">
                     <div>
                         <p class="text-blue-100 text-sm font-medium">Overall Preparedness</p>
-                        <p class="text-3xl font-bold">87%</p>
+                        <p class="text-3xl font-bold">0%</p>
                         <p class="text-blue-100 text-xs mt-1">↗ +5% from last month</p>
                     </div>
                     <div class="text-4xl opacity-80">🛡️</div>
@@ -152,7 +173,7 @@
                 <div class="flex items-center justify-between">
                     <div>
                         <p class="text-pink-100 text-sm font-medium">Student Participation</p>
-                        <p class="text-3xl font-bold">94%</p>
+                        <p class="text-3xl font-bold">0%</p>
                         <p class="text-pink-100 text-xs mt-1">1,245 of 1,324 students</p>
                     </div>
                     <div class="text-4xl opacity-80">👥</div>
