@@ -35,24 +35,11 @@
                 transform: translateY(0);
             }
         }
-        .demo-badge {
-            position: absolute;
-            top: 20px;
-            right: 20px;
-            background: rgba(255, 193, 7, 0.9);
-            color: #000;
-            padding: 8px 16px;
-            border-radius: 20px;
-            font-size: 14px;
-            font-weight: 600;
-            z-index: 10;
-        }
+        
     </style>
 </head>
 <body class="gradient-bg min-h-screen flex items-center justify-center p-4">
-    <div class="demo-badge">
-        🚧 Demo Template
-    </div>
+    
     
     <div class="login-card w-full max-w-md">
         <!-- Logo/Brand Section -->
@@ -62,7 +49,9 @@
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"></path>
                 </svg>
             </div>
+            <h1 class="text-4xl font-bold text-white mb-2">Student Portal</h1>
             <h1 class="text-3xl font-bold text-white mb-2">Welcome Back</h1>
+            
             <p class="text-white/80">Sign in to your account</p>
         </div>
 
@@ -117,7 +106,7 @@
                 </div>
 
                 <!-- Login Button -->
-                <button 
+                <button onclick="window.location.href='studentdash.html'" 
                     type="submit"
                     class="w-full bg-white text-indigo-600 py-3 px-4 rounded-lg font-semibold hover:bg-white/90 focus:outline-none focus:ring-2 focus:ring-white/50 transform hover:scale-105 transition-all duration-300 shadow-lg"
                 >
