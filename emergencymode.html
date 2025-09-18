@@ -99,9 +99,9 @@
         <!-- Emergency Action Buttons -->
         <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-8">
             <!-- Call 911 -->
-            <button onclick="callEmergency('911')" class="emergency-button emergency-pulse bg-red-600 hover:bg-red-700 p-6 rounded-xl text-center shadow-2xl">
+            <button onclick="callEmergency('112')" class="emergency-button emergency-pulse bg-red-600 hover:bg-red-700 p-6 rounded-xl text-center shadow-2xl">
                 <div class="text-4xl mb-2">📞</div>
-                <div class="text-2xl font-bold mb-1">CALL 911</div>
+                <div class="text-2xl font-bold mb-1">CALL 112</div>
                 <div class="text-red-200 text-sm">Police, Fire, Medical</div>
             </button>
 
@@ -157,7 +157,7 @@
                             <div class="font-semibold">Emergency Services</div>
                             <div class="text-red-200 text-sm">Police, Fire, Medical</div>
                         </div>
-                        <button onclick="callNumber('911')" class="bg-red-600 hover:bg-red-500 px-4 py-2 rounded font-bold">911</button>
+                        <button onclick="callNumber('112')" class="bg-red-600 hover:bg-red-500 px-4 py-2 rounded font-bold">112</button>
                     </div>
                     
                     <div class="flex justify-between items-center bg-red-700 p-3 rounded-lg">
@@ -289,7 +289,7 @@
 
         <!-- Exit Emergency Mode -->
         <div class="text-center">
-            <button onclick="exitEmergencyMode()" class="bg-gray-700 hover:bg-gray-600 text-white font-bold py-3 px-8 rounded-lg transition-colors">
+            <button onclick="window.location.href='/map.html'" onclick="exitEmergencyMode()" class="bg-gray-700 hover:bg-gray-600 text-white font-bold py-3 px-8 rounded-lg transition-colors">
                 Exit Emergency Mode
             </button>
             <p class="text-red-200 text-sm mt-2">Only exit when the emergency situation has been resolved</p>
@@ -312,17 +312,17 @@
         // Call emergency services
         function callEmergency(type) {
             const numbers = {
-                '911': '911',
+                '112': '112',
                 'medical': '911',
                 'fire': '911',
                 'police': '911'
             };
             
             const messages = {
-                '911': 'Calling 911 - Emergency Services',
-                'medical': 'Calling 911 - Medical Emergency',
-                'fire': 'Calling 911 - Fire Department',
-                'police': 'Calling 911 - Police'
+                '112': 'Calling 112 - Emergency Services',
+                'medical': 'Calling 112 - Medical Emergency',
+                'fire': 'Calling 112 - Fire Department',
+                'police': 'Calling 112 - Police'
             };
             
             if (confirm(`${messages[type]}\n\nThis will attempt to call ${numbers[type]}. Continue?`)) {
@@ -335,10 +335,10 @@
         // Quick action buttons
         function quickAction(type) {
             const actions = {
-                'poison': { number: '1-800-222-1222', name: 'Poison Control' },
-                'fire': { number: '911', name: 'Fire Department' },
-                'police': { number: '911', name: 'Police' },
-                'mental': { number: '988', name: 'Crisis Hotline' }
+                'poison': { number: '1800-425-1213', name: 'Poison Control' },
+                'fire': { number: '112', name: 'Fire Department' },
+                'police': { number: '112', name: 'Police' },
+                'mental': { number: '14416', name: 'Crisis Hotline' }
             };
             
             const action = actions[type];
