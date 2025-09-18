@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign Up - Join Us Today</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+        .gradient-bg {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        }
+        .glass-effect {
+            backdrop-filter: blur(10px);
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+        .input-focus:focus {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+        }
+        .success-message {
+            display: none;
+        }
+        .success-message.show {
+            display: block;
+            animation: slideIn 0.5s ease-out;
+        }
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+    </style>
+</head>
+<body class="gradient-bg min-h-screen flex items-center justify-center p-4">
+    <div class="w-full max-w-md">
+        <!-- Sign Up Form -->
+        <div id="signupForm" class="glass-effect rounded-2xl p-8 shadow-2xl">
+            <div class="text-center mb-8">
+                <div class="w-16 h-16 bg-white rounded-full flex items-center justify-center mx-auto mb-4 shadow-lg">
+                    <svg class="w-8 h-8 text-purple-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M18 9v3m0 0v3m0-3h3m-3 0h-3m-2-5a4 4 0 11-8 0 4 4 0 018 0zM3 20a6 6 0 0112 0v1H3v-1z"></path>
+                    </svg>
+                </div>
+                <h1 class="text-4xl font-bold text-white mb-2">Administrator Portal</h1>
+                <h1 class="text-3xl font-bold text-white mb-2">Join Us Today</h1>
+                <p class="text-white/80">Create your account and get started</p>
+            </div>
+
+            <form id="signupFormElement" class="space-y-6">
+                <div>
+                    <label for="fullName" class="block text-sm font-medium text-white/90 mb-2">Full Name</label>
+                    <input type="text" id="fullName" name="fullName" required
+                           class="input-focus w-full px-4 py-3 bg-white/10 border border-white/20 rounded-lg text-white placeholder-white/60 focus:outline-none focus:ring-2 focus:ring-white/50 transition-all duration-300"
+                           placeholder="Enter your full name">
+                </div>
+
+                <div>
+                    <label for="email" class="block text-sm font-medium text-white/90 mb-2">Email Address</label>
+                    <input type="email" id="email" name="email" required
+                           class="input-focus w-full px-4 py-3 bg-white/10 border border-white/20 rounded-lg text-white placeholder-white/60 focus:outline-none focus:ring-2 focus:ring-white/50 transition-all duration-300"
+                           placeholder="Enter your email">
+                </div>
+
+                <div>
+                    <label for="password" class="block text-sm font-medium text-white/90 mb-2">Password</label>
+                    <input type="password" id="password" name="password" required
+                           class="input-focus w-full px-4 py-3 bg-white/10 border border-white/20 rounded-lg text-white placeholder-white/60 focus:outline-none focus:ring-2 focus:ring-white/50 transition-all duration-300"
+                           placeholder="Create a password">
+                </div>
+
+                <div>
+                    <label for="confirmPassword" class="block text-sm font-medium text-white/90 mb-2">Confirm Password</label>
+                    <input type="password" id="confirmPassword" name="confirmPassword" required
+                           class="input-focus w-full px-4 py-3 bg-white/10 border border-white/20 rounded-lg text-white placeholder-white/60 focus:outline-none focus:ring-2 focus:ring-white/50 transition-all duration-300"
+                           placeholder="Confirm your password">
+                </div>
+
+                <div class="flex items-center">
+                    <input type="checkbox" id="terms" name="terms" required
+                           class="w-4 h-4 text-purple-600 bg-white/10 border-white/20 rounded focus:ring-purple-500 focus:ring-2">
+                    <label for="terms" class="ml-3 text-sm text-white/90">
+                        I agree to the <a href="#" class="text-white underline hover:text-white/80">Terms of Service</a> and <a href="#" class="text-white underline hover:text-white/80">Privacy Policy</a>
+                    </label>
+                </div>
+
+                <button onclick="window.location.href='Dashboard.html'"type="submit"
+                        class="w-full bg-white text-purple-600 font-semibold py-3 px-4 rounded-lg hover:bg-white/90 focus:outline-none focus:ring-2 focus:ring-white/50 transform hover:scale-105 transition-all duration-300 shadow-lg">
+                    Create Account
+                </button>
+            </form>
+
+            <div class="mt-6 text-center">
+                <p class="text-white/80">Already have an account? 
+                    <a href="/loginsa.html" class="text-white font-medium underline hover:text-white/80 transition-colors">Sign in here</a>
+                </p>
+            </div>
+        </div>
+
+        <!-- Success Message -->
+        <div id="successMessage" class="success-message glass-effect rounded-2xl p-8 shadow-2xl text-center">
+            <div class="w-16 h-16 bg-green-500 rounded-full flex items-center justify-center mx-auto mb-4">
+                <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                </svg>
+            </div>
+            <h2 class="text-2xl font-bold text-white mb-2">Welcome Aboard! 🎉</h2>
+            <p class="text-white/80 mb-6">Your account has been created successfully. We're excited to have you join our community!</p>
+            <button onclick="resetForm()" 
+                    class="bg-white text-purple-600 font-semibold py-2 px-6 rounded-lg hover:bg-white/90 transition-all duration-300">
+                Create Another Account
+            </button>
+        </div>
+    </div>
+
+    <script>
+        document.getElementById('signupFormElement').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            // Get form values
+            const fullName = document.getElementById('fullName').value;
+            const email = document.getElementById('email').value;
+            const password = document.getElementById('password').value;
+            const confirmPassword = document.getElementById('confirmPassword').value;
+            const terms = document.getElementById('terms').checked;
+            
+            // Validation
+            if (!fullName || !email || !password || !confirmPassword) {
+                alert('Please fill in all fields');
+                return;
+            }
+            
+            if (password !== confirmPassword) {
+                alert('Passwords do not match');
+                return;
+            }
+            
+            if (password.length < 6) {
+                alert('Password must be at least 6 characters long');
+                return;
+            }
+            
+            if (!terms) {
+                alert('Please agree to the Terms of Service and Privacy Policy');
+                return;
+            }
+            
+            // Show success message
+            document.getElementById('signupForm').style.display = 'none';
+            document.getElementById('successMessage').classList.add('show');
+        });
+        
+        function resetForm() {
+            document.getElementById('signupFormElement').reset();
+            document.getElementById('signupForm').style.display = 'block';
+            document.getElementById('successMessage').classList.remove('show');
+        }
+        
+        // Add real-time password matching feedback
+        document.getElementById('confirmPassword').addEventListener('input', function() {
+            const password = document.getElementById('password').value;
+            const confirmPassword = this.value;
+            
+            if (confirmPassword && password !== confirmPassword) {
+                this.style.borderColor = '#ef4444';
+            } else {
+                this.style.borderColor = 'rgba(255, 255, 255, 0.2)';
+            }
+        });
+    </script>
+<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'97eee581726a91be',t:'MTc1Nzg0MjU1MC4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+</html>
