@@ -1,0 +1,1100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Disaster Preparedness Dashboard</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
+        body { font-family: 'Inter', sans-serif; }
+        
+        .dashboard-card {
+            transition: all 0.3s ease;
+        }
+        
+        .dashboard-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
+        }
+        
+        .progress-ring {
+            transform: rotate(-90deg);
+        }
+        
+        .progress-ring-circle {
+            transition: stroke-dasharray 0.35s;
+            transform: rotate(-90deg);
+            transform-origin: 50% 50%;
+        }
+        
+        .badge {
+            display: inline-flex;
+            align-items: center;
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 600;
+        }
+        
+        .badge-gold { background-color: #fef3c7; color: #92400e; }
+        .badge-silver { background-color: #f3f4f6; color: #374151; }
+        .badge-bronze { background-color: #fed7aa; color: #9a3412; }
+        .badge-locked { background-color: #f3f4f6; color: #9ca3af; }
+        
+        .quiz-option {
+            transition: all 0.2s ease;
+            cursor: pointer;
+        }
+        
+        .quiz-option:hover {
+            background-color: #f3f4f6;
+        }
+        
+        .quiz-option.selected {
+            background-color: #dbeafe;
+            border-color: #3b82f6;
+        }
+        
+        .quiz-option.correct {
+            background-color: #d1fae5;
+            border-color: #10b981;
+        }
+        
+        .quiz-option.incorrect {
+            background-color: #fee2e2;
+            border-color: #ef4444;
+        }
+        
+        .video-thumbnail {
+            position: relative;
+            overflow: hidden;
+            border-radius: 8px;
+        }
+        
+        .video-thumbnail::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 60px;
+            height: 60px;
+            background: rgba(0, 0, 0, 0.7);
+            border-radius: 50%;
+            z-index: 2;
+        }
+        
+        .video-thumbnail::after {
+            content: '▶';
+            position: absolute;
+            top: 50%;
+            left: 52%;
+            transform: translate(-50%, -50%);
+            color: white;
+            font-size: 24px;
+            z-index: 3;
+        }
+        
+        .fade-in {
+            animation: fadeIn 0.6s ease-out;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .tab-active {
+            background-color: #3b82f6;
+            color: white;
+        }
+        
+        .streak-flame {
+            animation: flicker 2s infinite alternate;
+        }
+        
+        @keyframes flicker {
+            0%, 100% { transform: scale(1) rotate(-2deg); }
+            50% { transform: scale(1.1) rotate(2deg); }
+        }
+        
+        .level-progress {
+            background: linear-gradient(90deg, #3b82f6 0%, #8b5cf6 50%, #f59e0b 100%);
+        }
+    </style>
+</head>
+<body class="bg-gradient-to-br from-blue-50 to-indigo-100 min-h-screen">
+    <!-- Header -->
+    <header class="bg-white shadow-sm border-b border-gray-200">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center py-4">
+                <div class="flex items-center">
+                    <div class="text-2xl mr-3">🎓</div>
+                    <div>
+                        <h1 class="text-2xl font-bold text-gray-900">Disaster Preparedness Hub</h1>
+                        <p class="text-sm text-gray-600">Learn, Practice, Stay Safe</p>
+                    </div>
+                </div>
+                <div class="flex items-center space-x-4">
+                   
+                    <div class="flex items-center">
+                        <img class="h-8 w-8 rounded-full" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ccircle cx='50' cy='50' r='50' fill='%233b82f6'/%3E%3Ctext x='50' y='55' text-anchor='middle' fill='white' font-size='40' font-family='Arial'%3ES%3C/text%3E%3C/svg%3E" alt="Student">
+                        <span class="ml-2 text-sm font-medium text-gray-700">Sarah Johnson</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+        <!-- Progress Overview -->
+        <div class="grid grid-cols-1 md:grid-cols-4 gap-6 mb-8">
+            <!-- Overall Score -->
+            <div class="bg-white rounded-xl shadow-sm p-6 dashboard-card fade-in text-center">
+                <div class="relative w-24 h-24 mx-auto mb-4">
+                    <svg class="w-24 h-24 progress-ring">
+                        <circle cx="48" cy="48" r="40" stroke="#e5e7eb" stroke-width="8" fill="transparent"></circle>
+                        <circle cx="48" cy="48" r="40" stroke="#3b82f6" stroke-width="8" fill="transparent" 
+                                stroke-dasharray="188.4" stroke-dashoffset="37.68" class="progress-ring-circle"></circle>
+                    </svg>
+                    <div class="absolute inset-0 flex items-center justify-center">
+                        <span class="text-2xl font-bold text-gray-900">82%</span>
+                    </div>
+                </div>
+                <h3 class="font-semibold text-gray-900">Preparedness Score</h3>
+                <p class="text-sm text-gray-600">Great progress!</p>
+            </div>
+
+            <!-- Level Progress -->
+            <div class="bg-white rounded-xl shadow-sm p-6 dashboard-card fade-in">
+                <div class="text-center mb-4">
+                    <div class="text-3xl mb-2">🏆</div>
+                    <h3 class="font-semibold text-gray-900">Level 3</h3>
+                    <p class="text-sm text-gray-600">Intermediate</p>
+                </div>
+                <div class="w-full bg-gray-200 rounded-full h-2 mb-2">
+                    <div class="level-progress h-2 rounded-full" style="width: 65%"></div>
+                </div>
+                <p class="text-xs text-gray-600 text-center">350/500 XP to Level 4</p>
+            </div>
+
+            <!-- Badges Earned -->
+            <div class="bg-white rounded-xl shadow-sm p-6 dashboard-card fade-in">
+                <div class="text-center mb-4">
+                    <div class="text-3xl mb-2">🎖️</div>
+                    <h3 class="font-semibold text-gray-900">Badges</h3>
+                    <p class="text-sm text-gray-600">5 earned</p>
+                </div>
+                <div class="flex justify-center space-x-1">
+                    <span class="text-lg" title="Fire Safety Expert">🔥</span>
+                    <span class="text-lg" title="Quiz Master">📚</span>
+                    <span class="text-lg" title="Video Learner">🎥</span>
+                    <span class="text-lg" title="Emergency Kit Ready">🎒</span>
+                    <span class="text-lg" title="7-Day Streak">⚡</span>
+                </div>
+            </div>
+
+            <!-- Quick Stats -->
+            <div class="bg-white rounded-xl shadow-sm p-6 dashboard-card fade-in">
+                <div class="space-y-3">
+                    <div class="flex justify-between items-center">
+                        <span class="text-sm text-gray-600">Quizzes Completed</span>
+                        <span class="font-semibold text-blue-600">12/15</span>
+                    </div>
+                    <div class="flex justify-between items-center">
+                        <span class="text-sm text-gray-600">Videos Watched</span>
+                        <span class="font-semibold text-green-600">8/10</span>
+                    </div>
+                    <div class="flex justify-between items-center">
+                        <span class="text-sm text-gray-600">Emergency Kit</span>
+                        <span class="font-semibold text-yellow-600">85%</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Tab Navigation -->
+        <div class="bg-white rounded-lg shadow-sm mb-6">
+            <div class="border-b border-gray-200">
+                <nav class="flex space-x-8 px-6">
+                    <button onclick="switchTab('dashboard')" id="tab-dashboard" class="tab-active py-4 px-1 border-b-2 border-transparent font-medium text-sm transition-colors">
+                        🏠 Dashboard
+                    </button>
+                    <button onclick="switchTab('quiz')" id="tab-quiz" class="py-4 px-1 border-b-2 border-transparent font-medium text-sm text-gray-500 hover:text-gray-700 transition-colors">
+                        🧠 Take Quiz
+                    </button>
+                    <button onclick="switchTab('videos')" id="tab-videos" class="py-4 px-1 border-b-2 border-transparent font-medium text-sm text-gray-500 hover:text-gray-700 transition-colors">
+                        🎥 Learn Videos
+                    </button>
+                    <button onclick="switchTab('emergency')" id="tab-emergency" class="py-4 px-1 border-b-2 border-transparent font-medium text-sm text-gray-500 hover:text-gray-700 transition-colors">
+                        🚨 Emergency Info
+                    </button>
+                    <button onclick="switchTab('progress')" id="tab-progress" class="py-4 px-1 border-b-2 border-transparent font-medium text-sm text-gray-500 hover:text-gray-700 transition-colors">
+                        📊 My Progress
+                    </button>
+                </nav>
+            </div>
+        </div>
+
+        <!-- Dashboard Tab -->
+        <div id="content-dashboard" class="tab-content">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-8">
+                <!-- Recent Activities -->
+                <div class="bg-white rounded-xl shadow-sm p-6 dashboard-card">
+                    <h3 class="text-lg font-semibold text-gray-900 mb-4">Recent Activities</h3>
+                    <div class="space-y-3">
+                        <div class="flex items-center p-3 bg-green-50 rounded-lg">
+                            <div class="text-2xl mr-3">✅</div>
+                            <div class="flex-1">
+                                <p class="font-medium text-gray-900">Completed Fire Safety Quiz</p>
+                                <p class="text-sm text-gray-600">Scored 95% - Excellent work!</p>
+                            </div>
+                            <span class="text-sm text-gray-500">2 hours ago</span>
+                        </div>
+                        
+                        <div class="flex items-center p-3 bg-blue-50 rounded-lg">
+                            <div class="text-2xl mr-3">🎥</div>
+                            <div class="flex-1">
+                                <p class="font-medium text-gray-900">Watched Earthquake Safety Video</p>
+                                <p class="text-sm text-gray-600">Earned 50 XP points</p>
+                            </div>
+                            <span class="text-sm text-gray-500">1 day ago</span>
+                        </div>
+                        
+                        <div class="flex items-center p-3 bg-yellow-50 rounded-lg">
+                            <div class="text-2xl mr-3">🎒</div>
+                            <div class="flex-1">
+                                <p class="font-medium text-gray-900">Updated Emergency Kit</p>
+                                <p class="text-sm text-gray-600">Added first aid supplies</p>
+                            </div>
+                            <span class="text-sm text-gray-500">2 days ago</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Leaderboard -->
+                <div class="bg-white rounded-xl shadow-sm p-6 dashboard-card">
+                    <h3 class="text-lg font-semibold text-gray-900 mb-4">Class Leaderboard</h3>
+                    <div class="space-y-3">
+                        <div class="flex items-center justify-between p-3 bg-yellow-50 rounded-lg">
+                            <div class="flex items-center">
+                                <span class="text-2xl mr-3">🥇</span>
+                                <div>
+                                    <p class="font-medium text-gray-900">Alex Chen</p>
+                                    <p class="text-sm text-gray-600">Level 4 • 520 XP</p>
+                                </div>
+                            </div>
+                            <span class="font-bold text-yellow-600">95%</span>
+                        </div>
+                        
+                        <div class="flex items-center justify-between p-3 bg-gray-50 rounded-lg">
+                            <div class="flex items-center">
+                                <span class="text-2xl mr-3">🥈</span>
+                                <div>
+                                    <p class="font-medium text-gray-900">Maria Rodriguez</p>
+                                    <p class="text-sm text-gray-600">Level 3 • 485 XP</p>
+                                </div>
+                            </div>
+                            <span class="font-bold text-gray-600">89%</span>
+                        </div>
+                        
+                        <div class="flex items-center justify-between p-3 bg-blue-50 rounded-lg border-2 border-blue-200">
+                            <div class="flex items-center">
+                                <span class="text-2xl mr-3">🥉</span>
+                                <div>
+                                    <p class="font-medium text-blue-900">You (Sarah Johnson)</p>
+                                    <p class="text-sm text-blue-600">Level 3 • 350 XP</p>
+                                </div>
+                            </div>
+                            <span class="font-bold text-blue-600">82%</span>
+                        </div>
+                        
+                        <div class="text-center pt-2">
+                            <button class="text-blue-600 hover:text-blue-800 text-sm font-medium">View Full Leaderboard</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Quick Actions -->
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <div class="bg-gradient-to-r from-blue-500 to-blue-600 rounded-xl shadow-sm p-6 text-white dashboard-card cursor-pointer" onclick="switchTab('quiz')">
+                    <div class="text-4xl mb-3">🧠</div>
+                    <h3 class="text-lg font-semibold mb-2">Take a Quiz</h3>
+                    <p class="text-blue-100 text-sm">Test your knowledge and earn XP</p>
+                </div>
+                
+                <div class="bg-gradient-to-r from-green-500 to-green-600 rounded-xl shadow-sm p-6 text-white dashboard-card cursor-pointer" onclick="switchTab('videos')">
+                    <div class="text-4xl mb-3">🎥</div>
+                    <h3 class="text-lg font-semibold mb-2">Watch Videos</h3>
+                    <p class="text-green-100 text-sm">Learn from expert tutorials</p>
+                </div>
+                
+                <div class="bg-gradient-to-r from-purple-500 to-purple-600 rounded-xl shadow-sm p-6 text-white dashboard-card cursor-pointer" onclick="switchTab('emergency')">
+                    <div class="text-4xl mb-3">🚨</div>
+                    <h3 class="text-lg font-semibold mb-2">Emergency Kit</h3>
+                    <p class="text-purple-100 text-sm">Check your preparedness</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Quiz Tab -->
+        <div id="content-quiz" class="tab-content hidden">
+            <div class="max-w-4xl mx-auto">
+                <!-- Quiz Selection -->
+                <div id="quiz-selection" class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div class="bg-white rounded-xl shadow-sm p-6 dashboard-card cursor-pointer" onclick="startQuiz('fire')">
+                        <div class="flex items-center mb-4">
+                            <div class="text-4xl mr-4">🔥</div>
+                            <div>
+                                <h3 class="text-lg font-semibold text-gray-900">Fire Safety Quiz</h3>
+                                <p class="text-sm text-gray-600">10 questions • 5 minutes</p>
+                            </div>
+                        </div>
+                        <div class="flex justify-between items-center">
+                            <span class="badge badge-gold">Best: 95%</span>
+                            <span class="text-blue-600 font-medium">Start Quiz →</span>
+                        </div>
+                    </div>
+
+                    <div class="bg-white rounded-xl shadow-sm p-6 dashboard-card cursor-pointer" onclick="startQuiz('earthquake')">
+                        <div class="flex items-center mb-4">
+                            <div class="text-4xl mr-4">🌍</div>
+                            <div>
+                                <h3 class="text-lg font-semibold text-gray-900">Earthquake Safety Quiz</h3>
+                                <p class="text-sm text-gray-600">8 questions • 4 minutes</p>
+                            </div>
+                        </div>
+                        <div class="flex justify-between items-center">
+                            <span class="badge badge-silver">Best: 87%</span>
+                            <span class="text-blue-600 font-medium">Start Quiz →</span>
+                        </div>
+                    </div>
+
+                    <div class="bg-white rounded-xl shadow-sm p-6 dashboard-card cursor-pointer" onclick="startQuiz('lockdown')">
+                        <div class="flex items-center mb-4">
+                            <div class="text-4xl mr-4">🔒</div>
+                            <div>
+                                <h3 class="text-lg font-semibold text-gray-900">Lockdown Procedures Quiz</h3>
+                                <p class="text-sm text-gray-600">6 questions • 3 minutes</p>
+                            </div>
+                        </div>
+                        <div class="flex justify-between items-center">
+                            <span class="badge badge-bronze">Best: 78%</span>
+                            <span class="text-blue-600 font-medium">Start Quiz →</span>
+                        </div>
+                    </div>
+
+                    <div class="bg-white rounded-xl shadow-sm p-6 dashboard-card cursor-pointer" onclick="startQuiz('weather')">
+                        <div class="flex items-center mb-4">
+                            <div class="text-4xl mr-4">🌪️</div>
+                            <div>
+                                <h3 class="text-lg font-semibold text-gray-900">Severe Weather Quiz</h3>
+                                <p class="text-sm text-gray-600">7 questions • 4 minutes</p>
+                            </div>
+                        </div>
+                        <div class="flex justify-between items-center">
+                            <span class="badge badge-locked">🔒 Locked</span>
+                            <span class="text-gray-400">Complete Level 3</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Quiz Interface -->
+                <div id="quiz-interface" class="hidden">
+                    <div class="bg-white rounded-xl shadow-sm p-8">
+                        <!-- Quiz Header -->
+                        <div class="flex justify-between items-center mb-6">
+                            <div>
+                                <h2 id="quiz-title" class="text-2xl font-bold text-gray-900">Fire Safety Quiz</h2>
+                                <p class="text-gray-600">Question <span id="current-question">1</span> of <span id="total-questions">10</span></p>
+                            </div>
+                            <div class="text-right">
+                                <div class="text-2xl font-bold text-blue-600" id="quiz-timer">5:00</div>
+                                <p class="text-sm text-gray-600">Time remaining</p>
+                            </div>
+                        </div>
+
+                        <!-- Progress Bar -->
+                        <div class="w-full bg-gray-200 rounded-full h-2 mb-8">
+                            <div id="quiz-progress" class="bg-blue-600 h-2 rounded-full transition-all duration-300" style="width: 10%"></div>
+                        </div>
+
+                        <!-- Question -->
+                        <div class="mb-8">
+                            <h3 id="question-text" class="text-xl font-semibold text-gray-900 mb-6">
+                                What should you do first when you hear the fire alarm?
+                            </h3>
+                            
+                            <div id="quiz-options" class="space-y-3">
+                                <div class="quiz-option border-2 border-gray-200 rounded-lg p-4" onclick="selectOption(0)">
+                                    <label class="flex items-center cursor-pointer">
+                                        <input type="radio" name="quiz-answer" class="mr-3">
+                                        <span>Stop what you're doing and listen for instructions</span>
+                                    </label>
+                                </div>
+                                <div class="quiz-option border-2 border-gray-200 rounded-lg p-4" onclick="selectOption(1)">
+                                    <label class="flex items-center cursor-pointer">
+                                        <input type="radio" name="quiz-answer" class="mr-3">
+                                        <span>Immediately evacuate using the nearest exit</span>
+                                    </label>
+                                </div>
+                                <div class="quiz-option border-2 border-gray-200 rounded-lg p-4" onclick="selectOption(2)">
+                                    <label class="flex items-center cursor-pointer">
+                                        <input type="radio" name="quiz-answer" class="mr-3">
+                                        <span>Gather your belongings and then evacuate</span>
+                                    </label>
+                                </div>
+                                <div class="quiz-option border-2 border-gray-200 rounded-lg p-4" onclick="selectOption(3)">
+                                    <label class="flex items-center cursor-pointer">
+                                        <input type="radio" name="quiz-answer" class="mr-3">
+                                        <span>Call 911 first</span>
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Quiz Controls -->
+                        <div class="flex justify-between">
+                            <button onclick="exitQuiz()" class="px-6 py-2 border border-gray-300 rounded-lg text-gray-700 hover:bg-gray-50">
+                                Exit Quiz
+                            </button>
+                            <button id="next-question-btn" onclick="nextQuestion()" class="px-6 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 disabled:opacity-50" disabled>
+                                Next Question
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Quiz Results -->
+                <div id="quiz-results" class="hidden">
+                    <div class="bg-white rounded-xl shadow-sm p-8 text-center">
+                        <div class="text-6xl mb-4">🎉</div>
+                        <h2 class="text-3xl font-bold text-gray-900 mb-2">Quiz Complete!</h2>
+                        <p class="text-xl text-gray-600 mb-6">You scored <span id="final-score" class="font-bold text-blue-600">85%</span></p>
+                        
+                        <div class="grid grid-cols-3 gap-4 mb-8">
+                            <div class="text-center">
+                                <div class="text-2xl font-bold text-green-600">8</div>
+                                <div class="text-sm text-gray-600">Correct</div>
+                            </div>
+                            <div class="text-center">
+                                <div class="text-2xl font-bold text-red-600">2</div>
+                                <div class="text-sm text-gray-600">Incorrect</div>
+                            </div>
+                            <div class="text-center">
+                                <div class="text-2xl font-bold text-blue-600">+50</div>
+                                <div class="text-sm text-gray-600">XP Earned</div>
+                            </div>
+                        </div>
+
+                        <div class="flex justify-center space-x-4">
+                            <button onclick="retakeQuiz()" class="px-6 py-2 border border-blue-600 text-blue-600 rounded-lg hover:bg-blue-50">
+                                Retake Quiz
+                            </button>
+                            <button onclick="backToQuizSelection()" class="px-6 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700">
+                                Choose Another Quiz
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Videos Tab -->
+        <div id="content-videos" class="tab-content hidden">
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <!-- Fire Safety Videos -->
+                <div class="bg-white rounded-xl shadow-sm overflow-hidden dashboard-card">
+                    <div class="video-thumbnail bg-red-100 h-48 flex items-center justify-center cursor-pointer" onclick="playVideo('fire-basics')">
+                        <div class="text-6xl">🔥</div>
+                    </div>
+                    <div class="p-4">
+                        <h3 class="font-semibold text-gray-900 mb-2">Fire Safety Basics</h3>
+                        <p class="text-sm text-gray-600 mb-3">Learn the fundamentals of fire safety and evacuation procedures.</p>
+                        <div class="flex justify-between items-center">
+                            <span class="text-xs text-gray-500">8:45 minutes</span>
+                            <span class="badge badge-gold">✓ Completed</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="bg-white rounded-xl shadow-sm overflow-hidden dashboard-card">
+                    <div class="video-thumbnail bg-orange-100 h-48 flex items-center justify-center cursor-pointer" onclick="playVideo('fire-extinguisher')">
+                        <div class="text-6xl">🧯</div>
+                    </div>
+                    <div class="p-4">
+                        <h3 class="font-semibold text-gray-900 mb-2">Using Fire Extinguishers</h3>
+                        <p class="text-sm text-gray-600 mb-3">Step-by-step guide on proper fire extinguisher usage.</p>
+                        <div class="flex justify-between items-center">
+                            <span class="text-xs text-gray-500">5:20 minutes</span>
+                            <span class="badge badge-silver">75% watched</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Earthquake Safety Videos -->
+                <div class="bg-white rounded-xl shadow-sm overflow-hidden dashboard-card">
+                    <div class="video-thumbnail bg-yellow-100 h-48 flex items-center justify-center cursor-pointer" onclick="playVideo('earthquake-drop')">
+                        <div class="text-6xl">🌍</div>
+                    </div>
+                    <div class="p-4">
+                        <h3 class="font-semibold text-gray-900 mb-2">Drop, Cover, and Hold On</h3>
+                        <p class="text-sm text-gray-600 mb-3">Essential earthquake response techniques for staying safe.</p>
+                        <div class="flex justify-between items-center">
+                            <span class="text-xs text-gray-500">6:15 minutes</span>
+                            <span class="badge badge-gold">✓ Completed</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="bg-white rounded-xl shadow-sm overflow-hidden dashboard-card">
+                    <div class="video-thumbnail bg-green-100 h-48 flex items-center justify-center cursor-pointer" onclick="playVideo('earthquake-aftermath')">
+                        <div class="text-6xl">🏠</div>
+                    </div>
+                    <div class="p-4">
+                        <h3 class="font-semibold text-gray-900 mb-2">After the Earthquake</h3>
+                        <p class="text-sm text-gray-600 mb-3">What to do immediately after an earthquake stops.</p>
+                        <div class="flex justify-between items-center">
+                            <span class="text-xs text-gray-500">7:30 minutes</span>
+                            <span class="text-blue-600 font-medium">Watch Now</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Lockdown Procedures -->
+                <div class="bg-white rounded-xl shadow-sm overflow-hidden dashboard-card">
+                    <div class="video-thumbnail bg-purple-100 h-48 flex items-center justify-center cursor-pointer" onclick="playVideo('lockdown-basics')">
+                        <div class="text-6xl">🔒</div>
+                    </div>
+                    <div class="p-4">
+                        <h3 class="font-semibold text-gray-900 mb-2">Lockdown Procedures</h3>
+                        <p class="text-sm text-gray-600 mb-3">Understanding lockdown protocols and safety measures.</p>
+                        <div class="flex justify-between items-center">
+                            <span class="text-xs text-gray-500">4:45 minutes</span>
+                            <span class="text-blue-600 font-medium">Watch Now</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Severe Weather -->
+                <div class="bg-white rounded-xl shadow-sm overflow-hidden dashboard-card">
+                    <div class="video-thumbnail bg-blue-100 h-48 flex items-center justify-center cursor-pointer" onclick="playVideo('severe-weather')">
+                        <div class="text-6xl">🌪️</div>
+                    </div>
+                    <div class="p-4">
+                        <h3 class="font-semibold text-gray-900 mb-2">Severe Weather Safety</h3>
+                        <p class="text-sm text-gray-600 mb-3">Preparing for and responding to severe weather events.</p>
+                        <div class="flex justify-between items-center">
+                            <span class="text-xs text-gray-500">9:10 minutes</span>
+                            <span class="badge badge-locked">🔒 Level 4</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Video Player Modal -->
+            <div id="video-modal" class="fixed inset-0 bg-black bg-opacity-75 flex items-center justify-center z-50 hidden">
+                <div class="bg-white rounded-lg p-6 max-w-4xl w-full mx-4">
+                    <div class="flex justify-between items-center mb-4">
+                        <h3 id="video-title" class="text-xl font-semibold">Fire Safety Basics</h3>
+                        <button onclick="closeVideo()" class="text-gray-500 hover:text-gray-700">
+                            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+                            </svg>
+                        </button>
+                    </div>
+                    <div class="bg-gray-900 rounded-lg aspect-video flex items-center justify-center mb-4">
+                        <div class="text-white text-center">
+                            <div class="text-4xl mb-2">🎥</div>
+                            <p>Video Player</p>
+                            <p class="text-sm text-gray-300">Educational content would play here</p>
+                        </div>
+                    </div>
+                    <div class="flex justify-between items-center">
+                        <div class="flex items-center space-x-4">
+                            <button class="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700">
+                                ▶ Play
+                            </button>
+                            <span class="text-sm text-gray-600">0:00 / 8:45</span>
+                        </div>
+                        <button onclick="markVideoComplete()" class="bg-green-600 text-white px-4 py-2 rounded-lg hover:bg-green-700">
+                            Mark Complete
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Emergency Info Tab -->
+        <div id="content-emergency" class="tab-content hidden">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-8">
+                <!-- Emergency Contacts -->
+                <div class="bg-white rounded-xl shadow-sm p-6 dashboard-card">
+                    <h3 class="text-lg font-semibold text-gray-900 mb-4">Emergency Contacts</h3>
+                    <div class="space-y-3">
+                        <div class="flex items-center justify-between p-3 border border-gray-200 rounded-lg">
+                            <div class="flex items-center">
+                                <div class="text-2xl mr-3">🚨</div>
+                                <div>
+                                    <p class="font-medium text-gray-900">Emergency Services</p>
+                                    <p class="text-sm text-gray-600">Fire, Police, Medical</p>
+                                </div>
+                            </div>
+                            <a href="tel:911" class="text-red-600 font-bold text-lg">911</a>
+                        </div>
+
+                        <div class="flex items-center justify-between p-3 border border-gray-200 rounded-lg">
+                            <div class="flex items-center">
+                                <div class="text-2xl mr-3">🏫</div>
+                                <div>
+                                    <p class="font-medium text-gray-900">School Main Office</p>
+                                    <p class="text-sm text-gray-600">Lincoln High School</p>
+                                </div>
+                            </div>
+                            <a href="tel:555-0123" class="text-blue-600 font-medium">(555) 012-3456</a>
+                        </div>
+
+                        <div class="flex items-center justify-between p-3 border border-gray-200 rounded-lg">
+                            <div class="flex items-center">
+                                <div class="text-2xl mr-3">👨‍⚕️</div>
+                                <div>
+                                    <p class="font-medium text-gray-900">School Nurse</p>
+                                    <p class="text-sm text-gray-600">Health Office</p>
+                                </div>
+                            </div>
+                            <a href="tel:555-0124" class="text-blue-600 font-medium">(555) 012-3457</a>
+                        </div>
+
+                        <div class="flex items-center justify-between p-3 border border-gray-200 rounded-lg">
+                            <div class="flex items-center">
+                                <div class="text-2xl mr-3">👨‍👩‍👧‍👦</div>
+                                <div>
+                                    <p class="font-medium text-gray-900">Parent/Guardian</p>
+                                    <p class="text-sm text-gray-600">Mom - Jennifer Johnson</p>
+                                </div>
+                            </div>
+                            <a href="tel:555-0125" class="text-blue-600 font-medium">(555) 012-3458</a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Emergency Kit Checklist -->
+                <div class="bg-white rounded-xl shadow-sm p-6 dashboard-card">
+                    <div class="flex justify-between items-center mb-4">
+                        <h3 class="text-lg font-semibold text-gray-900">Emergency Kit Checklist</h3>
+                        <span class="text-sm text-gray-600">85% Complete</span>
+                    </div>
+                    <div class="space-y-2">
+                        <label class="flex items-center">
+                            <input type="checkbox" checked class="mr-3 text-blue-600">
+                            <span class="text-gray-700">Water (1 gallon per person per day)</span>
+                        </label>
+                        <label class="flex items-center">
+                            <input type="checkbox" checked class="mr-3 text-blue-600">
+                            <span class="text-gray-700">Non-perishable food (3-day supply)</span>
+                        </label>
+                        <label class="flex items-center">
+                            <input type="checkbox" checked class="mr-3 text-blue-600">
+                            <span class="text-gray-700">Flashlight and extra batteries</span>
+                        </label>
+                        <label class="flex items-center">
+                            <input type="checkbox" checked class="mr-3 text-blue-600">
+                            <span class="text-gray-700">First aid kit</span>
+                        </label>
+                        <label class="flex items-center">
+                            <input type="checkbox" class="mr-3 text-blue-600">
+                            <span class="text-gray-700">Battery-powered radio</span>
+                        </label>
+                        <label class="flex items-center">
+                            <input type="checkbox" checked class="mr-3 text-blue-600">
+                            <span class="text-gray-700">Cell phone chargers</span>
+                        </label>
+                        <label class="flex items-center">
+                            <input type="checkbox" class="mr-3 text-blue-600">
+                            <span class="text-gray-700">Cash in small bills</span>
+                        </label>
+                        <label class="flex items-center">
+                            <input type="checkbox" checked class="mr-3 text-blue-600">
+                            <span class="text-gray-700">Important documents (copies)</span>
+                        </label>
+                        <label class="flex items-center">
+                            <input type="checkbox" class="mr-3 text-blue-600">
+                            <span class="text-gray-700">Medications</span>
+                        </label>
+                        <label class="flex items-center">
+                            <input type="checkbox" checked class="mr-3 text-blue-600">
+                            <span class="text-gray-700">Blankets and warm clothing</span>
+                        </label>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Quick Reference Guides -->
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+                <div class="bg-red-50 border border-red-200 rounded-xl p-6 dashboard-card">
+                    <div class="text-3xl mb-3">🔥</div>
+                    <h3 class="font-semibold text-red-800 mb-2">Fire Emergency</h3>
+                    <ul class="text-sm text-red-700 space-y-1">
+                        <li>• Stay calm and alert others</li>
+                        <li>• Exit immediately</li>
+                        <li>• Don't use elevators</li>
+                        <li>• Meet at assembly point</li>
+                    </ul>
+                </div>
+
+                <div class="bg-yellow-50 border border-yellow-200 rounded-xl p-6 dashboard-card">
+                    <div class="text-3xl mb-3">🌍</div>
+                    <h3 class="font-semibold text-yellow-800 mb-2">Earthquake</h3>
+                    <ul class="text-sm text-yellow-700 space-y-1">
+                        <li>• Drop to hands and knees</li>
+                        <li>• Take cover under desk</li>
+                        <li>• Hold on until shaking stops</li>
+                        <li>• Exit when safe</li>
+                    </ul>
+                </div>
+
+                <div class="bg-purple-50 border border-purple-200 rounded-xl p-6 dashboard-card">
+                    <div class="text-3xl mb-3">🔒</div>
+                    <h3 class="font-semibold text-purple-800 mb-2">Lockdown</h3>
+                    <ul class="text-sm text-purple-700 space-y-1">
+                        <li>• Lock classroom door</li>
+                        <li>• Turn off lights</li>
+                        <li>• Stay quiet and hidden</li>
+                        <li>• Wait for all-clear</li>
+                    </ul>
+                </div>
+
+                <div class="bg-blue-50 border border-blue-200 rounded-xl p-6 dashboard-card">
+                    <div class="text-3xl mb-3">🌪️</div>
+                    <h3 class="font-semibold text-blue-800 mb-2">Severe Weather</h3>
+                    <ul class="text-sm text-blue-700 space-y-1">
+                        <li>• Move to interior room</li>
+                        <li>• Stay away from windows</li>
+                        <li>• Get low to the ground</li>
+                        <li>• Protect head and neck</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- Progress Tab -->
+        <div id="content-progress" class="tab-content hidden">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-8">
+                <!-- Progress Chart -->
+                <div class="bg-white rounded-xl shadow-sm p-6 dashboard-card">
+                    <h3 class="text-lg font-semibold text-gray-900 mb-4">Learning Progress</h3>
+                    <canvas id="progressChart" width="400" height="300"></canvas>
+                </div>
+
+                <!-- Achievements -->
+                <div class="bg-white rounded-xl shadow-sm p-6 dashboard-card">
+                    <h3 class="text-lg font-semibold text-gray-900 mb-4">Achievements</h3>
+                    <div class="grid grid-cols-2 gap-4">
+                        <div class="text-center p-4 bg-yellow-50 border border-yellow-200 rounded-lg">
+                            <div class="text-3xl mb-2">🔥</div>
+                            <h4 class="font-semibold text-yellow-800 text-sm">Fire Safety Expert</h4>
+                            <p class="text-xs text-yellow-600">Completed all fire safety content</p>
+                        </div>
+
+                        <div class="text-center p-4 bg-blue-50 border border-blue-200 rounded-lg">
+                            <div class="text-3xl mb-2">📚</div>
+                            <h4 class="font-semibold text-blue-800 text-sm">Quiz Master</h4>
+                            <p class="text-xs text-blue-600">Scored 90%+ on 5 quizzes</p>
+                        </div>
+
+                        <div class="text-center p-4 bg-green-50 border border-green-200 rounded-lg">
+                            <div class="text-3xl mb-2">🎥</div>
+                            <h4 class="font-semibold text-green-800 text-sm">Video Learner</h4>
+                            <p class="text-xs text-green-600">Watched 10 educational videos</p>
+                        </div>
+
+                        <div class="text-center p-4 bg-purple-50 border border-purple-200 rounded-lg">
+                            <div class="text-3xl mb-2">⚡</div>
+                            <h4 class="font-semibold text-purple-800 text-sm">7-Day Streak</h4>
+                            <p class="text-xs text-purple-600">Consistent daily learning</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Detailed Stats -->
+            <div class="bg-white rounded-xl shadow-sm p-6 dashboard-card">
+                <h3 class="text-lg font-semibold text-gray-900 mb-6">Detailed Statistics</h3>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                    <div class="text-center">
+                        <div class="text-3xl font-bold text-blue-600 mb-2">350</div>
+                        <div class="text-sm text-gray-600">Total XP Earned</div>
+                    </div>
+                    <div class="text-center">
+                        <div class="text-3xl font-bold text-green-600 mb-2">12</div>
+                        <div class="text-sm text-gray-600">Quizzes Completed</div>
+                    </div>
+                    <div class="text-center">
+                        <div class="text-3xl font-bold text-purple-600 mb-2">8</div>
+                        <div class="text-sm text-gray-600">Videos Watched</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Global variables
+        let currentQuiz = null;
+        let currentQuestionIndex = 0;
+        let quizScore = 0;
+        let selectedAnswer = null;
+        let quizTimer = null;
+        let timeRemaining = 300; // 5 minutes in seconds
+
+        // Quiz data
+        const quizData = {
+            fire: {
+                title: "Fire Safety Quiz",
+                questions: [
+                    {
+                        question: "What should you do first when you hear the fire alarm?",
+                        options: [
+                            "Stop what you're doing and listen for instructions",
+                            "Immediately evacuate using the nearest exit",
+                            "Gather your belongings and then evacuate",
+                            "Call 911 first"
+                        ],
+                        correct: 1,
+                        explanation: "When you hear a fire alarm, you should immediately evacuate using the nearest safe exit. Don't waste time gathering belongings."
+                    },
+                    {
+                        question: "If you encounter smoke while evacuating, you should:",
+                        options: [
+                            "Stand up and run through it quickly",
+                            "Stay low and crawl under the smoke",
+                            "Turn around and find another exit",
+                            "Cover your face with your shirt and walk normally"
+                        ],
+                        correct: 1,
+                        explanation: "Smoke rises, so the cleaner air is closer to the floor. Stay low and crawl to avoid inhaling toxic smoke."
+                    }
+                ]
+            }
+        };
+
+        // Tab switching functionality
+        function switchTab(tabName) {
+            // Hide all tab contents
+            document.querySelectorAll('.tab-content').forEach(content => {
+                content.classList.add('hidden');
+            });
+            
+            // Remove active class from all tabs
+            document.querySelectorAll('[id^="tab-"]').forEach(tab => {
+                tab.classList.remove('tab-active');
+                tab.classList.add('text-gray-500', 'hover:text-gray-700');
+            });
+            
+            // Show selected tab content
+            document.getElementById(`content-${tabName}`).classList.remove('hidden');
+            
+            // Add active class to selected tab
+            const activeTab = document.getElementById(`tab-${tabName}`);
+            activeTab.classList.add('tab-active');
+            activeTab.classList.remove('text-gray-500', 'hover:text-gray-700');
+        }
+
+        // Quiz functions
+        function startQuiz(quizType) {
+            if (quizType === 'weather') {
+                alert('This quiz is locked. Complete Level 3 to unlock!');
+                return;
+            }
+
+            currentQuiz = quizType;
+            currentQuestionIndex = 0;
+            quizScore = 0;
+            selectedAnswer = null;
+            timeRemaining = 300;
+
+            document.getElementById('quiz-selection').classList.add('hidden');
+            document.getElementById('quiz-interface').classList.remove('hidden');
+            
+            loadQuestion();
+            startTimer();
+        }
+
+        function loadQuestion() {
+            const quiz = quizData[currentQuiz];
+            if (!quiz || currentQuestionIndex >= quiz.questions.length) {
+                endQuiz();
+                return;
+            }
+
+            const question = quiz.questions[currentQuestionIndex];
+            
+            document.getElementById('quiz-title').textContent = quiz.title;
+            document.getElementById('current-question').textContent = currentQuestionIndex + 1;
+            document.getElementById('total-questions').textContent = quiz.questions.length;
+            document.getElementById('question-text').textContent = question.question;
+            
+            // Update progress bar
+            const progress = ((currentQuestionIndex + 1) / quiz.questions.length) * 100;
+            document.getElementById('quiz-progress').style.width = progress + '%';
+            
+            // Load options
+            const optionsContainer = document.getElementById('quiz-options');
+            optionsContainer.innerHTML = '';
+            
+            question.options.forEach((option, index) => {
+                const optionDiv = document.createElement('div');
+                optionDiv.className = 'quiz-option border-2 border-gray-200 rounded-lg p-4';
+                optionDiv.onclick = () => selectOption(index);
+                optionDiv.innerHTML = `
+                    <label class="flex items-center cursor-pointer">
+                        <input type="radio" name="quiz-answer" class="mr-3">
+                        <span>${option}</span>
+                    </label>
+                `;
+                optionsContainer.appendChild(optionDiv);
+            });
+            
+            selectedAnswer = null;
+            document.getElementById('next-question-btn').disabled = true;
+        }
+
+        function selectOption(index) {
+            // Clear previous selections
+            document.querySelectorAll('.quiz-option').forEach(option => {
+                option.classList.remove('selected');
+                option.querySelector('input').checked = false;
+            });
+            
+            // Select current option
+            const options = document.querySelectorAll('.quiz-option');
+            options[index].classList.add('selected');
+            options[index].querySelector('input').checked = true;
+            
+            selectedAnswer = index;
+            document.getElementById('next-question-btn').disabled = false;
+        }
+
+        function nextQuestion() {
+            if (selectedAnswer === null) return;
+            
+            const quiz = quizData[currentQuiz];
+            const question = quiz.questions[currentQuestionIndex];
+            
+            // Check if answer is correct
+            if (selectedAnswer === question.correct) {
+                quizScore++;
+            }
+            
+            // Show correct answer briefly
+            const options = document.querySelectorAll('.quiz-option');
+            options[question.correct].classList.add('correct');
+            if (selectedAnswer !== question.correct) {
+                options[selectedAnswer].classList.add('incorrect');
+            }
+            
+            setTimeout(() => {
+                currentQuestionIndex++;
+                loadQuestion();
+            }, 1500);
+        }
+
+        function startTimer() {
+            quizTimer = setInterval(() => {
+                timeRemaining--;
+                
+                const minutes = Math.floor(timeRemaining / 60);
+                const seconds = timeRemaining % 60;
+                document.getElementById('quiz-timer').textContent = 
+                    `${minutes}:${seconds.toString().padStart(2, '0')}`;
+                
+                if (timeRemaining <= 0) {
+                    endQuiz();
+                }
+            }, 1000);
+        }
+
+        function endQuiz() {
+            clearInterval(quizTimer);
+            
+            const quiz = quizData[currentQuiz];
+            const percentage = Math.round((quizScore / quiz.questions.length) * 100);
+            
+            document.getElementById('quiz-interface').classList.add('hidden');
+            document.getElementById('quiz-results').classList.remove('hidden');
+            document.getElementById('final-score').textContent = percentage + '%';
+            
+            // Update score display
+            document.querySelector('#quiz-results .text-green-600').textContent = quizScore;
+            document.querySelector('#quiz-results .text-red-600').textContent = quiz.questions.length - quizScore;
+        }
+
+        function exitQuiz() {
+            clearInterval(quizTimer);
+            backToQuizSelection();
+        }
+
+        function retakeQuiz() {
+            document.getElementById('quiz-results').classList.add('hidden');
+            startQuiz(currentQuiz);
+        }
+
+        function backToQuizSelection() {
+            document.getElementById('quiz-interface').classList.add('hidden');
+            document.getElementById('quiz-results').classList.add('hidden');
+            document.getElementById('quiz-selection').classList.remove('hidden');
+        }
+
+        // Video functions
+        function playVideo(videoId) {
+            document.getElementById('video-modal').classList.remove('hidden');
+            // In a real implementation, you would load the actual video here
+        }
+
+        function closeVideo() {
+            document.getElementById('video-modal').classList.add('hidden');
+        }
+
+        function markVideoComplete() {
+            alert('Video marked as complete! You earned 25 XP.');
+            closeVideo();
+        }
+
+        // Initialize charts
+        function initializeCharts() {
+            // Progress Chart
+            const progressCtx = document.getElementById('progressChart').getContext('2d');
+            new Chart(progressCtx, {
+                type: 'radar',
+                data: {
+                    labels: ['Fire Safety', 'Earthquake', 'Lockdown', 'Weather', 'First Aid', 'Communication'],
+                    datasets: [{
+                        label: 'Your Progress',
+                        data: [95, 87, 78, 45, 82, 90],
+                        backgroundColor: 'rgba(59, 130, 246, 0.2)',
+                        borderColor: '#3b82f6',
+                        pointBackgroundColor: '#3b82f6'
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    scales: {
+                        r: {
+                            beginAtZero: true,
+                            max: 100
+                        }
+                    }
+                }
+            });
+        }
+
+        // Initialize when page loads
+        document.addEventListener('DOMContentLoaded', function() {
+            initializeCharts();
+        });
+    </script>
+<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'9809e8e8478c59b2',t:'MTc1ODEyNTgwNS4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+</html>
