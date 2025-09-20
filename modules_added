@@ -1,0 +1,1910 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CRISORA - Disaster Preparedness & Response Education</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+        
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+        
+        .hero-gradient {
+            background: url("image23.jpg")no-repeat center center/cover;        }
+        
+        .card-hover {
+            transition: all 0.3s ease;
+        }
+        
+        .card-hover:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+        }
+        
+        .pulse-animation {
+            animation: pulse 2s infinite;
+        }
+        
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.7; }
+        }
+        
+        .emergency-alert {
+            background: linear-gradient(90deg, #ef4444, #dc2626);
+            border:none;
+            padding:12px 24px;
+            border-radius:8px;
+            font-size: 18px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+            animation: alertPulse 3s infinite;
+        }
+
+        .donation {
+      background-color: #72B01D;
+      color:white;
+      border: none;
+      padding: 12px 24px;
+      border-radius: 8px;
+      font-size: 18px;
+      font-weight: bold;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+
+    .donation:hover {
+      background-color: #5c8f16; /* slightly darker shade */
+    }
+
+        .dashboard {
+      background-color: #00A7E1;
+      color:white;
+      border: none;
+      padding: 12px 24px;
+      border-radius: 8px;
+      font-size: 18px;
+      font-weight: bold;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+
+    .dashboard:hover {
+      background-color: #6EFAFB; /* slightly darker shade */  
+    }     
+        @keyframes alertPulse {
+            0%, 100% { background: linear-gradient(90deg, #ef4444, #dc2626); }
+            50% { background: linear-gradient(90deg, #dc2626, #b91c1c); }
+        }
+    </style>
+</head>
+<body class="bg-gray-50">
+
+
+    <!-- Navigation -->
+<nav class="bg-white shadow-lg fixed w-full top-0 z-50">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="flex justify-between items-center h-16">
+      
+      <!-- Logo with link to Home -->
+      <a href="/map.html" class="flex items-center">
+        <!-- Shield Logo -->
+        <div class="relative mr-2 shield-glow">
+          <svg width="40" height="40" viewBox="0 0 80 80" class="pulse-animation">
+            <!-- Shield Background -->
+            <path d="M40 8 L65 18 L65 35 C65 52 40 70 40 70 C40 70 15 52 15 35 L15 18 Z" 
+                  fill="url(#shieldGradient)" stroke="#1e40af" stroke-width="2"/>
+            
+            <!-- Safety Cross -->
+            <rect x="36" y="25" width="8" height="20" fill="white" rx="2"/>
+            <rect x="30" y="31" width="20" height="8" fill="white" rx="2"/>
+            
+            <!-- Emergency Alert Dots -->
+            <circle cx="28" cy="48" r="3" fill="#ef4444"/>
+            <circle cx="40" cy="52" r="3" fill="#f59e0b"/>
+            <circle cx="52" cy="48" r="3" fill="#10b981"/>
+            
+            <!-- Graduation Cap -->
+            <path d="M25 22 L40 18 L55 22 L55 26 L40 22 L25 26 Z" fill="#1e40af" opacity="0.8"/>
+            <rect x="53" y="22" width="4" height="8" fill="#1e40af" opacity="0.8"/>
+            <circle cx="55" cy="24" r="2" fill="#1e40af" opacity="0.8"/>
+            
+            <defs>
+              <linearGradient id="shieldGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                <stop offset="0%" style="stop-color:#3b82f6;stop-opacity:0.9"/>
+                <stop offset="50%" style="stop-color:#60a5fa;stop-opacity:0.8"/>
+                <stop offset="100%" style="stop-color:#93c5fd;stop-opacity:0.7"/>
+              </linearGradient>
+            </defs>
+          </svg>
+        </div>
+        <!-- Logo Text -->
+        <span class="text-xl font-bold text-gradient tracking-tight">CRISORA</span>
+      </a>
+   
+                <div class="hidden md:flex space-x-8">
+                    <a href="#home" class="nav-link text-gray-700 hover:text-blue-600 font-medium">Home</a>
+                    <a href="#learn" class="nav-link text-gray-700 hover:text-blue-600 font-medium">Learn</a>
+                    <a href="#prepare" class="nav-link text-gray-700 hover:text-blue-600 font-medium">Prepare</a>
+                    <a href="#alerts" class="nav-link text-gray-700 hover:text-blue-600 font-medium">Alerts</a>
+                    <a href="#community" class="nav-link text-gray-700 hover:text-blue-600 font-medium">Community</a>
+                    <a href="/donatepage" class="nav-link text-gray-700 hover:text-blue-600 font-medium"></a>
+                    <a href="/confirmation" class="nav-link text-gray-700 hover:text-blue-600 font-medium"></a>
+                </div>
+                <button onclick="window.location.href='donatepage2.html'" class="donation text-white px-4 py-2 rounded-lg font-semibold pulse-animation">Donate</button>
+                <button onclick="window.location.href='emergencymode.html'"class="emergency-alert text-white px-4 py-2 rounded-lg font-semibold pulse-animation">
+                    Emergency
+                </button>
+                <button onclick="window.location.href='redirecting.html'" class="dashboard text-white px-4 py-2 rounded-lg font-semibold pulse-animation">Dashboard</button>
+                
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="home" class="hero-gradient text-white py-20">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <h1 class="text-5xl md:text-6xl font-bold mb-6">
+                Stay Prepared. Stay Safe. 
+                <span class="text-yellow-300">Stay Resilient.</span>
+            </h1>
+            <p class="text-xl md:text-2xl mb-8 max-w-3xl mx-auto opacity-90">
+                Empowering communities with knowledge, tools, and resources for disaster preparedness and emergency response.
+            </p>
+            <div class="flex flex-col sm:flex-row gap-4 justify-center">
+                <button onclick="startLearning()" class="bg-yellow-400 text-blue-900 px-8 py-4 rounded-lg text-lg font-semibold hover:bg-yellow-300 transition-colors">
+                    🎓 Start Learning
+                </button>
+                <button onclick="checkReadiness()" class="bg-white bg-opacity-20 backdrop-blur-sm border-2 border-white text-white px-8 py-4 rounded-lg text-lg font-semibold hover:bg-opacity-30 transition-colors">
+                     Check My Readiness
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Current Alerts -->
+    <section class="bg-red-50 border-l-4 border-red-400 py-4">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center">
+                <div class="text-2xl mr-3">⚠️</div>
+                <div>
+                    <h3 class="text-red-800 font-semibold">Current Weather Alert</h3>
+                    <p class="text-red-700">Severe thunderstorm warning in effect for your area until 8:00 PM. Stay indoors and avoid travel.</p>
+                </div>
+                <button class="ml-auto bg-red-600 text-white px-4 py-2 rounded-lg hover:bg-red-700">
+                    View Details
+                </button>
+                
+            </div>
+        </div>
+    </section>
+
+    <!-- Main Features -->
+    <section id="learn" class="py-20">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h2 class="text-4xl font-bold text-gray-900 mb-4">Learn & Prepare</h2>
+                <p class="text-xl text-gray-600 max-w-2xl mx-auto">
+                    Interactive modules designed to educate and prepare you for various emergency scenarios
+                </p>
+            </div>
+
+            <div class="grid md:grid-cols-3 lg:grid-cols-4 gap-8">
+                <!-- Natural Disasters -->
+                <div class="bg-white rounded-xl shadow-lg p-6 card-hover cursor-pointer" onclick="openModule('natural')">
+                    <div class="text-4xl mb-4"></div>
+                    <h3 class="text-xl font-semibold mb-3 text-gray-900">Natural Disasters</h3>
+                    <p class="text-gray-600 mb-4">Learn about earthquakes, hurricanes, floods, wildfires, and how to prepare for each.</p>
+                    <div class="flex items-center justify-between">
+                        <span class="text-sm text-blue-600 font-medium">8 Modules Available</span>
+                        <div class="bg-green-100 text-green-800 px-2 py-1 rounded-full text-xs font-medium">Beginner</div>
+                        
+                    </div>
+                </div>
+                
+
+                <!-- Emergency Kits -->
+                <div class="bg-white rounded-xl shadow-lg p-6 card-hover cursor-pointer" onclick="openModule('kits')">
+                    <div class="text-4xl mb-4"></div>
+                    <h3 class="text-xl font-semibold mb-3 text-gray-900">Emergency Kits</h3>
+                    <p class="text-gray-600 mb-4">Build comprehensive emergency kits for home, work, and vehicle with our interactive checklist.</p>
+                    <div class="flex items-center justify-between">
+                        <span class="text-sm text-blue-600 font-medium">Interactive Checklist</span>
+                        <div class="bg-blue-100 text-blue-800 px-2 py-1 rounded-full text-xs font-medium">Essential</div>
+                    </div>
+                </div>
+
+                <!-- First Aid -->
+                <div class="bg-white rounded-xl shadow-lg p-6 card-hover cursor-pointer" onclick="openModule('firstaid')">
+                    <div class="text-4xl mb-4"></div>
+                    <h3 class="text-xl font-semibold mb-3 text-gray-900">First Aid Training</h3>
+                    <p class="text-gray-600 mb-4">Essential first aid skills with step-by-step guides and video demonstrations.</p>
+                    <div class="flex items-center justify-between">
+                        <span class="text-sm text-blue-600 font-medium">Video Tutorials</span>
+                        <div class="bg-orange-100 text-orange-800 px-2 py-1 rounded-full text-xs font-medium">Critical</div>
+                    </div>
+                </div>
+
+                <!-- Communication -->
+                <div class="bg-white rounded-xl shadow-lg p-6 card-hover cursor-pointer" onclick="openModule('communication')">
+                    <div class="text-4xl mb-4"></div>
+                    <h3 class="text-xl font-semibold mb-3 text-gray-900">Emergency Communication</h3>
+                    <p class="text-gray-600 mb-4">Stay connected during emergencies with backup communication methods and protocols.</p>
+                    <div class="flex items-center justify-between">
+                        <span class="text-sm text-blue-600 font-medium">5 Strategies</span>
+                        <div class="bg-purple-100 text-purple-800 px-2 py-1 rounded-full text-xs font-medium">Advanced</div>
+                    </div>
+                </div>
+
+               
+
+                
+            </div>
+        </div>
+    </section>
+
+    <!-- Readiness Assessment -->
+    <section id="prepare" class="bg-blue-50 py-20">
+        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-12">
+                <h2 class="text-4xl font-bold text-gray-900 mb-4">Readiness Assessment</h2>
+                <p class="text-xl text-gray-600">
+                    Take our comprehensive assessment to identify gaps in your disaster preparedness
+                </p>
+            </div>
+
+            <div class="bg-white rounded-xl shadow-lg p-8">
+                <div class="mb-8">
+                    <div class="flex justify-between items-center mb-2">
+                        <span class="text-sm font-medium text-gray-700">Assessment Progress</span>
+                        <span class="text-sm text-gray-500" id="progress-text">0 of 10 questions</span>
+                    </div>
+                    <div class="w-full bg-gray-200 rounded-full h-2">
+                        <div class="bg-blue-600 h-2 rounded-full transition-all duration-300" style="width: 0%" id="progress-bar"></div>
+                    </div>
+                </div>
+
+                <div id="assessment-content">
+                    <div class="text-center py-12">
+                        <div class="text-6xl mb-4">📋</div>
+                        <h3 class="text-2xl font-semibold mb-4 text-gray-900">Ready to Test Your Preparedness?</h3>
+                        <p class="text-gray-600 mb-8 max-w-2xl mx-auto">
+                            Our assessment covers emergency supplies, communication plans, evacuation procedures, and more. 
+                            Get personalized recommendations based on your results.
+                        </p>
+                        <button onclick="startAssessment()" class="bg-blue-600 text-white px-8 py-4 rounded-lg text-lg font-semibold hover:bg-blue-700 transition-colors">
+                            Start Assessment
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Emergency Contacts & Resources -->
+    <section id="alerts" class="py-20">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h2 class="text-4xl font-bold text-gray-900 mb-4">Emergency Resources</h2>
+                <p class="text-xl text-gray-600">
+                    Quick access to emergency contacts, alerts, and critical information
+                </p>
+            </div>
+
+            <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+                <div class="bg-red-600 text-white rounded-xl p-6 text-center card-hover cursor-pointer" onclick="callEmergency('911')">
+                    <div class="text-4xl mb-3">🚨</div>
+                    <h3 class="text-xl font-semibold mb-2">Emergency Services</h3>
+                    <p class="text-red-100 mb-4">Police, Fire, Medical</p>
+                    <div class="text-2xl font-bold">112</div>
+                </div>
+
+                <div class="bg-orange-600 text-white rounded-xl p-6 text-center card-hover cursor-pointer" onclick="callEmergency('poison')">
+                    <div class="text-4xl mb-3">☠️</div>
+                    <h3 class="text-xl font-semibold mb-2">Poison Control</h3>
+                    <p class="text-orange-100 mb-4">24/7 Poison Help</p>
+                    <div class="text-lg font-bold">1800-425-1213</div>
+                </div>
+
+                <div class="bg-blue-600 text-white rounded-xl p-6 text-center card-hover cursor-pointer" onclick="openWeatherAlerts()">
+                    <div class="text-4xl mb-3">🌦️</div>
+                    <h3 class="text-xl font-semibold mb-2">Weather Alerts</h3>
+                    <p class="text-blue-100 mb-4">Current Conditions</p>
+                    <div class="text-sm font-medium">View Active Alerts</div>
+                </div>
+
+                <div class="bg-green-600 text-white rounded-xl p-6 text-center card-hover cursor-pointer" onclick="openRedCross()">
+                    <div class="text-4xl mb-3">🏥</div>
+                    <h3 class="text-xl font-semibold mb-2">Red Cross</h3>
+                    <p class="text-green-100 mb-4">Disaster Relief</p>
+                    <div class="text-lg font-bold">011-23711551</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Community Hub -->
+    <section id="community" class="bg-gray-100 py-20">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h2 class="text-4xl font-bold text-gray-900 mb-4">Community Hub</h2>
+                <p class="text-xl text-gray-600">
+                    Connect with your local community and share preparedness resources
+                </p>
+            </div>
+
+    
+
+            <div class="grid md:grid-cols-3 gap-8">
+                <div class="bg-white rounded-xl shadow-lg p-6">
+                    <h3 class="text-xl font-semibold mb-4 text-gray-900">📍 Local Groups</h3>
+                    <div class="space-y-3">
+                        <div class="flex items-center justify-between p-3 bg-gray-50 rounded-lg">
+                            <div>
+                                <div class="font-medium">Downtown Preparedness Group</div>
+                                <div class="text-sm text-gray-500">0 members</div>
+                            </div>
+                            <button onclick="openGroup('downtown')" class="text-blue-600 hover:text-blue-800 font-medium">Join</button>
+                        </div>
+                        <div class="flex items-center justify-between p-3 bg-gray-50 rounded-lg">
+                            <div>
+                                <div class="font-medium">Neighborhood Watch Alliance</div>
+                                <div class="text-sm text-gray-500">0 members</div>
+                            </div>
+                            <button onclick="openGroup('watch')" class="text-blue-600 hover:text-blue-800 font-medium">Join</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="bg-white rounded-xl shadow-lg p-6">
+                    <h3 class="text-xl font-semibold mb-4 text-gray-900">📢 Recent Updates</h3>
+                    <div class="space-y-3">
+                        <div class="p-3 bg-blue-50 rounded-lg">
+                            <div class="font-medium text-blue-900">Emergency Drill Scheduled</div>
+                            <div class="text-sm text-blue-700">Community-wide drill on March 15th</div>
+                            <div class="text-xs text-blue-600 mt-1">2 hours ago</div>
+                        </div>
+                        <div class="p-3 bg-green-50 rounded-lg">
+                            <div class="font-medium text-green-900">Supply Drive Success</div>
+                            <div class="text-sm text-green-700">Collected 500+ emergency kits</div>
+                            <div class="text-xs text-green-600 mt-1">1 day ago</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="bg-white rounded-xl shadow-lg p-6">
+                    <h3 class="text-xl font-semibold mb-4 text-gray-900">🎯 Quick Actions</h3>
+                    <div class="space-y-3">
+                        <button onclick="reportIncident()" class="w-full bg-red-600 text-white py-3 rounded-lg font-medium hover:bg-red-700 transition-colors">
+                            Report Incident
+                        </button>
+                        <button onclick="requestHelp()" class="w-full bg-orange-600 text-white py-3 rounded-lg font-medium hover:bg-orange-700 transition-colors">
+                            Request Help
+                        </button>
+                        <button onclick="offerHelp()" class="w-full bg-green-600 text-white py-3 rounded-lg font-medium hover:bg-green-700 transition-colors">
+                            Offer Help
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-gray-900 text-white py-12">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid md:grid-cols-4 gap-8">
+                <div>
+                    <div class="flex items-center space-x-3 mb-4">
+                        <div class="text-3xl"><body class="bg-gradient-to-br from-slate-50 to-blue-50 min-h-screen flex items-center justify-center p-8">
+    <div class="logo-container">
+        <!-- Main Logo -->
+        <div class="flex items-center justify-center">
+            <!-- Shield Icon -->
+            <div class="relative mr-4 shield-glow">
+                <svg width="50" height="60" viewBox="0 0 80 80" class="pulse-animation cursor-pointer">
+                    <!-- Shield Background -->
+                    <path d="M40 8 L65 18 L65 35 C65 52 40 70 40 70 C40 70 15 52 15 35 L15 18 Z" 
+                          fill="url(#shieldGradient)" stroke="#1e40af" stroke-width="2"/>
+                    
+                    <!-- Safety Cross -->
+                    <rect x="36" y="25" width="8" height="20" fill="white" rx="2"/>
+                    <rect x="30" y="31" width="20" height="8" fill="white" rx="2"/>
+                    
+                    <!-- Emergency Alert Dots -->
+                    <circle cx="28" cy="48" r="3" fill="#ef4444"/>
+                    <circle cx="40" cy="52" r="3" fill="#f59e0b"/>
+                    <circle cx="52" cy="48" r="3" fill="#10b981"/>
+                    
+                    <!-- Graduation Cap Element -->
+                    <path d="M25 22 L40 18 L55 22 L55 26 L40 22 L25 26 Z" fill="#1e40af" opacity="0.8"/>
+                    <rect x="53" y="22" width="4" height="8" fill="#1e40af" opacity="0.8"/>
+                    <circle cx="55" cy="24" r="2" fill="#1e40af" opacity="0.8"/>
+                    
+                    <defs>
+                        <linearGradient id="shieldGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                            <stop offset="0%" style="stop-color:#3b82f6;stop-opacity:0.9"/>
+                            <stop offset="50%" style="stop-color:#60a5fa;stop-opacity:0.8"/>
+                            <stop offset="100%" style="stop-color:#93c5fd;stop-opacity:0.7"/>
+                        </linearGradient>
+                    </defs>
+                </svg>
+            </div>
+            
+            <!-- Logo Text -->
+            <div>
+                <h6 class="text-4xl font-bold text-gradient tracking-tight">CRISORA</h6>
+            </div>
+        </div>
+    </div></div>
+                        
+                    </div>
+                    <p class="text-gray-400">
+                        Empowering communities through education, preparation, and coordinated response to disasters and emergencies.
+                    </p>
+                </div>
+                
+                <div>
+                    <h4 class="font-semibold mb-4">Learn</h4>
+                    <ul class="space-y-2 text-gray-400">
+                        <li><a href="#" class="hover:text-white">Natural Disasters</a></li>
+                        <li><a href="#" class="hover:text-white">Emergency Kits</a></li>
+                        <li><a href="#" class="hover:text-white">First Aid</a></li>
+                        <li><a href="#" class="hover:text-white">Communication</a></li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h4 class="font-semibold mb-4">Resources</h4>
+                    <ul class="space-y-2 text-gray-400">
+                        <li><a href="#" class="hover:text-white">Emergency Contacts</a></li>
+                        <li><a href="#" class="hover:text-white">Weather Alerts</a></li>
+                        <li><a href="#" class="hover:text-white">Community Groups</a></li>
+                        <li><a href="#" class="hover:text-white">Training Centers</a></li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h4 class="font-semibold mb-4">Contact</h4>
+                    <ul class="space-y-2 text-gray-400">
+                        <li>📧 infocrisora@gmail.com</li>
+                        <li>📞 7520691705</li>
+                        <li>🌐 www.crisora.org</li>
+                        <li>📍 Emergency Operations Center</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="border-t border-gray-800 mt-8 pt-8 text-center text-gray-400">
+                <p>&copy; 2025 CRISORA. All rights reserved. | Emergency Hotline: 112</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Modal for Learning Modules -->
+    <div id="moduleModal" class="fixed inset-0 bg-black bg-opacity-50 hidden z-50 flex items-center justify-center p-4">
+        <div class="bg-white rounded-xl max-w-4xl w-full max-h-[90vh] overflow-y-auto">
+            <div class="p-6 border-b">
+                <div class="flex justify-between items-center">
+                    <h3 id="modalTitle" class="text-2xl font-bold text-gray-900"></h3>
+                    <button onclick="closeModal()" class="text-gray-500 hover:text-gray-700 text-2xl" aria-label="Close">&times;</button>
+                </div>
+            </div>
+            <div id="modalContent" class="p-6">
+                <!-- Content will be populated by JavaScript -->
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Smooth navigation
+        document.querySelectorAll('.nav-link').forEach(link => {
+            link.addEventListener('click', function(e) {
+                e.preventDefault();
+                const targetId = this.getAttribute('href');
+                const targetSection = document.querySelector(targetId);
+                if (targetSection) targetSection.scrollIntoView({ behavior: 'smooth' });
+            });
+        });
+
+        function startLearning() { document.querySelector('#learn').scrollIntoView({ behavior: 'smooth' }); }
+        function checkReadiness() { document.querySelector('#prepare').scrollIntoView({ behavior: 'smooth' }); }
+
+        // Assessment
+        let currentQuestion = 0;
+        let assessmentScore = 0;
+        const questions = [
+            { question: "Do you have a 72-hour emergency kit prepared?", options: [
+                { label: "Yes, fully stocked", score: 2 }, { label: "Partially prepared", score: 1 }, { label: "No, not yet", score: 0 } ] },
+            { question: "Does your family have an emergency communication plan?", options: [
+                { label: "Yes, written and practiced", score: 2 }, { label: "Yes, but not practiced", score: 1 }, { label: "No plan yet", score: 0 } ] },
+            { question: "Do you know your evacuation routes?", options: [
+                { label: "Multiple routes planned", score: 2 }, { label: "One route known", score: 1 }, { label: "No routes identified", score: 0 } ] },
+            { question: "Are you trained in basic first aid?", options: [
+                { label: "Certified and current", score: 2 }, { label: "Some training", score: 1 }, { label: "No training", score: 0 } ] },
+            { question: "Do you have emergency water storage?", options: [
+                { label: "1+ gallon per person/day", score: 2 }, { label: "Some water stored", score: 1 }, { label: "No water storage", score: 0 } ] }
+        ];
+        const maxScore = questions.reduce((s, q) => s + Math.max(...q.options.map(o => o.score)), 0);
+
+        function startAssessment() { assessmentScore = 0; currentQuestion = 0; showQuestion(); }
+        function showQuestion() {
+            if (currentQuestion < questions.length) {
+                const q = questions[currentQuestion];
+                document.getElementById('assessment-content').innerHTML = `
+                    <div class="mb-6">
+                        <h4 class="text-xl font-semibold mb-4">Question ${currentQuestion + 1} of ${questions.length}</h4>
+                        <p class="text-lg mb-6">${q.question}</p>
+                        <div class="space-y-3">
+                            ${q.options.map((o, i) => `
+                                <button onclick="selectAnswer(${i})" class="w-full text-left p-4 border-2 border-gray-200 rounded-lg hover:border-blue-500 hover:bg-blue-50 transition-colors">${o.label}</button>
+                            `).join('')}
+                        </div>
+                    </div>
+                `;
+                updateProgress();
+            } else { showResults(); }
+        }
+        function selectAnswer(i) {
+            assessmentScore += questions[currentQuestion].options[i]?.score || 0;
+            currentQuestion++;
+            showQuestion();
+        }
+        function updateProgress() {
+            const progress = (currentQuestion / questions.length) * 100;
+            document.getElementById('progress-bar').style.width = progress + '%';
+            document.getElementById('progress-text').textContent = `${currentQuestion} of ${questions.length} questions`;
+        }
+        function showResults() {
+            const pct = Math.round((assessmentScore / maxScore) * 100);
+            document.getElementById('assessment-content').innerHTML = `
+                <div class="text-center py-8">
+                    <div class="text-6xl mb-4">📊</div>
+                    <h3 class="text-2xl font-semibold mb-4">Your Preparedness Score</h3>
+                    <div class="text-4xl font-bold text-blue-600 mb-6">${pct}%</div>
+                    <div class="max-w-md mx-auto mb-8">
+                        <div class="bg-gray-200 rounded-full h-4">
+                            <div class="bg-blue-600 h-4 rounded-full" style="width: ${pct}%"></div>
+                        </div>
+                    </div>
+                    <p class="text-gray-600 mb-8">
+                        ${pct >= 80 ? "Excellent! You're well-prepared for emergencies." :
+                          pct >= 60 ? "Good start! There are some areas to improve." :
+                          "You have significant gaps in your preparedness. Let's work on improving!"}
+                    </p>
+                    <div class="space-y-3">
+                        <button onclick="getRecommendations()" class="bg-blue-600 text-white px-6 py-3 rounded-lg font-medium hover:bg-blue-700 transition-colors">
+                            Get Personalized Recommendations
+                        </button>
+                        <button onclick="retakeAssessment()" class="bg-gray-200 text-gray-800 px-6 py-3 rounded-lg font-medium hover:bg-gray-300 transition-colors ml-4">
+                            Retake Assessment
+                        </button>
+                    </div>
+                </div>
+            `;
+            document.getElementById('progress-bar').style.width = '100%';
+            document.getElementById('progress-text').textContent = 'Assessment Complete';
+        }
+        function getRecommendations() { showRecommendations(); }
+
+function showRecommendations() {
+    const pct = Math.round((assessmentScore / maxScore) * 100) || 0;
+
+    // Choose tier content based on score
+    let tier = 'low';
+    if (pct >= 80) tier = 'high';
+    else if (pct >= 60) tier = 'mid';
+
+    const headings = {
+        low: 'Let’s boost your readiness fast',
+        mid: 'Great start — level up next',
+        high: 'Excellent! Maintain and refine'
+    };
+
+    const actions = {
+        low: [
+            'Assemble a 72-hour kit this week (water, food, light, radio)',
+            'Create a simple family communication plan and practice it',
+            'Identify two evacuation routes from home and work'
+        ],
+        mid: [
+            'Expand water and food to 7 days where possible',
+            'Add backups: power bank, hand-crank radio, extra meds',
+            'Run a 15-minute home hazard walk-through and fix top 3 risks'
+        ],
+        high: [
+            'Refresh supplies and rotate food/water dates',
+            'Add a neighborhood contact tree and quarterly drill',
+            'Cross-train a family member on kit locations and shutoffs'
+        ]
+    };
+
+    const learn = {
+        low: [
+            'Start: 🌊 Floods basics (evacuation and safety)',
+            'Then: 🌪️ Tornado shelter practice',
+            'Add: 🏥 First Aid — bleeding control'
+        ],
+        mid: [
+            'Deepen: 🔥 Wildfire prep and go-bag',
+            'Practice: 🏔️ Earthquake Drop–Cover–Hold',
+            'Build: 📡 Detailed communication cards'
+        ],
+        high: [
+            'Refine: Hazard-specific kits (vehicle/work)',
+            'Lead: Host a mini family or neighbor drill',
+            'Extend: CERT/First Aid refresher'
+        ]
+    };
+
+    const palette = pct >= 80 ? {bg:'bg-green-50', tag:'bg-green-100 text-green-800', bar:'bg-green-600', accent:'text-green-700'} :
+                    pct >= 60 ? {bg:'bg-yellow-50', tag:'bg-yellow-100 text-yellow-800', bar:'bg-yellow-600', accent:'text-yellow-700'} :
+                                 {bg:'bg-red-50', tag:'bg-red-100 text-red-800', bar:'bg-red-600', accent:'text-red-700'};
+
+    const content = `
+        <div class="space-y-8">
+            <div class="${palette.bg} p-5 rounded-lg border">
+                <div class="flex items-start justify-between gap-3">
+                    <div>
+                        <h3 class="text-xl font-semibold mb-1">Personalized Recommendations</h3>
+                        <p class="text-sm text-gray-700">Based on your score</p>
+                    </div>
+                    <div class="text-right">
+                        <div class="text-3xl font-bold ${palette.accent}">${pct}%</div>
+                        <div class="text-xs text-gray-500">Preparedness level</div>
+                    </div>
+                </div>
+                <div class="w-full bg-gray-200 rounded-full h-2 mt-4">
+                    <div class="${palette.bar} h-2 rounded-full" style="width:${pct}%"></div>
+                </div>
+            </div>
+
+            <div class="border rounded-lg p-5">
+                <h4 class="font-semibold text-lg mb-2">${headings[tier]}</h4>
+                <ul class="list-disc ml-5 space-y-2 text-sm text-gray-700">
+                    ${actions[tier].map(a=>`<li>${a}</li>`).join('')}
+                </ul>
+            </div>
+
+            <div class="border rounded-lg p-5">
+                <h4 class="font-semibold text-lg mb-2">Next Learning Steps</h4>
+                <div class="flex flex-wrap gap-2">
+                    ${learn[tier].map(l=>`<span class="${palette.tag} px-2.5 py-1 text-xs rounded-full">${l}</span>`).join('')}
+                </div>
+            </div>
+
+            <div class="grid md:grid-cols-3 gap-4">
+                <div class="bg-blue-50 rounded-lg p-4">
+                    <div class="font-semibold mb-1">Build Your Kit</div>
+                    <p class="text-sm text-gray-700 mb-3">Check off essentials and track progress.</p>
+                    <button onclick="openKitBuilder('home')" class="px-3 py-2 rounded bg-blue-600 text-white hover:bg-blue-700 text-sm">Open Home Kit</button>
+                </div>
+                <div class="bg-purple-50 rounded-lg p-4">
+                    <div class="font-semibold mb-1">Make a Plan</div>
+                    <p class="text-sm text-gray-700 mb-3">Create contacts and meeting points.</p>
+                    <button onclick="createCommPlan()" class="px-3 py-2 rounded bg-purple-600 text-white hover:bg-purple-700 text-sm">Create Plan</button>
+                </div>
+                <div class="bg-orange-50 rounded-lg p-4">
+                    <div class="font-semibold mb-1">Learn by Scenario</div>
+                    <p class="text-sm text-gray-700 mb-3">Follow the guided disaster path.</p>
+                    <button onclick="openModule('natural')" class="px-3 py-2 rounded bg-orange-600 text-white hover:bg-orange-700 text-sm">Open Path</button>
+                </div>
+            </div>
+
+            <div class="flex flex-wrap gap-3">
+                <button onclick="showResults()" class="px-4 py-2.5 rounded-lg border hover:bg-gray-50">Back to Results</button>
+                <button onclick="window.print()" class="px-4 py-2.5 rounded-lg bg-gray-900 text-white hover:bg-black">Print/Save PDF</button>
+                <button onclick="retakeAssessment()" class="px-4 py-2.5 rounded-lg bg-gray-200 hover:bg-gray-300">Retake Assessment</button>
+            </div>
+        </div>
+    `;
+
+    const container = document.getElementById('assessment-content');
+    if (container) container.innerHTML = content;
+}
+        function retakeAssessment() { startAssessment(); }
+
+        // Modal control
+        function closeModal() { document.getElementById('moduleModal').classList.add('hidden'); }
+
+        // Natural Disaster modules (entry)
+        function openModule(moduleType) {
+            const modules = {
+                natural: {
+                    title: "🌪️ Natural Disasters",
+                    content: `
+                        <div class="space-y-6">
+                            <p class="text-gray-600">Learn about different types of natural disasters and how to prepare for each one.</p>
+                            <div class="grid gap-4">
+                                <div class="border rounded-lg p-4 hover:bg-gray-50 cursor-pointer" onclick="openDisasterModule('floods')">
+                                    <h4 class="font-semibold text-lg mb-2">🌊 Floods & Flash Floods</h4>
+                                    <p class="text-gray-600 text-sm">Understanding flood risks, evacuation procedures, and water safety.</p>
+                                    <div class="mt-2 text-blue-600 text-sm">Duration: 15 minutes</div>
+                                </div>
+                                <div class="border rounded-lg p-4 hover:bg-gray-50 cursor-pointer" onclick="openDisasterModule('tornadoes')">
+                                    <h4 class="font-semibold text-lg mb-2">🌪️ Tornadoes & Severe Weather</h4>
+                                    <p class="text-gray-600 text-sm">Tornado safety, warning signs, and shelter procedures.</p>
+                                    <div class="mt-2 text-blue-600 text-sm">Duration: 12 minutes</div>
+                                </div>
+                                <div class="border rounded-lg p-4 hover:bg-gray-50 cursor-pointer" onclick="openDisasterModule('wildfires')">
+                                    <h4 class="font-semibold text-lg mb-2">🔥 Wildfires</h4>
+                                    <p class="text-gray-600 text-sm">Fire prevention, evacuation planning, and defensible space.</p>
+                                    <div class="mt-2 text-blue-600 text-sm">Duration: 18 minutes</div>
+                                </div>
+                                <div class="border rounded-lg p-4 hover:bg-gray-50 cursor-pointer" onclick="openDisasterModule('earthquakes')">
+                                    <h4 class="font-semibold text-lg mb-2">🏔️ Earthquakes</h4>
+                                    <p class="text-gray-600 text-sm">Drop, cover, hold techniques and earthquake preparedness.</p>
+                                    <div class="mt-2 text-blue-600 text-sm">Duration: 20 minutes</div>
+                                </div>
+                            </div>
+                            <button onclick="startNaturalDisasterPath()" class="w-full bg-blue-600 text-white py-3 rounded-lg font-medium hover:bg-blue-700 transition-colors">
+                                Start Learning Path
+                            </button>
+                        </div>
+                    `
+                },
+                kits: {
+                    title: "🎒 Emergency Kits",
+                    content: `
+                        <div class="space-y-6">
+                            <p class="text-gray-600">Build comprehensive emergency kits with our interactive checklist system.</p>
+                            <div class="bg-blue-50 p-4 rounded-lg">
+                                <h4 class="font-semibold mb-2">📦 Basic 72-Hour Kit</h4>
+                                <div class="space-y-2 text-sm">
+                                    <label class="flex items-center"><input type="checkbox" class="mr-2"> Water (1 gallon per person per day)</label>
+                                    <label class="flex items-center"><input type="checkbox" class="mr-2"> Non-perishable food (3-day supply)</label>
+                                    <label class="flex items-center"><input type="checkbox" class="mr-2"> Battery-powered radio</label>
+                                    <label class="flex items-center"><input type="checkbox" class="mr-2"> Flashlight and extra batteries</label>
+                                    <label class="flex items-center"><input type="checkbox" class="mr-2"> First aid kit</label>
+                                    <label class="flex items-center"><input type="checkbox" class="mr-2"> Whistle for signaling help</label>
+                                </div>
+                            </div>
+                            <div class="grid md:grid-cols-2 gap-4">
+                                <button onclick="openKitBuilder('home')" class="bg-green-600 text-white py-3 rounded-lg font-medium hover:bg-green-700 transition-colors">🏠 Home Kit Checklist</button>
+                                <button onclick="openKitBuilder('vehicle')" class="bg-orange-600 text-white py-3 rounded-lg font-medium hover:bg-orange-700 transition-colors">🚗 Vehicle Kit Checklist</button>
+                            </div>
+                        </div>
+                    `
+                },
+                communication: {
+                    title: "📡 Emergency Communication",
+                    content: `
+                        <div class="space-y-6">
+                            <p class="text-gray-600">Stay connected during emergencies with backup communication methods and protocols.</p>
+                            <div class="grid gap-4">
+                                <div class="border rounded-lg p-4 hover:bg-gray-50">
+                                    <h4 class="font-semibold text-lg mb-2">📱 Primary Communication Methods</h4>
+                                    <div class="space-y-2 text-sm">
+                                        <div class="flex items-center"><span class="w-2 h-2 bg-green-500 rounded-full mr-2"></span>Cell phone with backup battery/solar charger</div>
+                                        <div class="flex items-center"><span class="w-2 h-2 bg-green-500 rounded-full mr-2"></span>Text messaging (often works when calls don't)</div>
+                                        <div class="flex items-center"><span class="w-2 h-2 bg-green-500 rounded-full mr-2"></span>Social media check-ins and updates</div>
+                                        <div class="flex items-center"><span class="w-2 h-2 bg-green-500 rounded-full mr-2"></span>Email from mobile devices</div>
+                                    </div>
+                                </div>
+                                <div class="border rounded-lg p-4 hover:bg-gray-50">
+                                    <h4 class="font-semibold text-lg mb-2">📻 Backup Communication</h4>
+                                    <div class="space-y-2 text-sm">
+                                        <div class="flex items-center"><span class="w-2 h-2 bg-orange-500 rounded-full mr-2"></span>Battery/hand-crank emergency radio</div>
+                                        <div class="flex items-center"><span class="w-2 h-2 bg-orange-500 rounded-full mr-2"></span>Two-way radios (FRS/GMRS)</div>
+                                        <div class="flex items-center"><span class="w-2 h-2 bg-orange-500 rounded-full mr-2"></span>Satellite communicators</div>
+                                        <div class="flex items-center"><span class="w-2 h-2 bg-orange-500 rounded-full mr-2"></span>Ham radio (requires license)</div>
+                                    </div>
+                                </div>
+                                <div class="border rounded-lg p-4 hover:bg-gray-50">
+                                    <h4 class="font-semibold text-lg mb-2">🗺️ Communication Plan Essentials</h4>
+                                    <div class="space-y-2 text-sm">
+                                        <div class="flex items-center"><span class="w-2 h-2 bg-blue-500 rounded-full mr-2"></span>Out-of-state contact person</div>
+                                        <div class="flex items-center"><span class="w-2 h-2 bg-blue-500 rounded-full mr-2"></span>Local meeting points</div>
+                                        <div class="flex items-center"><span class="w-2 h-2 bg-blue-500 rounded-full mr-2"></span>Important phone numbers written down</div>
+                                        <div class="flex items-center"><span class="w-2 h-2 bg-blue-500 rounded-full mr-2"></span>Emergency contact cards for all family members</div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="bg-yellow-50 p-4 rounded-lg">
+                                <h4 class="font-semibold mb-2">⚡ Power Outage Communication</h4>
+                                <ul class="text-sm space-y-1">
+                                    <li>• Conserve phone battery - use airplane mode when not needed</li>
+                                    <li>• Text instead of calling - uses less battery and bandwidth</li>
+                                    <li>• Use car chargers or portable battery packs</li>
+                                    <li>• Listen to battery radio for official updates</li>
+                                    <li>• Designate one family member to update others</li>
+                                </ul>
+                            </div>
+                            <button onclick="createCommPlan()" class="w-full bg-purple-600 text-white py-3 rounded-lg font-medium hover:bg-purple-700 transition-colors">
+                                📋 Create My Communication Plan
+                            </button>
+                        </div>
+                    `
+                },
+                firstaid: {
+                    title: "🏥 First Aid Training",
+                    content: `
+                        <div class="space-y-6">
+                            <p class="text-gray-600">Essential first aid skills that could save lives in emergency situations.</p>
+                            <div class="grid gap-4">
+                                <div class="border rounded-lg p-4">
+                                    <h4 class="font-semibold text-lg mb-2">🫁 CPR Basics</h4>
+                                    <p class="text-gray-600 text-sm mb-3">Learn hands-only CPR techniques for adults and children.</p>
+                                    <div class="bg-red-50 p-3 rounded text-sm">
+                                        <strong>Remember:</strong> Push hard and fast in the center of the chest at least 2 inches deep at 100-120 compressions per minute.
+                                    </div>
+                                </div>
+                                <div class="border rounded-lg p-4">
+                                    <h4 class="font-semibold text-lg mb-2">🩹 Wound Care</h4>
+                                    <p class="text-gray-600 text-sm mb-3">Proper cleaning, dressing, and care of cuts and wounds.</p>
+                                    <ol class="text-sm space-y-1 ml-4">
+                                        <li>1. Clean hands thoroughly</li>
+                                        <li>2. Stop bleeding with direct pressure</li>
+                                        <li>3. Clean wound gently</li>
+                                        <li>4. Apply antibiotic ointment</li>
+                                        <li>5. Cover with sterile bandage</li>
+                                    </ol>
+                                </div>
+                            </div>
+                            <button onclick="startFirstAidTraining()" class="w-full bg-red-600 text-white py-3 rounded-lg font-medium hover:bg-red-700 transition-colors">
+                                Start Interactive Training
+                            </button>
+                        </div>
+                    `
+                }
+            };
+            const module = modules[moduleType];
+            if (module) {
+                document.getElementById('modalTitle').textContent = module.title;
+                document.getElementById('modalContent').innerHTML = module.content;
+                document.getElementById('moduleModal').classList.remove('hidden');
+            }
+        }
+
+        // Natural Disaster Learning Path (Floods sample kept)
+        let currentLearningPath = null;
+        let currentModule = 0;
+        function startNaturalDisasterPath() { currentLearningPath = 'natural'; currentModule = 0; showLearningPathOverview(); }
+        function showLearningPathOverview() {
+            const content = `
+                <div class="space-y-6">
+                    <div class="bg-blue-50 p-6 rounded-lg">
+                        <h3 class="text-xl font-semibold mb-4">🎯 Natural Disaster Learning Path</h3>
+                        <p class="text-gray-600 mb-4">Complete this comprehensive 4-module course to become prepared for natural disasters.</p>
+                        <div class="grid gap-3">
+                            <div class="flex items-center p-3 bg-white rounded-lg">
+                                <div class="w-8 h-8 bg-blue-600 text-white rounded-full flex items-center justify-center text-sm font-bold mr-3">1</div>
+                                <div class="flex-1">
+                                    <div class="font-medium">Floods & Flash Floods</div>
+                                    <div class="text-sm text-gray-500">Water safety and evacuation</div>
+                                </div>
+                                <div class="text-sm text-blue-600">15 min</div>
+                            </div>
+                            <div class="flex items-center p-3 bg-white rounded-lg">
+                                <div class="w-8 h-8 bg-gray-300 text-gray-600 rounded-full flex items-center justify-center text-sm font-bold mr-3">2</div>
+                                <div class="flex-1">
+                                    <div class="font-medium">Tornadoes & Severe Weather</div>
+                                    <div class="text-sm text-gray-500">Warning signs and shelter</div>
+                                </div>
+                                <div class="text-sm text-gray-500">12 min</div>
+                            </div>
+                            <div class="flex items-center p-3 bg-white rounded-lg">
+                                <div class="w-8 h-8 bg-gray-300 text-gray-600 rounded-full flex items-center justify-center text-sm font-bold mr-3">3</div>
+                                <div class="flex-1">
+                                    <div class="font-medium">Wildfires</div>
+                                    <div class="text-sm text-gray-500">Prevention and evacuation</div>
+                                </div>
+                                <div class="text-sm text-gray-500">18 min</div>
+                            </div>
+                            <div class="flex items-center p-3 bg-white rounded-lg">
+                                <div class="w-8 h-8 bg-gray-300 text-gray-600 rounded-full flex items-center justify-center text-sm font-bold mr-3">4</div>
+                                <div class="flex-1">
+                                    <div class="font-medium">Earthquakes</div>
+                                    <div class="text-sm text-gray-500">Drop, cover, and hold</div>
+                                </div>
+                                <div class="text-sm text-gray-500">20 min</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="flex gap-4">
+                        <button onclick="startModule(0)" class="flex-1 bg-blue-600 text-white py-3 rounded-lg font-medium hover:bg-blue-700 transition-colors">Start Module 1: Floods</button>
+                        <button onclick="closeModal()" class="px-6 py-3 border border-gray-300 rounded-lg font-medium hover:bg-gray-50 transition-colors">Later</button>
+                    </div>
+                </div>
+            `;
+            document.getElementById('modalTitle').textContent = '🌪️ Natural Disasters Learning Path';
+            document.getElementById('modalContent').innerHTML = content;
+        }
+        // Full learning path modules that flow one-by-one
+        const pathModules = [
+          {
+            key: 'floods',
+            title: '🌊 Floods & Flash Floods',
+            color: 'blue',
+            objectives: [
+              'Understand flood risk factors',
+              'Learn evacuation procedures',
+              'Practice water safety techniques'
+            ],
+            sections: [
+              { h: '🚨 Flood Warning Signs', cols: [
+                { t: 'Weather Indicators', items: ['Heavy rainfall (>1 inch/hour)','Rapid snowmelt','Dam or levee failure','Storm surge warnings'] },
+                { t: 'Environmental Signs', items: ['Rising water levels','Muddy or debris-filled water','Unusual animal behavior','Ground saturation'] }
+              ]},
+              { h: '🏃‍♂️ Evacuation Procedures', list: [
+                'Listen to authorities; evacuate immediately when ordered',
+                'Turn off gas, electricity, and water at main switches',
+                'Take essentials: emergency kit, meds, important documents',
+                'Avoid flooded roads: Turn Around, Don’t Drown',
+                'If trapped, move to the highest interior room'
+              ]},
+              { h: '⚠️ Critical Safety Rules', danger: [
+                'Never drive through flooded roads',
+                'Stay away from downed power lines',
+                "Don't walk in moving water above your ankles",
+                'Avoid contact with floodwater (contamination risk)'
+              ]}
+            ]
+          },
+          {
+            key: 'tornadoes',
+            title: '🌪️ Tornadoes & Severe Weather',
+            color: 'cyan',
+            objectives: [
+              'Recognize watches vs. warnings',
+              'Choose and prepare a safe room',
+              'Protect yourself during and after'
+            ],
+            sections: [
+              { h: '⚠️ Warning Signs & Alerts', cols: [
+                { t: 'Warning Signs', items: ['Greenish, dark sky','Large hail or heavy rain','Roaring sound like a freight train','Wall cloud or funnel'] },
+                { t: 'Alerts', items: ['Watch: Be ready','Warning: Take shelter now','NOAA Weather Radio alerts','Local sirens and text alerts'] }
+              ]},
+              { h: '🛡️ Shelter Procedures', list: [
+                'Go to a small, interior, windowless room on the lowest floor',
+                'Cover head and neck with arms or a sturdy object',
+                'Wear shoes; bring a phone/whistle if time allows',
+                'Stay put until the all-clear is given'
+              ]},
+              { h: '🚫 Safety Rules', danger: [
+                'Do not open windows',
+                'Avoid large open rooms (gyms, auditoriums)',
+                'Do not shelter under highway overpasses',
+                'Keep pets and children close'
+              ]}
+            ]
+          },
+          {
+            key: 'wildfires',
+            title: '🔥 Wildfires',
+            color: 'orange',
+            objectives: ['Create defensible space','Prepare for poor air quality','Evacuate early and safely'],
+            sections: [
+              { h: '🌡️ Risk & Air Quality', cols: [
+                { t: 'Risk Factors', items: ['Dry vegetation and high winds','Red Flag Warnings','Prolonged drought','Nearby smoke plumes'] },
+                { t: 'Air Quality Clues', items: ['Visible smoke and haze','Unhealthy AQI alerts','Irritated eyes/throat','Falling ash/embers'] }
+              ]},
+              { h: '🚗 Evacuation Checklist', list: [
+                'Clear debris within 30–100 feet of structures',
+                'Pack go-bags; include N95 masks and eye protection',
+                'Back car into driveway; keep tank full',
+                'Leave early if in evacuation zone; follow routes'
+              ]},
+              { h: '🚫 Safety Rules', danger: [
+                'Do not wait until roads are blocked',
+                'Keep gutters/roofs clear of debris',
+                'Do not return until officials say it’s safe',
+                'Wear N95 masks in smoky conditions'
+              ]}
+            ]
+          },
+          {
+            key: 'earthquakes',
+            title: '🏔️ Earthquakes',
+            color: 'purple',
+            objectives: ['Reduce hazards at home','Practice Drop–Cover–Hold','Stay safe after shaking'],
+            sections: [
+              { h: '📋 Before & After', cols: [
+                { t: 'Before', items: ['Secure furniture and water heaters','Keep shoes/flashlight by bed','Make a family meeting plan','Maintain an emergency kit'] },
+                { t: 'After', items: ['Expect aftershocks','Check gas/electrical hazards','Use texts instead of calls','Follow official updates'] }
+              ]},
+              { h: '🛡️ During Shaking', list: [
+                'Drop to hands and knees',
+                'Cover head/neck under sturdy furniture',
+                'Hold until shaking stops',
+                'Outdoors: move to an open area away from hazards'
+              ]},
+              { h: '🚫 Safety Rules', danger: [
+                'Do not run outside during shaking',
+                'Avoid elevators',
+                'If in bed, stay and protect head/neck',
+                'If driving, pull over away from bridges and lines'
+              ]}
+            ]
+          }
+        ];
+
+        function renderModulePage(index){
+          const m = pathModules[index];
+          if(!m) return;
+          const badgeColor = m.color === 'blue' ? 'bg-blue-100 text-blue-800' : m.color === 'cyan' ? 'bg-cyan-100 text-cyan-800' : m.color === 'orange' ? 'bg-orange-100 text-orange-800' : 'bg-purple-100 text-purple-800';
+          const headerBg = m.color === 'blue' ? 'bg-blue-50' : m.color === 'cyan' ? 'bg-cyan-50' : m.color === 'orange' ? 'bg-orange-50' : 'bg-purple-50';
+
+          const sectionsHtml = m.sections.map(s => {
+            if(s.cols){
+              return `
+                <div class="space-y-3">
+                  <h4 class="font-semibold text-lg">${s.h}</h4>
+                  <div class="grid md:grid-cols-2 gap-4">
+                    ${s.cols.map(col => `
+                      <div class="border rounded-lg p-4">
+                        <h5 class="font-medium mb-2">${col.t}</h5>
+                        <ul class="text-sm space-y-1">${col.items.map(it=>`<li>• ${it}</li>`).join('')}</ul>
+                      </div>
+                    `).join('')}
+                  </div>
+                </div>`;
+            }
+            if(s.list){
+              return `
+                <div class="space-y-3">
+                  <h4 class="font-semibold text-lg">${s.h}</h4>
+                  <div class="bg-yellow-50 p-4 rounded-lg">
+                    <ol class="space-y-2">${s.list.map((it,i)=>`<li><strong>${i+1}.</strong> ${it}</li>`).join('')}</ol>
+                  </div>
+                </div>`;
+            }
+            if(s.danger){
+              return `
+                <div class="bg-red-50 p-4 rounded-lg">
+                  <h5 class="font-semibold text-red-800 mb-2">${s.h}</h5>
+                  <ul class="text-red-700 text-sm space-y-1">${s.danger.map(it=>`<li>• ${it}</li>`).join('')}</ul>
+                </div>`;
+            }
+            return '';
+          }).join('');
+
+          const content = `
+            <div class="space-y-6">
+              <div class="${headerBg} p-4 rounded-lg">
+                <div class="flex items-start justify-between gap-3">
+                  <div>
+                    <h3 class="text-xl font-semibold mb-2">${m.title}</h3>
+                    <div class="flex flex-wrap gap-2">
+                      ${m.objectives.map(o=>`<span class="${badgeColor} px-2.5 py-1 text-xs rounded-full">${o}</span>`).join('')}
+                    </div>
+                  </div>
+                  <div class="text-sm text-gray-600">Module ${index+1} of ${pathModules.length}</div>
+                </div>
+              </div>
+              ${sectionsHtml}
+              <div class="flex gap-4">
+                <button onclick="completeModule(${index})" class="flex-1 bg-green-600 text-white py-3 rounded-lg font-medium hover:bg-green-700 transition-colors">✓ Complete Module</button>
+                <button onclick="showLearningPathOverview()" class="px-6 py-3 border border-gray-300 rounded-lg font-medium hover:bg-gray-50 transition-colors">Back to Overview</button>
+              </div>
+            </div>`;
+
+          document.getElementById('modalTitle').textContent = m.title;
+          document.getElementById('modalContent').innerHTML = content;
+          document.getElementById('moduleModal').classList.remove('hidden');
+        }
+
+        function startModule(moduleIndex) {
+          currentModule = moduleIndex;
+          renderModulePage(currentModule);
+        }
+        function completeModule(idx) {
+          const next = (typeof idx === 'number' ? idx + 1 : currentModule + 1);
+          if (next < pathModules.length) {
+            currentModule = next;
+            renderModulePage(currentModule);
+          } else {
+            // Path finished
+            document.getElementById('modalTitle').textContent = '🎉 Path Complete';
+            document.getElementById('modalContent').innerHTML = `
+              <div class="text-center space-y-4">
+                <div class="text-6xl">🏆</div>
+                <h3 class="text-2xl font-semibold">You finished all four modules!</h3>
+                <p class="text-gray-600">Great work—you're significantly more prepared. Review any module anytime.</p>
+                <div class="flex gap-3 justify-center">
+                  <button class="px-5 py-2.5 rounded-lg bg-blue-600 text-white hover:bg-blue-700" onclick="startModule(0)">Restart Path</button>
+                  <button class="px-5 py-2.5 rounded-lg border" onclick="closeModal()">Close</button>
+                </div>
+              </div>`;
+            document.getElementById('moduleModal').classList.remove('hidden');
+          }
+        }
+
+        // Disaster full pages: Tornadoes, Wildfires, Earthquakes
+        const disasterPages = {
+            tornadoes: {
+                title: '🌪️ Tornadoes & Severe Weather',
+                color: 'cyan',
+                objectives: [
+                    'Recognize watches vs. warnings',
+                    'Choose and prepare a safe room',
+                    'Protect yourself during and after'
+                ],
+                signs: {
+                    leftTitle: 'Warning Signs',
+                    left: ['Greenish, dark sky', 'Large hail or heavy rain', 'Roaring sound like a freight train', 'Wall cloud or funnel'],
+                    rightTitle: 'Alerts',
+                    right: ['Watch: Be ready', 'Warning: Take shelter now', 'NOAA Weather Radio alerts', 'Local sirens and text alerts']
+                },
+                procedures: [
+                    'Go to a small, interior, windowless room on lowest floor',
+                    'Cover head and neck with arms or sturdy object',
+                    'Wear shoes; bring phone/whistle if time allows',
+                    'Stay put until all-clear is given'
+                ],
+                rules: [
+                    'Do not open windows',
+                    'Avoid large open rooms (gyms)',
+                    'Do not shelter under highway overpasses',
+                    'Keep pets and children close'
+                ],
+                quiz: { q: 'Best place to shelter during a tornado?', options: ['Top floor near a window', 'Interior room on lowest level', 'In your car under an overpass'], correct: 1 }
+            },
+            wildfires: {
+                title: '🔥 Wildfires',
+                color: 'orange',
+                objectives: ['Create defensible space', 'Prepare for poor air quality', 'Evacuate early and safely'],
+                signs: {
+                    leftTitle: 'Risk Factors',
+                    left: ['Dry vegetation and high winds', 'Red Flag Warnings', 'Prolonged drought', 'Nearby smoke plumes'],
+                    rightTitle: 'Air Quality Clues',
+                    right: ['Visible smoke and haze', 'Unhealthy AQI alerts', 'Irritated eyes/throat', 'Falling ash/embers']
+                },
+                procedures: [
+                    'Clear brush/debris within 30–100 feet of structures',
+                    'Pack go-bags; include N95 masks and eye protection',
+                    'Back car into driveway; keep tank full',
+                    'Leave early if in evacuation zone; follow routes'
+                ],
+                rules: [
+                    'Do not wait until roads are blocked',
+                    'Keep gutters/roofs clear of debris',
+                    'Do not return until officials say it’s safe',
+                    'Wear N95 masks in smoky conditions'
+                ],
+                quiz: { q: 'When should you evacuate for a wildfire?', options: ['When flames reach your fence', 'As soon as officials issue orders', 'After you finish packing everything'], correct: 1 }
+            },
+            earthquakes: {
+                title: '🏔️ Earthquakes',
+                color: 'purple',
+                objectives: ['Reduce hazards at home', 'Practice Drop–Cover–Hold', 'Stay safe after shaking'],
+                signs: {
+                    leftTitle: 'Before',
+                    left: ['Secure furniture and water heaters', 'Keep shoes/flashlight by bed', 'Make a family meeting plan', 'Maintain an emergency kit'],
+                    rightTitle: 'After',
+                    right: ['Expect aftershocks', 'Check gas/electrical hazards', 'Use texts instead of calls', 'Follow official updates']
+                },
+                procedures: [
+                    'Drop to hands and knees',
+                    'Cover head/neck under sturdy furniture',
+                    'Hold until shaking stops',
+                    'If outdoors, move to open area away from hazards'
+                ],
+                rules: [
+                    'Do not run outside during shaking',
+                    'Avoid elevators',
+                    'If in bed, stay and protect head/neck',
+                    'If driving, pull over away from bridges and lines'
+                ],
+                quiz: { q: 'During an earthquake indoors you should:', options: ['Run outside quickly', 'Drop–Cover–Hold', 'Stand in a doorway only'], correct: 1 }
+            }
+        };
+
+        function openDisasterModule(disasterType) {
+            if (disasterType === 'floods') {
+                startModule(0); // Keep Floods module as structured lesson
+                return;
+            }
+            openDisasterPage(disasterType);
+        }
+
+        function openDisasterPage(key) {
+            const data = disasterPages[key];
+            if (!data) return;
+            const colors = {
+                cyan: { bg: 'bg-cyan-50', tag: 'bg-cyan-100 text-cyan-800', bar: 'bg-cyan-600', accent: 'text-cyan-700' },
+                orange: { bg: 'bg-orange-50', tag: 'bg-orange-100 text-orange-800', bar: 'bg-orange-600', accent: 'text-orange-700' },
+                purple: { bg: 'bg-purple-50', tag: 'bg-purple-100 text-purple-800', bar: 'bg-purple-600', accent: 'text-purple-700' }
+            };
+            const theme = colors[data.color] || colors.cyan;
+            const content = `
+                <div class="space-y-6">
+                    <div class="${theme.bg} border rounded-xl p-5">
+                        <h4 class="font-semibold mb-2">${data.title}</h4>
+                        <div class="flex flex-wrap gap-2">
+                            ${data.objectives.map(o => `<span class="${theme.tag} px-2.5 py-1 text-xs rounded-full">${o}</span>`).join('')}
+                        </div>
+                    </div>
+                    <div class="grid md:grid-cols-2 gap-4">
+                        <div class="border rounded-xl p-4">
+                            <h5 class="font-semibold mb-2">${data.signs.leftTitle}</h5>
+                            <ul class="text-sm text-gray-700 space-y-1">${data.signs.left.map(i => `<li>• ${i}</li>`).join('')}</ul>
+                        </div>
+                        <div class="border rounded-xl p-4">
+                            <h5 class="font-semibold mb-2">${data.signs.rightTitle}</h5>
+                            <ul class="text-sm text-gray-700 space-y-1">${data.signs.right.map(i => `<li>• ${i}</li>`).join('')}</ul>
+                        </div>
+                    </div>
+                    <div class="border rounded-xl p-4">
+                        <h5 class="font-semibold mb-2">🚦 Procedures</h5>
+                        <ol class="text-sm text-gray-700 space-y-1 ml-4">
+                            ${data.procedures.map((p, idx) => `<li>${idx+1}. ${p}</li>`).join('')}
+                        </ol>
+                    </div>
+                    <div class="border rounded-xl p-4">
+                        <h5 class="font-semibold mb-2">⚠️ Critical Safety Rules</h5>
+                        <ul class="text-sm text-red-700 space-y-1">
+                            ${data.rules.map(r => `<li>• ${r}</li>`).join('')}
+                        </ul>
+                    </div>
+                    <div class="${theme.bg} border rounded-xl p-4">
+                        <h5 class="font-semibold mb-3">📋 Mini-Checklist</h5>
+                        <div class="grid sm:grid-cols-2 gap-2 text-sm">
+                            ${data.objectives.map(c => `
+                                <label class="flex items-start gap-2">
+                                    <input type="checkbox" class="mt-0.5" onchange="updateDisasterChecklist('${key}')"> ${c}
+                                </label>
+                            `).join('')}
+                        </div>
+                        <div class="mt-3">
+                            <div class="w-full bg-gray-200 rounded-full h-2">
+                                <div id="disaster-check-${key}" class="${theme.bar} h-2 rounded-full" style="width:0%"></div>
+                            </div>
+                            <div id="disaster-check-text-${key}" class="text-xs mt-1 ${theme.accent}">0% complete</div>
+                        </div>
+                    </div>
+                    <div class="border rounded-xl p-4">
+                        <h5 class="font-semibold mb-3">🧠 Quick Quiz</h5>
+                        <p class="text-sm mb-3">${data.quiz.q}</p>
+                        <div class="grid sm:grid-cols-3 gap-2">
+                            ${data.quiz.options.map((opt, i)=>`
+                                <button class="px-3 py-2 rounded-lg border hover:bg-gray-50 text-sm text-left" onclick="gradeDisasterQuiz('${key}', ${i})">${opt}</button>
+                            `).join('')}
+                        </div>
+                        <div id="disaster-quiz-result-${key}" class="text-sm mt-3"></div>
+                    </div>
+                    <div class="flex flex-wrap gap-3">
+                        <button class="px-4 py-2.5 rounded-lg bg-gray-200 text-gray-800 hover:bg-gray-300" onclick="closeModal()">Close</button>
+                        <button class="px-4 py-2.5 rounded-lg bg-blue-600 text-white hover:bg-blue-700" onclick="continueDisasterPath('${key}')">Go to Path →</button>
+                    </div>
+                </div>
+            `;
+            document.getElementById('modalTitle').textContent = data.title;
+            document.getElementById('modalContent').innerHTML = content;
+            document.getElementById('moduleModal').classList.remove('hidden');
+        }
+        function updateDisasterChecklist(key) {
+            const modal = document.getElementById('modalContent');
+            const checks = modal.querySelectorAll('input[type="checkbox"]');
+            const total = checks.length; let done = 0;
+            checks.forEach(c => { if (c.checked) done++; });
+            const pct = total ? Math.round((done/total)*100) : 0;
+            const bar = document.getElementById(`disaster-check-${key}`);
+            const txt = document.getElementById(`disaster-check-text-${key}`);
+            if (bar) bar.style.width = pct + '%';
+            if (txt) txt.textContent = `${pct}% complete`;
+        }
+        function gradeDisasterQuiz(key, idx) {
+            const cfg = disasterPages[key]; const out = document.getElementById(`disaster-quiz-result-${key}`);
+            if (!cfg || !out) return;
+            if (idx === cfg.quiz.correct) { out.textContent = '✅ Correct! Nice job.'; out.className = 'text-sm mt-3 text-green-700'; }
+            else { out.textContent = '❌ Not quite. Try again.'; out.className = 'text-sm mt-3 text-red-700'; }
+        }
+        function continueDisasterPath(key) {
+            const order = { floods: 0, tornadoes: 1, wildfires: 2, earthquakes: 3 };
+            const idx = order[key] ?? 0;
+            closeModal();
+            if (idx === 0) startModule(0); else showLearningPathOverview();
+        }
+
+        // Emergency Kit Builder
+        let kitProgress = { home: {}, vehicle: {} };
+        function openKitBuilder(kitType) {
+            const kits = {
+                home: { title: '🏠 Home Emergency Kit Builder', categories: {
+                    'Water & Food': [
+                        'Water (1 gallon per person per day for 3 days)',
+                        'Non-perishable food (3-day supply)',
+                        'Manual can opener',
+                        'Paper plates, cups, plastic utensils',
+                        'Cooler with ice packs'
+                    ],
+                    'Safety & Tools': [
+                        'Battery-powered or hand crank radio',
+                        'Flashlight and extra batteries',
+                        'First aid kit',
+                        'Whistle for signaling help',
+                        'Multi-tool or Swiss Army knife',
+                        'Duct tape and plastic sheeting'
+                    ],
+                    'Personal Items': [
+                        'Medications (7-day supply)',
+                        'Personal hygiene items',
+                        'Copies of important documents',
+                        'Cash and credit cards',
+                        'Emergency contact information',
+                        'Extra clothing and blankets'
+                    ]}},
+                vehicle: { title: '🚗 Vehicle Emergency Kit Builder', categories: {
+                    'Vehicle Essentials': [
+                        'Jumper cables','Tire pressure gauge and pump','Motor oil and coolant',
+                        'Emergency flares or reflectors','Tow strap','Multi-tool with knife'
+                    ],
+                    'Safety & Communication': [
+                        'First aid kit','Flashlight with extra batteries','Emergency radio',
+                        'Cell phone car charger','Whistle','Emergency blanket'
+                    ],
+                    'Supplies': [
+                        'Water bottles','Non-perishable snacks','Rain gear',
+                        'Work gloves','Duct tape','Paper towels and wet wipes'
+                    ]}}
+            };
+            const kit = kits[kitType];
+            let content = `
+                <div class="space-y-6">
+                    <div class="bg-blue-50 p-4 rounded-lg">
+                        <h4 class="font-semibold mb-2">📋 Interactive Checklist</h4>
+                        <p class="text-sm text-gray-600">Check off items as you add them to your emergency kit.</p>
+                    </div>
+            `;
+            Object.entries(kit.categories).forEach(([cat, items]) => {
+                content += `
+                    <div class="border rounded-lg p-4">
+                        <h4 class="font-semibold text-lg mb-3">${cat}</h4>
+                        <div class="space-y-2">
+                            ${items.map((item, i) => {
+                                const id = `${kitType}_${cat.replace(/\s+/g,'-')}_${i}`;
+                                return `
+                                    <label class="flex items-start space-x-3 p-2 hover:bg-gray-50 rounded cursor-pointer">
+                                        <input type="checkbox" id="${id}" class="mt-1" onchange="updateKitProgress('${kitType}', '${id}')">
+                                        <span class="text-sm">${item}</span>
+                                    </label>
+                                `;
+                            }).join('')}
+                        </div>
+                    </div>
+                `;
+            });
+            content += `
+                    <div class="bg-green-50 p-4 rounded-lg">
+                        <div class="flex items-center justify-between mb-2">
+                            <h4 class="font-semibold">Kit Completion Progress</h4>
+                            <span id="kit-progress-${kitType}" class="text-sm font-medium">0%</span>
+                        </div>
+                        <div class="w-full bg-gray-200 rounded-full h-2">
+                            <div id="kit-progress-bar-${kitType}" class="bg-green-600 h-2 rounded-full transition-all duration-300" style="width: 0%"></div>
+                        </div>
+                    </div>
+                    <div class="flex gap-4">
+                        <button onclick="downloadKitList('${kitType}')" class="flex-1 bg-blue-600 text-white py-3 rounded-lg font-medium hover:bg-blue-700 transition-colors">📄 Download Checklist</button>
+                        <button onclick="shareKit('${kitType}')" class="px-6 py-3 border border-gray-300 rounded-lg font-medium hover:bg-gray-50 transition-colors">📤 Share Kit</button>
+                    </div>
+                </div>
+            `;
+            document.getElementById('modalTitle').textContent = kit.title;
+            document.getElementById('modalContent').innerHTML = content;
+            document.getElementById('moduleModal').classList.remove('hidden');
+        }
+        function updateKitProgress(kitType, itemId) {
+            const checkbox = document.getElementById(itemId);
+            if (!kitProgress[kitType]) kitProgress[kitType] = {};
+            kitProgress[kitType][itemId] = checkbox.checked;
+            const total = Object.keys(kitProgress[kitType]).length;
+            const checked = Object.values(kitProgress[kitType]).filter(Boolean).length;
+            const pct = total ? Math.round((checked/total)*100) : 0;
+            const txt = document.getElementById(`kit-progress-${kitType}`);
+            const bar = document.getElementById(`kit-progress-bar-${kitType}`);
+            if (txt) txt.textContent = `${pct}%`;
+            if (bar) bar.style.width = `${pct}%`;
+        }
+        function downloadKitList(kitType) { alert(`📄 Your ${kitType} kit would download as a printable checklist (demo).`); }
+        function shareKit(kitType) { alert(`📤 Share your ${kitType} kit progress via link or email (demo).`); }
+
+        // First Aid interactive training
+        let firstAidProgress = { currentScenario: 0, completedScenarios: [] };
+        function startFirstAidTraining() { firstAidProgress.currentScenario = 0; showFirstAidScenario(); }
+        function showFirstAidScenario() {
+            const scenarios = [
+                { title: '🫁 CPR Emergency', situation: 'You find an unconscious adult who is not breathing normally.',
+                  steps: ['Check responsiveness', 'Call 911 / get AED', 'Hands center of chest', 'Compress 100–120/min, 2 inches', 'Don’t stop until help arrives'],
+                  tips: ['Push to the beat of “Stayin’ Alive”', 'Push hard and fast', 'Switch every 2 minutes if possible'] },
+                { title: '🩸 Severe Bleeding', situation: 'Someone has a deep cut that is bleeding heavily.',
+                  steps: ['Ensure your safety (gloves)', 'Sit/lie down, elevate', 'Firm direct pressure', 'Add layers, do not remove', 'Call 911 if not controlled'],
+                  tips: ['Do not remove embedded objects', 'Avoid tourniquet unless trained', 'Keep person calm and warm'] }
+            ];
+            const s = scenarios[firstAidProgress.currentScenario];
+            if (!s) return showFirstAidCompletion();
+            const content = `
+                <div class="space-y-6">
+                    <div class="bg-red-50 p-4 rounded-lg border-l-4 border-red-500">
+                        <h4 class="font-semibold text-red-800 mb-2">Emergency Scenario ${firstAidProgress.currentScenario + 1}</h4>
+                        <p class="text-red-700">${s.situation}</p>
+                    </div>
+                    <div>
+                        <h4 class="font-semibold text-lg mb-3">📋 Step-by-Step Response</h4>
+                        <div class="space-y-2">
+                            ${s.steps.map((step, i) => `
+                                <div class="flex items-start space-x-3 p-3 bg-gray-50 rounded-lg">
+                                    <div class="w-6 h-6 bg-blue-600 text-white rounded-full flex items-center justify-center text-xs font-bold mt-0.5">${i+1}</div>
+                                    <span class="text-sm">${step}</span>
+                                </div>
+                            `).join('')}
+                        </div>
+                    </div>
+                    <div class="bg-yellow-50 p-4 rounded-lg">
+                        <h5 class="font-semibold mb-2">💡 Pro Tips</h5>
+                        <ul class="text-sm space-y-1">
+                            ${s.tips.map(t => `<li>• ${t}</li>`).join('')}
+                        </ul>
+                    </div>
+                    <div class="bg-blue-50 p-4 rounded-lg">
+                        <h5 class="font-semibold mb-2">🎯 Practice Exercise</h5>
+                        <p class="text-sm mb-3">Visualize each step and practice hand positions.</p>
+                        <button onclick="practiceScenario(${firstAidProgress.currentScenario})" class="bg-blue-600 text-white px-4 py-2 rounded font-medium hover:bg-blue-700 transition-colors">Start Practice</button>
+                    </div>
+                    <div class="flex gap-4">
+                        <button onclick="completeFirstAidScenario()" class="flex-1 bg-green-600 text-white py-3 rounded-lg font-medium hover:bg-green-700 transition-colors">✓ Complete Scenario</button>
+                        ${firstAidProgress.currentScenario > 0 ? `<button onclick="previousScenario()" class="px-6 py-3 border border-gray-300 rounded-lg font-medium hover:bg-gray-50 transition-colors">← Previous</button>` : ''}
+                    </div>
+                </div>
+            `;
+            document.getElementById('modalTitle').textContent = s.title;
+            document.getElementById('modalContent').innerHTML = content;
+            document.getElementById('moduleModal').classList.remove('hidden');
+        }
+        function practiceScenario() { alert('🎯 Practice mode (demo).'); }
+        function completeFirstAidScenario() { firstAidProgress.completedScenarios.push(firstAidProgress.currentScenario); firstAidProgress.currentScenario++; showFirstAidScenario(); }
+        function previousScenario() { if (firstAidProgress.currentScenario > 0) { firstAidProgress.currentScenario--; showFirstAidScenario(); } }
+        function showFirstAidCompletion() {
+            const content = `
+                <div class="text-center space-y-6">
+                    <div class="text-6xl mb-4">🏆</div>
+                    <h3 class="text-2xl font-semibold">First Aid Training Complete!</h3>
+                    <p class="text-gray-600 max-w-md mx-auto">Great work! You completed the basics.</p>
+                    <div class="bg-green-50 p-6 rounded-lg">
+                        <h4 class="font-semibold mb-3">🎖️ Skills Mastered</h4>
+                        <div class="grid gap-2">
+                            <div class="flex items-center justify-center p-2 bg-white rounded"><span class="text-green-600 mr-2">✓</span>CPR (Hands-only)</div>
+                            <div class="flex items-center justify-center p-2 bg-white rounded"><span class="text-green-600 mr-2">✓</span>Severe Bleeding Control</div>
+                        </div>
+                    </div>
+                    <div class="space-y-3">
+                        <button onclick="getCertificate()" class="bg-blue-600 text-white px-8 py-3 rounded-lg font-medium hover:bg-blue-700 transition-colors">📜 Get Certificate</button>
+                        <div>
+                            <button onclick="startFirstAidTraining()" class="bg-gray-200 text-gray-800 px-6 py-2 rounded-lg font-medium hover:bg-gray-300 transition-colors mr-3">🔄 Retake</button>
+                            <button onclick="closeModal()" class="bg-gray-200 text-gray-800 px-6 py-2 rounded-lg font-medium hover:bg-gray-300 transition-colors">Done</button>
+                        </div>
+                    </div>
+                </div>
+            `;
+            document.getElementById('modalTitle').textContent = '🏥 First Aid Training Complete';
+            document.getElementById('modalContent').innerHTML = content;
+            document.getElementById('moduleModal').classList.remove('hidden');
+        }
+        function getCertificate() { alert('📜 Certificate generated and emailed (demo).'); }
+
+        // Communication Plan
+        function createCommPlan() {
+            const content = `
+                <div class="space-y-6">
+                    <div class="bg-purple-50 p-4 rounded-lg">
+                        <h4 class="font-semibold mb-2">📋 Communication Plan Builder</h4>
+                        <p class="text-sm text-gray-600">Create a quick emergency communication plan.</p>
+                    </div>
+                    <div class="space-y-4">
+                        <div class="border rounded-lg p-4">
+                            <h5 class="font-semibold mb-3">👥 Family Contact Information</h5>
+                            <div class="space-y-3">
+                                <div>
+                                    <label class="block text-sm font-medium mb-1">Primary Contact Name</label>
+                                    <input type="text" class="w-full p-2 border rounded" placeholder="Enter name">
+                                </div>
+                                <div class="grid md:grid-cols-2 gap-3">
+                                    <div>
+                                        <label class="block text-sm font-medium mb-1">Phone Number</label>
+                                        <input type="tel" class="w-full p-2 border rounded" placeholder="(555) 123-4567">
+                                    </div>
+                                    <div>
+                                        <label class="block text-sm font-medium mb-1">Email</label>
+                                        <input type="email" class="w-full p-2 border rounded" placeholder="email@example.com">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="border rounded-lg p-4">
+                            <h5 class="font-semibold mb-3">🏠 Meeting Points</h5>
+                            <div class="space-y-3">
+                                <div>
+                                    <label class="block text-sm font-medium mb-1">Primary Meeting Point (Near Home)</label>
+                                    <input type="text" class="w-full p-2 border rounded" placeholder="e.g., Community Center, School">
+                                </div>
+                                <div>
+                                    <label class="block text-sm font-medium mb-1">Secondary Meeting Point (Outside Neighborhood)</label>
+                                    <input type="text" class="w-full p-2 border rounded" placeholder="e.g., Library, Park">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="border rounded-lg p-4">
+                            <h5 class="font-semibold mb-3">📞 Out-of-State Contact</h5>
+                            <div class="grid md:grid-cols-2 gap-3">
+                                <div>
+                                    <label class="block text-sm font-medium mb-1">Contact Name</label>
+                                    <input type="text" class="w-full p-2 border rounded" placeholder="Enter name">
+                                </div>
+                                <div>
+                                    <label class="block text-sm font-medium mb-1">Phone Number</label>
+                                    <input type="tel" class="w-full p-2 border rounded" placeholder="(555) 123-4567">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="bg-blue-50 p-4 rounded-lg">
+                            <h5 class="font-semibold mb-2">💡 Communication Tips</h5>
+                            <ul class="text-sm space-y-1">
+                                <li>• Keep a written copy of this plan in your emergency kit</li>
+                                <li>• Practice your plan with all family members</li>
+                                <li>• Update contact information regularly</li>
+                                <li>• Program ICE contacts in phones</li>
+                                <li>• Consider multiple communication methods</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="flex gap-4">
+                        <button onclick="saveCommPlan()" class="flex-1 bg-purple-600 text-white py-3 rounded-lg font-medium hover:bg-purple-700 transition-colors">💾 Save Plan</button>
+                        <button onclick="printCommPlan()" class="px-6 py-3 border border-gray-300 rounded-lg font-medium hover:bg-gray-50 transition-colors">🖨️ Print</button>
+                    </div>
+                </div>
+            `;
+            document.getElementById('modalTitle').textContent = '📡 Emergency Communication Plan';
+            document.getElementById('modalContent').innerHTML = content;
+            document.getElementById('moduleModal').classList.remove('hidden');
+        }
+        function saveCommPlan() { alert('💾 Plan saved (demo).'); }
+        function printCommPlan() { alert('🖨️ Use your browser print dialog to save as PDF.'); }
+
+        // Community group modal (fixed broken template)
+        function openGroup(groupId) {
+            const groups = {
+                downtown: {
+                    title: '📍 Downtown Preparedness Group',
+                    description: 'Coordinating urban readiness: apartment safety, hi-rise evacuations, first-aid stations, and supply caching in the city core.',
+                    members: 127,
+                    cadence: ['Weekly radio check', 'Monthly evacuation drill', 'Quarterly kit audit'],
+                    events: [
+                        'Sat 10:00 AM — Fire Extinguisher Training (City Hall Plaza)',
+                        'Tue 6:30 PM — Building Warden Briefing',
+                        'Mar 28 — Downtown Evacuation Drill'
+                    ],
+                    leads: ['Alex P. — Coordinator', 'Priya K. — Training', 'Jordan L. — Facilities'],
+                    roles: ['Member', 'Floor Warden', 'Logistics', 'Medical']
+                },
+                watch: {
+                    title: '🛡️ Neighborhood Watch Alliance',
+                    description: 'Block-by-block safety: patrols, buddy system check-ins, missing person coordination, and home resilience workshops.',
+                    members: 89,
+                    cadence: ['Nightly check-in schedule', 'Bi-weekly patrols', 'Monthly safety workshop'],
+                    events: [
+                        'Fri 7:00 PM — Flashlight Patrol Walk',
+                        'Sun 3:00 PM — Family Safety Workshop (Community Park)',
+                        'Apr 5 — Pet & Elderly Evacuation Practice'
+                    ],
+                    leads: ['Sam R. — Patrol Lead', 'Mina T. — Community Care', 'Diego C. — Communications'],
+                    roles: ['Neighbor', 'Patrol Volunteer', 'Care Team', 'Comms']
+                }
+            };
+            const group = groups[groupId] || groups.downtown;
+            const isWatch = groupId === 'watch';
+            const headerBg = isWatch ? 'bg-green-50' : 'bg-blue-50';
+            const badgeColors = isWatch ? 'text-green-800 bg-green-100' : 'text-blue-800 bg-blue-100';
+            const btnColors = isWatch ? 'bg-green-600 hover:bg-green-700' : 'bg-blue-600 hover:bg-blue-700';
+
+            const content = `
+                <div class="space-y-6">
+                    <div class="${headerBg} p-4 rounded-lg">
+                        <div class="flex items-start justify-between">
+                            <div>
+                                <h4 class="font-semibold mb-1">${group.title}</h4>
+                                <p class="text-sm text-gray-700">${group.description}</p>
+                            </div>
+                            <span class="inline-flex items-center text-sm ${badgeColors} px-2 py-1 rounded-full font-medium">${group.members} members</span>
+                        </div>
+                    </div>
+                    <div class="grid md:grid-cols-3 gap-4">
+                        <div class="border rounded-lg p-4">
+                            <h5 class="font-semibold mb-2">Focus & Rhythm</h5>
+                            <ul class="text-sm space-y-1 text-gray-700">
+                                ${group.cadence.map(item => `<li>• ${item}</li>`).join('')}
+                            </ul>
+                        </div>
+                        <div class="border rounded-lg p-4">
+                            <h5 class="font-semibold mb-2">Upcoming Events</h5>
+                            <ul class="text-sm space-y-2 text-gray-700">
+                                ${group.events.map(e => `<li>• ${e}</li>`).join('')}
+                            </ul>
+                        </div>
+                        <div class="border rounded-lg p-4">
+                            <h5 class="font-semibold mb-2">Leads</h5>
+                            <ul class="text-sm space-y-1 text-gray-700">
+                                ${group.leads.map(l => `<li>• ${l}</li>`).join('')}
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="border rounded-lg p-4">
+                        <h5 class="font-semibold mb-3">Join This Group</h5>
+                        <div class="grid md:grid-cols-2 gap-3">
+                            <input type="text" class="w-full p-3 border rounded-lg" placeholder="Your full name">
+                            <input type="email" class="w-full p-3 border rounded-lg" placeholder="Email address">
+                            <input type="tel" class="w-full p-3 border rounded-lg" placeholder="Phone number">
+                            <select class="w-full p-3 border rounded-lg">
+                                ${group.roles.map(r => `<option value="${r.toLowerCase().replace(/\s+/g,'-')}">${r}</option>`).join('')}
+                            </select>
+                        </div>
+                        <textarea class="w-full p-3 border rounded-lg mt-3 h-24" placeholder="Tell us how you'd like to help..."></textarea>
+                    </div>
+                    <div class="flex gap-4">
+                        <button onclick="submitGroupJoin('${groupId || 'downtown'}')" class="flex-1 ${btnColors} text-white py-3 rounded-lg font-medium transition-colors">✅ Join Group</button>
+                        <button onclick="closeModal()" class="px-6 py-3 border border-gray-300 rounded-lg font-medium hover:bg-gray-50 transition-colors">Cancel</button>
+                    </div>
+                </div>
+            `;
+            document.getElementById('modalTitle').textContent = group.title;
+            document.getElementById('modalContent').innerHTML = content;
+            document.getElementById('moduleModal').classList.remove('hidden');
+        }
+        function submitGroupJoin(groupId) {
+            const ref = Math.random().toString(36).slice(2,8).toUpperCase();
+            alert(`🎉 Join request sent!\nGroup: ${groupId === 'watch' ? 'Neighborhood Watch Alliance' : 'Downtown Preparedness Group'}\nRequest ID: #JOIN-${ref}`);
+            closeModal();
+        }
+
+        function reportIncident() {
+            const content = `
+                <div class="space-y-6">
+                    <div class="bg-red-50 p-4 rounded-lg border-l-4 border-red-500">
+                        <h4 class="font-semibold text-red-800 mb-2">🚨 Emergency Incident Report</h4>
+                        <p class="text-red-700 text-sm">Use this form to report emergencies, safety hazards, or incidents requiring immediate attention.</p>
+                    </div>
+                    <div class="space-y-4">
+                        <div>
+                            <label class="block text-sm font-medium mb-2">Incident Type *</label>
+                            <select class="w-full p-3 border rounded-lg">
+                                <option value="">Select incident type</option>
+                                <option value="emergency">🚨 Life-threatening Emergency</option>
+                                <option value="hazard">⚠️ Safety Hazard</option>
+                                <option value="infrastructure">🏗️ Infrastructure Damage</option>
+                                <option value="weather">🌪️ Weather-related Incident</option>
+                                <option value="fire">🔥 Fire or Smoke</option>
+                                <option value="medical">🏥 Medical Emergency</option>
+                                <option value="other">📝 Other</option>
+                            </select>
+                        </div>
+                        <div class="grid md:grid-cols-2 gap-4">
+                            <div>
+                                <label class="block text-sm font-medium mb-2">Location *</label>
+                                <input type="text" class="w-full p-3 border rounded-lg" placeholder="Street address or landmark">
+                            </div>
+                            <div>
+                                <label class="block text-sm font-medium mb-2">Date & Time *</label>
+                                <input type="datetime-local" class="w-full p-3 border rounded-lg">
+                            </div>
+                        </div>
+                        <div>
+                            <label class="block text-sm font-medium mb-2">Description *</label>
+                            <textarea class="w-full p-3 border rounded-lg h-24" placeholder="Describe what happened, current situation, and any immediate dangers..."></textarea>
+                        </div>
+                        <div class="grid md:grid-cols-2 gap-4">
+                            <div>
+                                <label class="block text-sm font-medium mb-2">Severity Level</label>
+                                <select class="w-full p-3 border rounded-lg">
+                                    <option value="critical">🔴 Critical</option>
+                                    <option value="high">🟠 High</option>
+                                    <option value="medium">🟡 Medium</option>
+                                    <option value="low">🟢 Low</option>
+                                </select>
+                            </div>
+                            <div>
+                                <label class="block text-sm font-medium mb-2">People Affected</label>
+                                <input type="number" class="w-full p-3 border rounded-lg" placeholder="Number of people" min="0">
+                            </div>
+                        </div>
+                        <div>
+                            <label class="block text-sm font-medium mb-2">Your Contact Information</label>
+                            <div class="grid md:grid-cols-2 gap-4">
+                                <input type="text" class="w-full p-3 border rounded-lg" placeholder="Your name">
+                                <input type="tel" class="w-full p-3 border rounded-lg" placeholder="Phone number">
+                            </div>
+                        </div>
+                        <div class="bg-yellow-50 p-4 rounded-lg">
+                            <h5 class="font-semibold mb-2">⚡ Life-Threatening Emergency?</h5>
+                            <p class="text-sm text-gray-700 mb-2">Call 911 immediately before or after submitting this report.</p>
+                            <button onclick="callEmergency('911')" class="bg-red-600 text-white px-4 py-2 rounded font-medium hover:bg-red-700 transition-colors">📞 Call 911 Now</button>
+                        </div>
+                    </div>
+                    <div class="flex gap-4">
+                        <button onclick="submitIncidentReport()" class="flex-1 bg-red-600 text-white py-3 rounded-lg font-medium hover:bg-red-700 transition-colors">🚨 Submit Report</button>
+                        <button onclick="closeModal()" class="px-6 py-3 border border-gray-300 rounded-lg font-medium hover:bg-gray-50 transition-colors">Cancel</button>
+                    </div>
+                </div>
+            `;
+            document.getElementById('modalTitle').textContent = '🚨 Report Incident';
+            document.getElementById('modalContent').innerHTML = content;
+            document.getElementById('moduleModal').classList.remove('hidden');
+        }
+        function submitIncidentReport() { alert('🚨 Incident report submitted (demo).'); closeModal(); }
+        function requestHelp() {
+            const content = `
+                <div class="space-y-6">
+                    <div class="bg-orange-50 p-4 rounded-lg border-l-4 border-orange-500">
+                        <h4 class="font-semibold text-orange-800 mb-2">🆘 Request Community Help</h4>
+                        <p class="text-orange-700 text-sm">Connect with local volunteers for non-emergency assistance.</p>
+                    </div>
+                    <div class="space-y-4">
+                        <div>
+                            <label class="block text-sm font-medium mb-2">Type of Help Needed *</label>
+                            <select class="w-full p-3 border rounded-lg">
+                                <option value="">Select help type</option>
+                                <option value="supplies">📦 Emergency Supplies</option>
+                                <option value="shelter">🏠 Temporary Shelter</option>
+                                <option value="transportation">🚗 Transportation</option>
+                                <option value="medical">💊 Medical/Medication Assistance</option>
+                                <option value="food">🍽️ Food & Water</option>
+                                <option value="childcare">👶 Child/Eldercare</option>
+                                <option value="cleanup">🧹 Cleanup/Recovery</option>
+                                <option value="emotional">💙 Emotional Support</option>
+                                <option value="other">📝 Other</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label class="block text-sm font-medium mb-2">Urgency Level *</label>
+                            <select class="w-full p-3 border rounded-lg">
+                                <option value="immediate">🔴 Immediate</option>
+                                <option value="urgent">🟠 Urgent (24 hrs)</option>
+                                <option value="soon">🟡 Soon (few days)</option>
+                                <option value="flexible">🟢 Flexible</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label class="block text-sm font-medium mb-2">Detailed Description *</label>
+                            <textarea class="w-full p-3 border rounded-lg h-24" placeholder="Describe what you need..."></textarea>
+                        </div>
+                        <div class="grid md:grid-cols-2 gap-4">
+                            <div>
+                                <label class="block text-sm font-medium mb-2">Number of People</label>
+                                <input type="number" class="w-full p-3 border rounded-lg" placeholder="How many?" min="1">
+                            </div>
+                            <div>
+                                <label class="block text-sm font-medium mb-2">Duration Needed</label>
+                                <select class="w-full p-3 border rounded-lg">
+                                    <option>Few hours</option><option>1 day</option><option>Few days</option><option>1 week</option><option>Longer</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div>
+                            <label class="block text-sm font-medium mb-2">Your Location/Address *</label>
+                            <input type="text" class="w-full p-3 border rounded-lg" placeholder="Where help is needed">
+                        </div>
+                        <div>
+                            <label class="block text-sm font-medium mb-2">Contact Information *</label>
+                            <div class="grid md:grid-cols-2 gap-4">
+                                <input type="text" class="w-full p-3 border rounded-lg" placeholder="Your name">
+                                <input type="tel" class="w-full p-3 border rounded-lg" placeholder="Phone number">
+                            </div>
+                        </div>
+                        <div class="bg-blue-50 p-4 rounded-lg">
+                            <h5 class="font-semibold mb-2">🤝 Support Networks</h5>
+                            <div class="grid md:grid-cols-2 gap-2 text-sm">
+                                <div class="flex items-center"><span class="w-2 h-2 bg-green-500 rounded-full mr-2"></span>Community Volunteers (127 active)</div>
+                                <div class="flex items-center"><span class="w-2 h-2 bg-green-500 rounded-full mr-2"></span>Local Churches & Organizations</div>
+                                <div class="flex items-center"><span class="w-2 h-2 bg-green-500 rounded-full mr-2"></span>Neighborhood Assistance Network</div>
+                                <div class="flex items-center"><span class="w-2 h-2 bg-green-500 rounded-full mr-2"></span>Emergency Response Teams</div>
+                            </div>
+                        </div>
+                        <div class="bg-red-50 p-4 rounded-lg">
+                            <h5 class="font-semibold text-red-800 mb-2">🚨 Life-Threatening Emergency?</h5>
+                            <p class="text-red-700 text-sm mb-2">Call 911 immediately.</p>
+                            <button onclick="callEmergency('911')" class="bg-red-600 text-white px-4 py-2 rounded font-medium hover:bg-red-700 transition-colors">📞 Call 911 Now</button>
+                        </div>
+                    </div>
+                    <div class="flex gap-4">
+                        <button onclick="submitHelpRequest()" class="flex-1 bg-orange-600 text-white py-3 rounded-lg font-medium hover:bg-orange-700 transition-colors">🆘 Submit Help Request</button>
+                        <button onclick="closeModal()" class="px-6 py-3 border border-gray-300 rounded-lg font-medium hover:bg-gray-50 transition-colors">Cancel</button>
+                    </div>
+                </div>
+            `;
+            document.getElementById('modalTitle').textContent = '🆘 Request Help';
+            document.getElementById('modalContent').innerHTML = content;
+            document.getElementById('moduleModal').classList.remove('hidden');
+        }
+        function submitHelpRequest() { alert('🆘 Help request submitted (demo).'); closeModal(); }
+        function offerHelp() {
+            const content = `
+                <div class="space-y-6">
+                    <div class="bg-green-50 p-4 rounded-lg border-l-4 border-green-500">
+                        <h4 class="font-semibold text-green-800 mb-2">🤝 Volunteer to Help Your Community</h4>
+                        <p class="text-green-700 text-sm">Join our network of community volunteers.</p>
+                    </div>
+                    <div class="space-y-4">
+                        <div>
+                            <label class="block text-sm font-medium mb-2">Types of Help You Can Offer *</label>
+                            <div class="space-y-2">
+                                ${['📦 Emergency Supplies','🚗 Transportation','🏠 Temporary Shelter','🍽️ Food & Water','🏥 First Aid & Medical','👶 Child/Eldercare','🧹 Cleanup & Recovery','💙 Emotional Support','📡 Communication','🎓 Training & Education'].map(t => `
+                                    <label class="flex items-center"><input type="checkbox" class="mr-2"> ${t}</label>
+                                `).join('')}
+                            </div>
+                        </div>
+                        <div class="grid md:grid-cols-2 gap-4">
+                            <div>
+                                <label class="block text-sm font-medium mb-2">Availability *</label>
+                                <select class="w-full p-3 border rounded-lg">
+                                    <option>🔴 Available Immediately</option><option>🟠 Short Notice</option><option>🟡 Planned Events Only</option><option>🟢 Flexible Schedule</option>
+                                </select>
+                            </div>
+                            <div>
+                                <label class="block text-sm font-medium mb-2">Time Commitment</label>
+                                <select class="w-full p-3 border rounded-lg">
+                                    <option>Few hours per month</option><option>Few hours per week</option><option>Available daily</option><option>Emergency response only</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div>
+                            <label class="block text-sm font-medium mb-2">Special Skills & Certifications</label>
+                            <div class="grid md:grid-cols-2 gap-2 text-sm">
+                                ${['🏥 First Aid/CPR','🚑 EMT/Medical','🔧 Construction/Repair','🚗 CDL/Large Vehicle','📡 Ham Radio','💙 Mental Health','🎓 Teaching/Training','🌐 Multilingual'].map(t => `
+                                    <label class="flex items-center"><input type="checkbox" class="mr-2"> ${t}</label>
+                                `).join('')}
+                            </div>
+                        </div>
+                        <div>
+                            <label class="block text-sm font-medium mb-2">Service Area</label>
+                            <div class="grid md:grid-cols-2 gap-4">
+                                <input type="text" class="w-full p-3 border rounded-lg" placeholder="Your neighborhood/area">
+                                <select class="w-full p-3 border rounded-lg">
+                                    <option>My neighborhood only</option><option>Entire city</option><option>County-wide</option><option>Regional</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div>
+                            <label class="block text-sm font-medium mb-2">Contact Information *</label>
+                            <div class="grid md:grid-cols-2 gap-4">
+                                <input type="text" class="w-full p-3 border rounded-lg" placeholder="Your name">
+                                <input type="tel" class="w-full p-3 border rounded-lg" placeholder="Phone number">
+                            </div>
+                            <input type="email" class="w-full p-3 border rounded-lg mt-3" placeholder="Email address">
+                        </div>
+                        <div>
+                            <label class="block text-sm font-medium mb-2">Additional Information</label>
+                            <textarea class="w-full p-3 border rounded-lg h-20" placeholder="Tell us more about how you'd like to help..."></textarea>
+                        </div>
+                    </div>
+                    <div class="flex gap-4">
+                        <button onclick="submitVolunteerApplication()" class="flex-1 bg-green-600 text-white py-3 rounded-lg font-medium hover:bg-green-700 transition-colors">🤝 Join Volunteer Network</button>
+                        <button onclick="closeModal()" class="px-6 py-3 border border-gray-300 rounded-lg font-medium hover:bg-gray-50 transition-colors">Cancel</button>
+                    </div>
+                </div>
+            `;
+            document.getElementById('modalTitle').textContent = '🤝 Offer Help';
+            document.getElementById('modalContent').innerHTML = content;
+            document.getElementById('moduleModal').classList.remove('hidden');
+        }
+        function submitVolunteerApplication() { alert('🤝 Volunteer application submitted (demo).'); closeModal(); }
+
+        // Close modal by clicking backdrop
+        document.getElementById('moduleModal').addEventListener('click', function(e) {
+            if (e.target === this) closeModal();
+        });
+
+        // Emergency contact helpers
+        function callEmergency(type) {
+            const msg = type === '911' ? 'Calling Emergency Services (911)...' :
+                        type === 'poison' ? 'Calling Poison Control (1-800-222-1222)...' :
+                        'Calling emergency contact...';
+            alert(msg);
+        }
+        function openWeatherAlerts() { alert('🌦️ Active Alerts:\n• Severe Thunderstorm Warning\n• Flash Flood Watch'); }
+        function openRedCross() { alert('➕ American Red Cross\nCall: 1-800-733-2767'); }
+    </script>
+<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'979ec167713d8ae5',t:'MTc1NzAwMjIxMC4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+</html>
