@@ -76,6 +76,33 @@
     .dashboard:hover {
       background-color: #6EFAFB; /* slightly darker shade */  
     }     
+
+
+    .logo-container {
+            font-family: 'Inter', sans-serif;
+        }
+        
+        .shield-glow {
+            filter: drop-shadow(0 4px 12px rgba(59, 130, 246, 0.3));
+        }
+        
+        .text-gradient {
+            background: linear-gradient(135deg, #1b253f 0%, #2b61b8 50%, #4578b6 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        @keyframes pulse-glow {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.8; }
+        }
+        
+        .pulse-animation:hover {
+            animation: pulse-glow 1.5s ease-in-out infinite;
+        }
+
+
         @keyframes alertPulse {
             0%, 100% { background: linear-gradient(90deg, #ef4444, #dc2626); }
             50% { background: linear-gradient(90deg, #dc2626, #b91c1c); }
@@ -135,11 +162,11 @@
                     <a href="/donatepage" class="nav-link text-gray-700 hover:text-blue-600 font-medium"></a>
                     <a href="/confirmation" class="nav-link text-gray-700 hover:text-blue-600 font-medium"></a>
                 </div>
-                <button onclick="window.location.href='donatepage2.html'" class="donation text-white px-4 py-2 rounded-lg font-semibold pulse-animation">Donate</button>
-                <button onclick="window.location.href='emergencymode.html'"class="emergency-alert text-white px-4 py-2 rounded-lg font-semibold pulse-animation">
+                <button onclick="window.location.href='donation'" class="donation text-white px-4 py-2 rounded-lg font-semibold pulse-animation">Donate</button>
+                <button onclick="window.location.href='emergencymode'"class="emergency-alert text-white px-4 py-2 rounded-lg font-semibold pulse-animation">
                     Emergency
                 </button>
-                <button onclick="window.location.href='redirecting.html'" class="dashboard text-white px-4 py-2 rounded-lg font-semibold pulse-animation">Dashboard</button>
+                <button onclick="window.location.href='redirecting'" class="dashboard text-white px-4 py-2 rounded-lg font-semibold pulse-animation">Dashboard</button>
                 
             </div>
         </div>
@@ -157,7 +184,7 @@
             </p>
             <div class="flex flex-col sm:flex-row gap-4 justify-center">
                 <button onclick="startLearning()" class="bg-yellow-400 text-blue-900 px-8 py-4 rounded-lg text-lg font-semibold hover:bg-yellow-300 transition-colors">
-                    🎓 Start Learning
+                     Start Learning
                 </button>
                 <button onclick="checkReadiness()" class="bg-white bg-opacity-20 backdrop-blur-sm border-2 border-white text-white px-8 py-4 rounded-lg text-lg font-semibold hover:bg-opacity-30 transition-colors">
                      Check My Readiness
@@ -471,9 +498,9 @@
                 <div>
                     <h4 class="font-semibold mb-4">Contact</h4>
                     <ul class="space-y-2 text-gray-400">
-                        <li>📧 infocrisora@gmail.com</li>
-                        <li>📞 7520691705</li>
-                        <li>🌐 www.crisora.org</li>
+                        <li>Email: infocrisora@gmail.com</li>
+                        <li>Contact number: 7520691705</li>
+                        <li>Web: www.crisora.org</li>
                         <li>📍 Emergency Operations Center</li>
                     </ul>
                 </div>
@@ -515,7 +542,7 @@
 
         // Assessment functionality
         let currentQuestion = 0;
-        const totalQuestions = 10;
+        const totalQuestions = 5;
         let assessmentStarted = false;
 
         let assessmentScore = 0;
@@ -558,6 +585,49 @@
                     { label: "1+ gallon per person/day", score: 2 },
                     { label: "Some water stored", score: 1 },
                     { label: "No water storage", score: 0 }
+                ]
+            },
+            {
+                question: "In an earthquake, what is the safest action?",
+                options:[
+                    { label: "Drop, Cover, and Hold On", score: 2},
+                    { label: "Run outside immediately", score: 1},
+                    { label: "Stand near windows", score: 0}
+                ]
+            },
+
+            {
+                question: "If a flood warning is issued, what will you do first?",
+                options:[
+                    {label:"Move to higher ground immediately", score: 2},
+                    {label: "Wait and see if it really floods", score: 1},
+                    {label: "Stay indoors at ground level", score: 0}
+                ]
+            },
+
+            {
+                question: "Do you know how to turn off gas, electricity, and water at home?",
+                options:[
+                    {label:"Yes, and I have practiced", score: 2},
+                    {label: "Yes, but never practiced", score: 1},
+                    {label: "No, I don’t know", score: 0}
+                ]
+            },
+
+            {
+                question: "If a fire breaks out, do you know the safest exit routes from your home?",
+                options:[
+                    {label:"Yes, I have practiced", score: 2},
+                    {label: "Yes, but never practiced", score: 1},
+                    {label: "No , we have not", score: 0}
+                ]
+            },
+
+            {
+                question: "Do you have a first aid kit at home?",
+                options:[
+                    {label:"Yes, I have", score: 2},
+                    {label: "No ,I have not", score: 0}
                 ]
             }
         ];
