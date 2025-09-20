@@ -93,21 +93,47 @@
         }
 
 
-            .dashboard {
-      background-color: #00A7E1;
-      color:white;
-      border: none;
-      padding: 12px 24px;
-      border-radius: 8px;
-      font-size: 18px;
-      font-weight: bold;
-      cursor: pointer;
-      transition: background-color 0.3s ease;
-    }
+        .dashboard {
+            background-color: #00A7E1;
+            color:white;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 8px;
+            font-size: 18px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
 
-    .dashboard:hover {
-      background-color: #6EFAFB; /* slightly darker shade */  
-    }
+        .dashboard:hover {
+            background-color: #6EFAFB; /* slightly darker shade */  
+        }
+
+
+
+        .logo-container {
+            font-family: 'Inter', sans-serif;
+        }
+
+        .shield-glow {
+            filter: drop-shadow(0 4px 12px rgba(59, 130, 246, 0.3));
+        }
+
+        .text-gradient {
+            background: linear-gradient(135deg, #1b253f 0%, #2b61b8 50%, #4578b6 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        @keyframes pulse-glow {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.8; }
+        }
+
+        .pulse-animation:hover {
+            animation: pulse-glow 1.5s ease-in-out infinite;
+        }
     
     </style>
 </head>
@@ -117,9 +143,53 @@
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex justify-between items-center py-4">
                 <div class="flex items-center">
-                    <div class="text-2xl mr-3">🏫</div>
+                    <div class="text-2xl mr-3">
+
+                        <body class="bg-gradient-to-br from-slate-50 to-blue-50 min-h-screen flex items-center justify-center p-8">
+    <div class="logo-container">
+        <!-- Main Logo -->
+        <div class="flex items-center justify-center">
+            <!-- Shield Icon -->
+            <div class="relative mr-4 shield-glow">
+                <svg width="40" height="40" viewBox="0 0 80 80" class="pulse-animation cursor-pointer">
+                    <!-- Shield Background -->
+                    <path d="M40 8 L65 18 L65 35 C65 52 40 70 40 70 C40 70 15 52 15 35 L15 18 Z" 
+                          fill="url(#shieldGradient)" stroke="#1e40af" stroke-width="2"/>
+                    
+                    <!-- Safety Cross -->
+                    <rect x="36" y="25" width="8" height="20" fill="white" rx="2"/>
+                    <rect x="30" y="31" width="20" height="8" fill="white" rx="2"/>
+                    
+                    <!-- Emergency Alert Dots -->
+                    <circle cx="28" cy="48" r="3" fill="#ef4444"/>
+                    <circle cx="40" cy="52" r="3" fill="#f59e0b"/>
+                    <circle cx="52" cy="48" r="3" fill="#10b981"/>
+                    
+                    <!-- Graduation Cap Element -->
+                    <path d="M25 22 L40 18 L55 22 L55 26 L40 22 L25 26 Z" fill="#1e40af" opacity="0.8"/>
+                    <rect x="53" y="22" width="4" height="8" fill="#1e40af" opacity="0.8"/>
+                    <circle cx="55" cy="24" r="2" fill="#1e40af" opacity="0.8"/>
+                    
+                    <defs>
+                        <linearGradient id="shieldGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                            <stop offset="0%" style="stop-color:#3b82f6;stop-opacity:0.9"/>
+                            <stop offset="50%" style="stop-color:#60a5fa;stop-opacity:0.8"/>
+                            <stop offset="100%" style="stop-color:#93c5fd;stop-opacity:0.7"/>
+                        </linearGradient>
+                    </defs>
+                </svg>
+            </div>
+            
+            <!-- Logo Text -->
+            <div>
+                <h1 class="text-3xl font-bold text-gradient tracking-tight">CRISORA</h1>
+            </div>
+        </div>
+    </div>
+
+
+                    </div>
                     <div>
-                        <h1 class="text-2xl font-bold text-gray-900">Disaster Preparedness Dashboard</h1>
                         <p class="text-sm text-gray-600">Bennett University - Administrator Portal</p>
                     </div>
                 </div>
