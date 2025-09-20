@@ -43,6 +43,9 @@
 </head>
 <body class="gradient-bg min-h-screen flex items-center justify-center p-4">
     <div class="w-full max-w-md">
+
+        
+
         <!-- Sign Up Form -->
         <div id="signupForm" class="glass-effect rounded-2xl p-8 shadow-2xl">
             <div class="text-center mb-8">
@@ -57,6 +60,203 @@
             </div>
 
             <form id="signupFormElement" class="space-y-6">
+
+
+                <!-- Institution Selection -->
+                <div>
+                    <label for="institution" class="block text-sm font-medium text-white mb-2">Institution</label>
+                    <select 
+                        id="institution" 
+                        name="institution" 
+                        required
+                        class="input-focus w-full px-4 py-3 bg-white/10 border border-white/20 rounded-lg text-white focus:outline-none focus:ring-2 focus:ring-white/50 focus:border-transparent transition-all duration-300 appearance-none cursor-pointer"
+                        style="background-image: url('data:image/svg+xml;charset=US-ASCII,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 4 5%22><path fill=%22%23ffffff%22 d=%22M2 0L0 2h4zm0 5L0 3h4z%22/></svg>'); background-repeat: no-repeat; background-position: right 12px center; background-size: 12px;"
+                    >
+                        <option value="" disabled selected style="color: #666;">Select your institution</option>
+                        
+                        <option value="aiims-bhubaneswar" style="color: #000;">AIIMS Bhubaneswar</option>
+                        <option value="aiims-delhi" style="color: #000;">AIIMS Delhi</option>
+                        <option value="aiims-jodhpur" style="color: #000;">AIIMS Jodhpur</option>
+                        <option value="aiims-mumbai" style="color: #000;">AIIMS Mumbai</option>
+                        <option value="aiims-patna" style="color: #000;">AIIMS Patna</option>
+                        <option value="aiims-raipur" style="color: #000;">AIIMS Raipur</option>
+                        <option value="aiims-rishikesh" style="color: #000;">AIIMS Rishikesh</option>
+                        <option value="amu" style="color: #000;">Aligarh Muslim University</option>
+                        <option value="amrita-university" style="color: #000;">Amrita Vishwa Vidyapeetham</option>
+                        <option value="andhra-university" style="color: #000;">Andhra University</option>
+                        <option value="anna-university" style="color: #000;">Anna University</option>
+                        <option value="assam-university" style="color: #000;">Assam University</option>
+                        <option value="bhu" style="color: #000;">Banaras Hindu University</option>
+                        <option value="bangalore-university" style="color: #000;">Bangalore University</option>
+                        <option value="bmc-bangalore" style="color: #000;">Bangalore Medical College</option>
+                        <option value="bennett-university" style="color: #000;">Bennett University</option>
+                        <option value="bharati-vidyapeeth" style="color: #000;">Bharati Vidyapeeth</option>
+                        <option value="bits-pilani" style="color: #000;">BITS Pilani</option>
+                        <option value="bms-bangalore" style="color: #000;">BMS College of Engineering</option>
+                        <option value="kanpur-university" style="color: #000;">Chhatrapati Shahu Ji Maharaj University</option>
+                        <option value="christ-university" style="color: #000;">Christ University</option>
+                        <option value="cochin-university" style="color: #000;">Cochin University of Science and Technology</option>
+                        <option value="ceg-chennai" style="color: #000;">College of Engineering Guindy</option>
+                        <option value="coep-pune" style="color: #000;">College of Engineering Pune</option>
+                        <option value="ddu-gorakhpur" style="color: #000;">Deen Dayal Upadhyaya Gorakhpur University</option>
+                        <option value="dtu" style="color: #000;">Delhi Technological University</option>
+                        <option value="gmc-mumbai" style="color: #000;">Grant Medical College Mumbai</option>
+                        <option value="gujarat-university" style="color: #000;">Gujarat University</option>
+                        <option value="ggsipu" style="color: #000;">Guru Gobind Singh Indraprastha University</option>
+                        <option value="iim-ahmedabad" style="color: #000;">IIM Ahmedabad</option>
+                        <option value="iim-amritsar" style="color: #000;">IIM Amritsar</option>
+                        <option value="iim-bangalore" style="color: #000;">IIM Bangalore</option>
+                        <option value="iim-bodh-gaya" style="color: #000;">IIM Bodh Gaya</option>
+                        <option value="iim-calcutta" style="color: #000;">IIM Calcutta</option>
+                        <option value="iim-indore" style="color: #000;">IIM Indore</option>
+                        <option value="iim-jammu" style="color: #000;">IIM Jammu</option>
+                        <option value="iim-kashipur" style="color: #000;">IIM Kashipur</option>
+                        <option value="iim-kozhikode" style="color: #000;">IIM Kozhikode</option>
+                        <option value="iim-lucknow" style="color: #000;">IIM Lucknow</option>
+                        <option value="iim-nagpur" style="color: #000;">IIM Nagpur</option>
+                        <option value="iim-raipur" style="color: #000;">IIM Raipur</option>
+                        <option value="iim-ranchi" style="color: #000;">IIM Ranchi</option>
+                        <option value="iim-rohtak" style="color: #000;">IIM Rohtak</option>
+                        <option value="iim-sambalpur" style="color: #000;">IIM Sambalpur</option>
+                        <option value="iim-shillong" style="color: #000;">IIM Shillong</option>
+                        <option value="iim-sirmaur" style="color: #000;">IIM Sirmaur</option>
+                        <option value="iim-trichy" style="color: #000;">IIM Trichy</option>
+                        <option value="iim-udaipur" style="color: #000;">IIM Udaipur</option>
+                        <option value="iim-visakhapatnam" style="color: #000;">IIM Visakhapatnam</option>
+                        <option value="iiit-allahabad" style="color: #000;">IIIT Allahabad</option>
+                        <option value="iiit-bangalore" style="color: #000;">IIIT Bangalore</option>
+                        <option value="iiit-delhi" style="color: #000;">IIIT Delhi</option>
+                        <option value="iiit-hyderabad" style="color: #000;">IIIT Hyderabad</option>
+                        <option value="iit-bhilai" style="color: #000;">IIT Bhilai</option>
+                        <option value="iit-bhubaneswar" style="color: #000;">IIT Bhubaneswar</option>
+                        <option value="iit-bombay" style="color: #000;">IIT Bombay</option>
+                        <option value="iit-varanasi" style="color: #000;">IIT (BHU) Varanasi</option>
+                        <option value="iit-delhi" style="color: #000;">IIT Delhi</option>
+                        <option value="iit-dharwad" style="color: #000;">IIT Dharwad</option>
+                        <option value="iit-gandhinagar" style="color: #000;">IIT Gandhinagar</option>
+                        <option value="iit-goa" style="color: #000;">IIT Goa</option>
+                        <option value="iit-guwahati" style="color: #000;">IIT Guwahati</option>
+                        <option value="iit-hyderabad" style="color: #000;">IIT Hyderabad</option>
+                        <option value="iit-indore" style="color: #000;">IIT Indore</option>
+                        <option value="iit-dhanbad" style="color: #000;">IIT (ISM) Dhanbad</option>
+                        <option value="iit-jammu" style="color: #000;">IIT Jammu</option>
+                        <option value="iit-jodhpur" style="color: #000;">IIT Jodhpur</option>
+                        <option value="iit-kanpur" style="color: #000;">IIT Kanpur</option>
+                        <option value="iit-kharagpur" style="color: #000;">IIT Kharagpur</option>
+                        <option value="iit-madras" style="color: #000;">IIT Madras</option>
+                        <option value="iit-mandi" style="color: #000;">IIT Mandi</option>
+                        <option value="iit-palakkad" style="color: #000;">IIT Palakkad</option>
+                        <option value="iit-patna" style="color: #000;">IIT Patna</option>
+                        <option value="iit-roorkee" style="color: #000;">IIT Roorkee</option>
+                        <option value="iit-ropar" style="color: #000;">IIT Ropar</option>
+                        <option value="iit-tirupati" style="color: #000;">IIT Tirupati</option>
+                        <option value="jamia" style="color: #000;">Jamia Millia Islamia</option>
+                        <option value="jnu" style="color: #000;">Jawaharlal Nehru University</option>
+                        <option value="jipmer-puducherry" style="color: #000;">JIPMER Puducherry</option>
+                        <option value="jss-mysore" style="color: #000;">JSS Academy of Higher Education & Research</option>
+                        <option value="kakatiya-university" style="color: #000;">Kakatiya University</option>
+                        <option value="kgmu-lucknow" style="color: #000;">King George's Medical University</option>
+                        <option value="kle-university" style="color: #000;">KLE Academy of Higher Education and Research</option>
+                        <option value="kurukshetra-university" style="color: #000;">Kurukshetra University</option>
+                        <option value="lpu" style="color: #000;">Lovely Professional University</option>
+                        <option value="magadh-university" style="color: #000;">Magadh University</option>
+                        <option value="mdu-rohtak" style="color: #000;">Maharshi Dayanand University</option>
+                        <option value="manipal-university" style="color: #000;">Manipal Academy of Higher Education</option>
+                        <option value="mit-manipal" style="color: #000;">Manipal Institute of Technology</option>
+                        <option value="manipur-university" style="color: #000;">Manipur University</option>
+                        <option value="mizoram-university" style="color: #000;">Mizoram University</option>
+                        <option value="ms-university" style="color: #000;">MS University of Baroda</option>
+                        <option value="nagaland-university" style="color: #000;">Nagaland University</option>
+                        <option value="nsit" style="color: #000;">Netaji Subhas University of Technology</option>
+                        <option value="nit-agartala" style="color: #000;">NIT Agartala</option>
+                        <option value="nit-allahabad" style="color: #000;">NIT Allahabad</option>
+                        <option value="nit-andhra" style="color: #000;">NIT Andhra Pradesh</option>
+                        <option value="nit-arunachal" style="color: #000;">NIT Arunachal Pradesh</option>
+                        <option value="nit-bhopal" style="color: #000;">NIT Bhopal</option>
+                        <option value="nit-calicut" style="color: #000;">NIT Calicut</option>
+                        <option value="nit-delhi" style="color: #000;">NIT Delhi</option>
+                        <option value="nit-durgapur" style="color: #000;">NIT Durgapur</option>
+                        <option value="nit-goa" style="color: #000;">NIT Goa</option>
+                        <option value="nit-hamirpur" style="color: #000;">NIT Hamirpur</option>
+                        <option value="nit-jaipur" style="color: #000;">NIT Jaipur</option>
+                        <option value="nit-jalandhar" style="color: #000;">NIT Jalandhar</option>
+                        <option value="nit-kurukshetra" style="color: #000;">NIT Kurukshetra</option>
+                        <option value="nit-manipur" style="color: #000;">NIT Manipur</option>
+                        <option value="nit-meghalaya" style="color: #000;">NIT Meghalaya</option>
+                        <option value="nit-mizoram" style="color: #000;">NIT Mizoram</option>
+                        <option value="nit-nagaland" style="color: #000;">NIT Nagaland</option>
+                        <option value="nit-nagpur" style="color: #000;">NIT Nagpur</option>
+                        <option value="nit-patna" style="color: #000;">NIT Patna</option>
+                        <option value="nit-puducherry" style="color: #000;">NIT Puducherry</option>
+                        <option value="nit-raipur" style="color: #000;">NIT Raipur</option>
+                        <option value="nit-rourkela" style="color: #000;">NIT Rourkela</option>
+                        <option value="nit-sikkim" style="color: #000;">NIT Sikkim</option>
+                        <option value="nit-srinagar" style="color: #000;">NIT Srinagar</option>
+                        <option value="nit-surathkal" style="color: #000;">NIT Surathkal</option>
+                        <option value="nit-trichy" style="color: #000;">NIT Trichy</option>
+                        <option value="nit-uttarakhand" style="color: #000;">NIT Uttarakhand</option>
+                        <option value="nit-warangal" style="color: #000;">NIT Warangal</option>
+                        <option value="nehu" style="color: #000;">North Eastern Hill University</option>
+                        <option value="osmania-university" style="color: #000;">Osmania University</option>
+                        <option value="punjab-university" style="color: #000;">Panjab University</option>
+                        <option value="punjab-agricultural-university" style="color: #000;">Punjab Agricultural University</option>
+                        <option value="punjab-technical-university" style="color: #000;">Punjab Technical University</option>
+                        <option value="guru-nanak-dev-university" style="color: #000;">Guru Nanak Dev University</option>
+                        <option value="punjabi-university" style="color: #000;">Punjabi University Patiala</option>
+                        <option value="thapar-university" style="color: #000;">Thapar Institute of Engineering and Technology</option>
+                        <option value="lovely-professional-university" style="color: #000;">Lovely Professional University</option>
+                        <option value="chandigarh-university" style="color: #000;">Chandigarh University</option>
+                        <option value="chitkara-university" style="color: #000;">Chitkara University</option>
+                        <option value="sant-longowal-institute" style="color: #000;">Sant Longowal Institute of Engineering and Technology</option>
+                        <option value="guru-gobind-singh-medical-college" style="color: #000;">Guru Gobind Singh Medical College</option>
+                        <option value="government-medical-college-patiala" style="color: #000;">Government Medical College Patiala</option>
+                        <option value="dayanand-medical-college" style="color: #000;">Dayanand Medical College and Hospital</option>
+                        <option value="christian-medical-college-ludhiana" style="color: #000;">Christian Medical College Ludhiana</option>
+                        <option value="baba-farid-university" style="color: #000;">Baba Farid University of Health Sciences</option>
+                        <option value="guru-angad-dev-veterinary" style="color: #000;">Guru Angad Dev Veterinary and Animal Sciences University</option>
+                        <option value="central-university-punjab" style="color: #000;">Central University of Punjab</option>
+                        <option value="rajiv-gandhi-national-university" style="color: #000;">Rajiv Gandhi National University of Law</option>
+                        <option value="apeejay-stya-university" style="color: #000;">Apeejay Stya University</option>
+                        <option value="ct-university" style="color: #000;">CT University</option>
+                        <option value="dav-university" style="color: #000;">DAV University</option>
+                        <option value="gna-university" style="color: #000;">GNA University</option>
+                        <option value="ik-gujral-punjab-technical-university" style="color: #000;">IK Gujral Punjab Technical University</option>
+                        <option value="khalsa-university" style="color: #000;">Khalsa University</option>
+                        <option value="rayat-bahra-university" style="color: #000;">Rayat Bahra University</option>
+                        <option value="rimt-university" style="color: #000;">RIMT University</option>
+                        <option value="shoolini-university" style="color: #000;">Shoolini University</option>
+                        <option value="patna-university" style="color: #000;">Patna University</option>
+                        <option value="pgimer-chandigarh" style="color: #000;">PGIMER Chandigarh</option>
+                        <option value="pondicherry-university" style="color: #000;">Pondicherry University</option>
+                        <option value="psg-coimbatore" style="color: #000;">PSG College of Technology</option>
+                        <option value="pec-chandigarh" style="color: #000;">Punjab Engineering College</option>
+                        <option value="rv-bangalore" style="color: #000;">RV College of Engineering</option>
+                        <option value="sikkim-university" style="color: #000;">Sikkim University</option>
+                        <option value="sms-jaipur" style="color: #000;">SMS Medical College Jaipur</option>
+                        <option value="srm-university" style="color: #000;">SRM Institute of Science and Technology</option>
+                        <option value="stanley-chennai" style="color: #000;">Stanley Medical College Chennai</option>
+                        <option value="symbiosis" style="color: #000;">Symbiosis International University</option>
+                        <option value="tezpur-university" style="color: #000;">Tezpur University</option>
+                        <option value="thadomal-shahani" style="color: #000;">Thadomal Shahani Engineering College</option>
+                        <option value="thapar-university" style="color: #000;">Thapar Institute of Engineering and Technology</option>
+                        <option value="tripura-university" style="color: #000;">Tripura University</option>
+                        <option value="allahabad-university" style="color: #000;">University of Allahabad</option>
+                        <option value="calcutta-university" style="color: #000;">University of Calcutta</option>
+                        <option value="du" style="color: #000;">University of Delhi</option>
+                        <option value="hyderabad-university" style="color: #000;">University of Hyderabad</option>
+                        <option value="kerala-university" style="color: #000;">University of Kerala</option>
+                        <option value="lucknow-university" style="color: #000;">University of Lucknow</option>
+                        <option value="madras-university" style="color: #000;">University of Madras</option>
+                        <option value="mumbai-university" style="color: #000;">University of Mumbai</option>
+                        <option value="mysore-university" style="color: #000;">University of Mysore</option>
+                        <option value="pune-university" style="color: #000;">University of Pune</option>
+                        <option value="rajasthan-university" style="color: #000;">University of Rajasthan</option>
+                        <option value="vjti-mumbai" style="color: #000;">VJTI Mumbai</option>
+                        <option value="vit-vellore" style="color: #000;">VIT Vellore</option>
+                        
+                        <option value="other" style="color: #000;">Other Institution</option>
+                    </select>
+                </div>
                 <div>
                     <label for="fullName" class="block text-sm font-medium text-white/90 mb-2">Full Name</label>
                     <input type="text" id="fullName" name="fullName" required
